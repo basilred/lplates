@@ -1,10 +1,10 @@
 {
   "author": "",
-  "name": "bem-project-stub",
-  "version": "1.5.0",
+  "name": "lplates",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bem/project-stub.git"
+    "url": "git://github.com/basilred/lplates.git"
   },
   "engines": {
     "node": ">=0.10"
