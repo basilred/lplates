@@ -1,0 +1,8 @@
+{
+    "freeze_paths" : {
+        "libs/**" : ":base64:",
+        "libs/**/*.svg" : ":encodeURIComponent:",
+        "*.blocks/**" : "desktop.bundles/index/img/",
+        "*.blocks/**/*.svg" : "desktop.bundles/index/img/"
+    }
+}
