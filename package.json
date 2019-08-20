@@ -1,33 +1,36 @@
 {
-  "author": "",
   "name": "lplates",
-  "version": "1.0.0",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/basilred/lplates.git"
-  },
-  "engines": {
-    "node": ">=0.10"
-  },
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "bower": "^1.7.7"
-  },
-  "devDependencies": {
-    "bem": "^0.10.2",
-    "borschik-tech-cleancss": "^2.1.0",
-    "browser-sync": "^2.11.2",
-    "enb": "^1.1.2",
-    "enb-bem-techs": "^2.2.1",
-    "enb-bemxjst": "^6.2.0",
-    "enb-borschik": "^2.3.0",
-    "enb-js": "^1.1.0",
-    "enb-stylus": "^2.2.0"
+    "@types/jest": "24.0.18",
+    "@types/node": "12.7.2",
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.9.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1",
+    "typescript": "3.5.3"
   },
   "scripts": {
-    "start": "enb server & browser-sync start --files \"*.blocks/**/*, *.bundles/**/*.bemjson.js\" --proxy 0.0.0.0:8080",
-    "build": "enb make && cp desktop.bundles/index/index.min.* output/ && cp desktop.bundles/index/index.borschik.html output/index.html && cp desktop.bundles/index/img/* output/img/",
-    "postinstall": "npm run deps",
-    "deps": "bower i --allow-root"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "private": true
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

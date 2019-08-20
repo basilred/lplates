@@ -1,155 +1,44 @@
-# Stub to start a new [BEM](https://bem.info) project
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Project-stub is a template project repository used for BEM projects creation. It contains the minimal configuration files and folders you will need for quick start from scratch.
+## Available Scripts
 
-There are two main BEM libraries are linked here by default:
+In the project directory, you can run:
 
-* [bem-core](https://en.bem.info/libs/bem-core/)
-* [bem-components](https://en.bem.info/libs/bem-components/)
+### `npm start`
 
-## Installation requirements
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-* [Node.js 0.12+](http://nodejs.org) is a platform built on Chrome JavaScript runtime for easily building fast, scalable network applications.
-* [Git Bash](http://msysgit.github.io/) if you use Windows OS.
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-## Supported browsers
+### `npm test`
 
-The list of supported browsers depends on the [bem-core](https://en.bem.info/libs/bem-core/current/#supported-browsers) and [bem-components](https://en.bem.info/libs/bem-components/current/#supported-browsers) library versions.
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
->**NB** Internet Explorer 8.0 is not supported by default. To support IE8 you must follow the [recomendations](https://en.bem.info/libs/bem-components/current/#support-for-internet-explorer-8) or use the alternative way — a [generator-bem-stub](https://en.bem.info/tools/bem/bem-stub/) that ensures an optimal config file for your project creation.
+### `npm run build`
 
-## Installation
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-So, how easy is it to get started with BEM? — *Super easy!*
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-It's as easy as...
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```
-git clone https://github.com/bem/project-stub.git --depth 1 --branch v1.5.0 my-bem-project
-cd my-bem-project
-npm install # Do not use root privilege to install npm and bower dependencies.
-```
+### `npm run eject`
 
-`bower` dependencies are installed in the `libs` directory by `npm postinstall`.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-## Usage
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-You could use the following tools to build the project: [ENB](https://ru.bem.info/tools/bem/enb-bem-techs/)(only in Russian) or [bem-tools](https://bem.info/tools/bem/bem-tools/). The result files are the same in both cases as `bem-tools` just calls `ENB` under the hood.
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You can run any `enb` commands via `node_modules/.bin/enb` and the `bem-tools` commands with `node_modules/bem/bin/bem`.
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### Build the project
+## Learn More
 
-```bash
-node_modules/.bin/enb make
-```
-or
-```bash
-node_modules/.bin/bem make
-```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To be able to run commands without typing a full path to an executable file (`node_modules/.bin/enb`), use:
-
-```
-export PATH=./node_modules/.bin:$PATH
-```
-
-Now you can use `enb` or `bem` from any point of your project.
-
-```
-enb make
-```
-
-### The basic commands
-
->Execute the following commands in your terminal.
-
-You could use help option to get information about the basic commands of `enb` and `bem-tools`:
-
-```
-enb -h
-```
-and
-
-```
-bem -h
-```
-
-**Start the dev server**
-
-```bash
-node_modules/.bin/enb server
-```
-or
-```bash
-node_modules/.bin/bem server
-```
-
-You could use the `npm start` command to start the `enb server` without specifying the full path to the `node_modules`.
-
-```bash
-npm start
-```
-
-The `bem server ` is running. To check it out, navigate to `http://localhost:8080/desktop.bundles/index/index.html`.
-
-You may also specify different port if `8080` is already taken by some other service:
-```bash
-npm start -- --port=8181
-```
-
-**Stop the server**
-
-Press `Ctrl` + `C` or `⌘` + `C` (for MAC devices) while the terminal is your active window to stop the server.
-
-**Add a block**
-
-If you want to use `bem-tools` to create new blocks, you should install additional dependencies:
-
-```bash
-npm i ym --save-dev
-```
-
-Now it's possible to create blocks with `bem create` command:
-
-```bash
-bem create -l desktop.blocks -b newBlock
-```
-
-**Add a page**
-
-```bash
-bem create -l desktop.bundles -b page
-```
-
-## Generator of BEM projects for Yeoman
-
-`project-stub` is a multipurpose template project that covers the most common tasks of the BEM project. If you want to create the most suitable configuration to build your project, use the [generator-bem-stub](https://en.bem.info/tools/bem/bem-stub/).
-
-This generator provides you the ability to get the base of BEM project in few minutes by answering the simple questions.
-- [generator-bem-stub](https://en.bem.info/tools/bem/bem-stub/)
-
-## Docs
-
-- [Full stack quick start](https://en.bem.info/articles/start-with-project-stub/)
-- [Static quick-start](https://en.bem.info/tutorials/quick-start-static/)
-- [Tutorial for BEMJSON template-engine](https://en.bem.info/technology/bemjson/current/bemjson/)
-- [Tutorial on BEMHTML](https://en.bem.info/libs/bem-core/2.0.0/bemhtml/reference/)
-- [Tutorial on i-bem.js](https://en.bem.info/tutorials/bem-js-tutorial/)
-- [JavaScript for BEM: main terms](https://en.bem.info/articles/bem-js-main-terms/)
-- [Commands bem-tools](https://en.bem.info/tools/bem/bem-tools/commands/)
-
-## Project-stub based projects
-
-- [Creating BEM application on Leaflet and 2GIS API](https://en.bem.info/tutorials/firm-card-story/)
-- [Creating a menu of geo objects collections with Yandex.Maps API and BEM](https://en.bem.info/tutorials/yamapsbem/)
-- [SSSR (Social Services Search Robot)](https://github.com/bem/sssr) — study app with BEM full-stack
-
-## Useful tools
-
-- [borschik](https://en.bem.info/tools/optimizers/borschik/) — borschik is a simple but powerful builder for text-based file formats
-
-## Videos
-
-- [BEM - Building 'em modular](https://www.youtube.com/watch?v=huQp7gr3WPE)
-- [BEM for JavaScript Talk on Camp JS](https://en.bem.info/talks/campjs-melbourne-2014/)
+To learn React, check out the [React documentation](https://reactjs.org/).
