@@ -27,7 +27,7 @@ export default class Input extends React.Component<InputProps, InputState> {
     return (
       <input
         className="Input"
-        placeholder="Plate number"
+        placeholder="AA or 123"
         value={value}
         onChange={this.handleChange} />
     );
