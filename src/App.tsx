@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 
 import Input from './Input/Input';
+import List from './List/List';
+import data from './data.json';
 
 const App: React.FC = () => {
   return (
@@ -11,6 +13,7 @@ const App: React.FC = () => {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <Input />
+        <List data={data} />
       </header>
     </div>
   );
