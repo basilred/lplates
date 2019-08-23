@@ -4,34 +4,35 @@ const List = (props: { data: object; }) => {
   const { data } = props;
 
   function getPlainData(data: any) {
-    let result = [];
+    const result: { name: string; codes: any; }[] = [];
+    const resultTree: string[] = [];
 
     for (const country in data) {
+
       if (data.hasOwnProperty(country)) {
         const currentCountry = data[country];
+
         for (const region in currentCountry) {
+
           if (currentCountry.hasOwnProperty(region)) {
-            // const currentRegion = currentCountry[region];
-            // result.push(currentRegion);
-            result.push(region);
+            const regionCodes = currentCountry[region];
+
+            result.push({ name: region, codes: regionCodes });
           }
         }
       }
     }
 
-    console.log(result);
-
-    return result;
+    return {result, resultTree};
   }
 
   return (
     <ul className="List">
-      {getPlainData(data).map(region => {
+      {getPlainData(data).result.map(region => {
+        
         return (
-          <li key={region}>
-            {region}
-          </li>
-          );
+          <li key={region.name}>{region.name}</li>
+        );
       })}
     </ul>
   );
