@@ -1,3 +1,5 @@
 .Input {
   font-size: 2rem;
+  position: sticky;
+  top: 10px;
 }
