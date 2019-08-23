@@ -1,0 +1,7 @@
+.List {
+  padding-left: 0;
+}
+
+.List > li {
+  list-style: none;
+}
