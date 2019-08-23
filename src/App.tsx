@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Enter license plate code
         </p>
         <Input />
         <List data={data} />
