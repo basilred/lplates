@@ -20,8 +20,9 @@ export default class Input extends React.Component<InputProps, InputState> {
   }
 
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: e.target.value });
-    this.props.onChange(e.target.value);
+    const value = e.target.value.toUpperCase();
+    this.setState({ value });
+    this.props.onChange(value);
   }
 
   render() {
