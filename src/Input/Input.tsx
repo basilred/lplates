@@ -3,6 +3,7 @@ import './Input.css';
 
 interface InputProps {
   value?: string;
+  onChange: (val: string) => void;
 };
 
 interface InputState {
@@ -20,6 +21,7 @@ export default class Input extends React.Component<InputProps, InputState> {
 
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({ value: e.target.value });
+    this.props.onChange(e.target.value);
   }
 
   render() {
