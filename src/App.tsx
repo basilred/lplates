@@ -53,7 +53,7 @@ class App extends React.Component<{data: any}, {dataList: {name: string; codes: 
         const {name, codes} = list[region];
         let codeExists: boolean = false;
 
-        codes.forEach((code: { indexOf: (arg0: string) => number; }) => {
+        codes.forEach((code: string[]) => {
           if (code.indexOf(value) !== -1) {
             codeExists = true;
           }
