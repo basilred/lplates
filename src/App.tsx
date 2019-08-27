@@ -6,9 +6,9 @@ import List from './List/List';
 
 
 class App extends React.Component<{data: any}, {dataList: {name: string; codes: any}[]}> {
-  
+
   private originalList = this.getPlainData(this.props.data).result;
-  
+
   constructor(props: {data: any}) {
     super(props);
 
@@ -47,7 +47,7 @@ class App extends React.Component<{data: any}, {dataList: {name: string; codes: 
   private handleInputChange(value: string) {
     const list = this.originalList;
     let newDataList: {name: string; codes: any[]}[] = [];
-    
+
     for (const region in list) {
       if (list.hasOwnProperty(region)) {
         const {name, codes} = list[region];
@@ -66,7 +66,7 @@ class App extends React.Component<{data: any}, {dataList: {name: string; codes: 
     }
     this.setState({ dataList: newDataList });
   }
-  
+
   render() {
     return (
       <div className="App">
