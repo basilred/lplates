@@ -59,7 +59,9 @@ class App extends React.Component<{data: any}, {dataList: {name: string; codes: 
           }
         });
 
-        if (codeExists) newDataList.push({ name, codes });
+        if (codeExists) {
+          newDataList.push({ name, codes });
+        }
       }
     }
     this.setState({ dataList: newDataList });
