@@ -12,7 +12,6 @@ class App extends React.Component<{data: any}, {dataList: {name: string; codes: 
   constructor(props: {data: any}) {
     super(props);
 
-    this.originalList = this.getPlainData(props.data).result;
     this.state = {
       dataList: this.originalList,
     }
