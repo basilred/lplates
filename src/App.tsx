@@ -7,7 +7,7 @@ import List from './List/List';
 
 class App extends React.Component<{data: any}, {dataList: {name: string; codes: any}[]}> {
 
-  private originalList = this.getPlainData(this.props.data).result;
+  private originalList = this.getPlainData(this.props.data);
 
   constructor(props: {data: any}) {
     super(props);
@@ -40,7 +40,7 @@ class App extends React.Component<{data: any}, {dataList: {name: string; codes: 
       }
     }
 
-    return { result, resultTree };
+    return result;
   }
 
   private handleInputChange(value: string) {
