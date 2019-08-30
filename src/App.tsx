@@ -4,12 +4,22 @@ import './App.css';
 import Input from './Input/Input';
 import List from './List/List';
 
+interface IData {
+  [countryIndex: string]: {
+    [regionIndex: string]: (string | number)[]
+  }
+}
 
-class App extends React.Component<{data: any}, {dataList: {name: string; codes: any}[]}> {
+interface IDataList {
+  name: string;
+  codes: string[];
+}
+
+class App extends React.Component<{data: IData}, {dataList: IDataList[]}> {
 
   private originalList = this.getPlainData(this.props.data);
 
-  constructor(props: {data: any}) {
+  constructor(props: {data: IData}) {
     super(props);
 
     this.state = {
@@ -19,9 +29,8 @@ class App extends React.Component<{data: any}, {dataList: {name: string; codes: 
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  private getPlainData(data: any) {
-    const result: { name: string; codes: any; }[] = [];
-    const resultTree: string[] = [];
+  private getPlainData(data: IData): IDataList[] {
+    const result = [];
 
     for (const country in data) {
 
@@ -32,7 +41,7 @@ class App extends React.Component<{data: any}, {dataList: {name: string; codes: 
 
           if (currentCountry.hasOwnProperty(region)) {
             const regionCodes = currentCountry[region];
-            const stringCodes = regionCodes.map((region: { toString: () => void; }) => region.toString());
+            const stringCodes = regionCodes.map(code => code.toString());
 
             result.push({ name: region, codes: stringCodes });
           }
@@ -45,7 +54,7 @@ class App extends React.Component<{data: any}, {dataList: {name: string; codes: 
 
   private handleInputChange(value: string) {
     const list = this.originalList;
-    let newDataList: {name: string; codes: any[]}[] = [];
+    let newDataList: IDataList[] = [];
 
     for (const region in list) {
       if (list.hasOwnProperty(region)) {
