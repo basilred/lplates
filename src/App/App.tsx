@@ -1,19 +1,11 @@
 import React from 'react';
 import './App.css';
 
-import Input from './Input/Input';
-import List from './List/List';
+import Input from '../Input/Input';
+import List from '../List/List';
 
-interface IData {
-  [countryIndex: string]: {
-    [regionIndex: string]: (string | number)[]
-  }
-}
+import { IData, IDataList } from '../interfaces';
 
-interface IDataList {
-  name: string;
-  codes: string[];
-}
 
 class App extends React.Component<{data: IData}, {dataList: IDataList[]}> {
 
