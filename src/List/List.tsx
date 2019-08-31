@@ -7,11 +7,15 @@ const List = (props: { data: IDataList[]; }) => {
 
   return (
     <ul className="List">
-      {data.map(region => {
-        return (
-          <li key={region.name}>{region.name}</li>
-        );
-      })}
+      {
+        data.length
+        ? data.map(region => {
+            return (
+              <li key={region.name}>{region.name}</li>
+            );
+          })
+        : 'Nothing to view'
+      }
     </ul>
   );
 };
