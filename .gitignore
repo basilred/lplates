@@ -1,47 +1,44 @@
-libs/
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
 node_modules/
+dist/
+dev-dist/
+dist-ssr/
+*.local
+
+# Editor/OS Files
 .DS_Store
 .idea/
 *.iml
 .project
-.svn
-npm-debug.log
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# bem
-.bem/cache/
-.enb/tmp/
-*bundles*/*/*.*
-!*bundles*/*/*.bemjson.js
-!*bundles*/.bem/*
-*pages*/*/*.*
-!*pages*/*/*.bemjson.js
-!*pages*/.bem/*
-
-# borschik's static freeze
-*bundles*/*/img/
-
-deploy/
-output/
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
+# Build outputs
 /build
+/output
+/deploy
+/coverage
+*.tsbuildinfo
 
-# misc
-.DS_Store
-.env.local
+# Environment Variables
+.env
 .env.development.local
 .env.test.local
 .env.production.local
+.env.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Vite
+.vite/

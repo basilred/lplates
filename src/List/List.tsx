@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './List.css';
 import { IDataList } from '../interfaces';
 
