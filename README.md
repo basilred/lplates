@@ -1,44 +1,107 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# LPlates
 
-## Available Scripts
+Небольшое React-приложение для поиска региона по коду автомобильного номера.
 
-In the project directory, you can run:
+Сейчас приложение работает с локальным набором данных и позволяет:
 
-### `npm start`
+- ввести числовой или буквенный код;
+- получить список регионов, которым соответствует этот код;
+- использовать приложение как PWA в браузере.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Что внутри
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- `React 19`
+- `TypeScript`
+- `Vite`
+- `vite-plugin-pwa`
+- локальный датасет в `src/data.json`
 
-### `npm test`
+## Как это работает
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+При запуске приложение загружает данные из `src/data.json`, разворачивает их в плоский список регионов и фильтрует его по введенному значению.
 
-### `npm run build`
+Поддерживаются данные для:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- России
+- Украины
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Поле ввода автоматически переводит значение в верхний регистр, поэтому буквенные коды можно вводить в любом регистре.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Запуск локально
 
-### `npm run eject`
+Требования:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- `Node.js` 18+ 
+- `npm`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Установка зависимостей:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm install
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Запуск dev-сервера:
 
-## Learn More
+```bash
+npm run dev
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Сборка production-версии:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```
+
+Локальный просмотр production-сборки:
+
+```bash
+npm run preview
+```
+
+## Деплой
+
+В проекте есть команда для публикации содержимого `dist` на GitHub Pages:
+
+```bash
+npm run deploy
+```
+
+Перед деплоем нужно выполнить production-сборку:
+
+```bash
+npm run build
+```
+
+## Структура проекта
+
+```text
+.
+├── public/
+├── src/
+│   ├── App/
+│   ├── Input/
+│   ├── List/
+│   ├── data.json
+│   ├── index.css
+│   ├── index.tsx
+│   └── interfaces/
+├── index.html
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
+
+## Особенности текущей реализации
+
+- поиск выполняется по точному совпадению кода;
+- результатом является список названий регионов без дополнительных деталей;
+- данные хранятся в репозитории и не подгружаются с внешнего API;
+- автоматических тестов в проекте пока нет.
+
+## Возможные улучшения
+
+- добавить поиск по мере ввода с частичным совпадением;
+- показывать найденные коды рядом с регионом;
+- разделить выдачу по странам;
+- добавить тесты для фильтрации и компонентов;
+- вынести данные в отдельный обновляемый источник.
