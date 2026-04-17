@@ -7,4 +7,5 @@ export interface IData {
 export interface IDataList {
   name: string;
   codes: string[];
+  country: string;
 }

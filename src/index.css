@@ -1,13 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+  --color-bg: #090b10;
+  --color-panel-soft: rgba(255, 255, 255, 0.035);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-text: #f4f5f8;
+  --color-text-muted: rgba(244, 245, 248, 0.74);
+  --color-text-subtle: rgba(244, 245, 248, 0.52);
+  --color-accent: #ffb25a;
+  --font-body: 'Instrument Sans', 'Segoe UI', sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-body);
+  background:
+    linear-gradient(180deg, #0a0d13 0%, #090b10 100%);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(255, 178, 90, 0.28);
 }

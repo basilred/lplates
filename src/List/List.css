@@ -1,9 +1,141 @@
-.List {
-  padding-left: 0;
-  font-size: 1.5em;
-  width: 90%;
+.Results {
+  padding-top: 0.2rem;
 }
 
-.List > li {
+.Results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0.4rem;
+}
+
+.Results-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(238, 240, 247, 0.52);
+}
+
+.Results-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.2rem;
+  height: 2.2rem;
+  padding: 0 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.List {
+  margin: 0;
+  padding: 0;
+}
+
+.ListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
   list-style: none;
+  background: rgba(255, 255, 255, 0.028);
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.ListItem + .ListItem {
+  margin-top: 0.75rem;
+}
+
+.ListItem:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.ListItem-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.ListItem-name {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.ListItem-country {
+  font-size: 0.84rem;
+  color: var(--color-text-subtle);
+}
+
+.ListItem-codes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
+.ListItem-code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3rem;
+  padding: 0.5rem 0.72rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.Results-empty {
+  padding: 2.2rem 1.1rem 2.4rem;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.Results-emptyTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+}
+
+.Results-emptyText {
+  max-width: 28rem;
+  margin: 0.8rem auto 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 720px) {
+  .ListItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ListItem-codes {
+    justify-content: flex-start;
+  }
 }
