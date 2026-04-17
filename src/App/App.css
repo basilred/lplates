@@ -1,13 +1,226 @@
 .App {
-  text-align: center;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
+.App-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 153, 56, 0.16), transparent 26%),
+    radial-gradient(circle at 85% 12%, rgba(94, 106, 210, 0.16), transparent 28%),
+    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.06), transparent 32%);
+  pointer-events: none;
+}
+
+.App-shell {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) minmax(320px, 760px);
+  gap: 2rem;
   align-items: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 48px 28px;
+}
+
+.App-intro {
+  max-width: 24rem;
+  animation: introRise 0.65s ease-out;
+}
+
+.App-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.App-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  color: var(--color-text);
+}
+
+.App-description {
+  max-width: 32rem;
+  margin: 1.5rem 0 0;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+
+.App-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+.App-stat {
+  padding: 1rem 1rem 1.1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-panel-soft);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px);
+}
+
+.App-statValue {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.App-statLabel {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--color-text-subtle);
+}
+
+.LookupPanel {
+  position: relative;
+  max-width: 760px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
+    rgba(12, 14, 19, 0.88);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(28px);
+  animation: panelRise 0.75s ease-out;
+}
+
+.LookupPanel-topbar {
+  display: flex;
+  gap: 0.45rem;
+  padding: 0.15rem 0 0.85rem;
+}
+
+.LookupPanel-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.LookupPanel-command {
+  padding: 1rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.LookupPanel-commandMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.LookupPanel-commandLabel,
+.LookupPanel-commandHint,
+.LookupPanel-summaryLabel {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.LookupPanel-commandLabel {
+  color: var(--color-text-subtle);
+}
+
+.LookupPanel-commandHint,
+.LookupPanel-summaryLabel {
+  color: rgba(238, 240, 247, 0.45);
+}
+
+.LookupPanel-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0.4rem 0.7rem;
+}
+
+.LookupPanel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.LookupPanel-tags > span {
+  padding: 0.38rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+@keyframes introRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panelRise {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 1100px) {
+  .App-shell {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding: 28px 18px 40px;
+  }
+
+  .App-intro {
+    max-width: none;
+  }
+
+  .App-title {
+    max-width: 10ch;
+  }
+}
+
+@media (max-width: 720px) {
+  .App-shell {
+    gap: 1.5rem;
+  }
+
+  .App-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .LookupPanel-summary,
+  .LookupPanel-commandMeta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
