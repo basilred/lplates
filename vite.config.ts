@@ -18,8 +18,8 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,
-        navigateFallback: '/index.html',
-        navigateFallbackDenylist: [/^\/sw.js$/, /^\/manifest.json$/, /^\/workbox-.*\.js$/]
+        navigateFallback: 'index.html',
+        navigateFallbackDenylist: [/sw\.js$/, /manifest\.webmanifest$/, /workbox-.*\.js$/]
       },
       devOptions: {
         enabled: true
@@ -32,8 +32,8 @@ export default defineConfig({
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
-        scope: '/',
-        start_url: '/',
+        scope: '/lplates/',
+        start_url: '/lplates/',
         icons: [
           {
             src: 'pwa-icon.png',
