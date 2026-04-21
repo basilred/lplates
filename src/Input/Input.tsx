@@ -29,17 +29,17 @@ export default class Input extends React.Component<InputProps, InputState> {
     const { value } = this.state;
 
     return (
-      <div className="InputWrap">
-        <span className="InputIcon" aria-hidden="true">
+      <div className="Input">
+        <span className="Input-Icon" aria-hidden="true">
           /
         </span>
         <input
-          className="Input"
+          className="Input-Field"
           placeholder="Type a code: AA, AK, 77, 178"
           value={value}
           onChange={this.handleChange}
         />
-        <span className="InputShortcut" aria-hidden="true">
+        <span className="Input-Shortcut" aria-hidden="true">
           Enter
         </span>
       </div>

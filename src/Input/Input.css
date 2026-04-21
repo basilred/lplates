@@ -1,4 +1,4 @@
-.InputWrap {
+.Input {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -15,8 +15,8 @@
     0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
-.InputIcon,
-.InputShortcut {
+.Input-Icon,
+.Input-Shortcut {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +24,7 @@
   color: rgba(238, 240, 247, 0.56);
 }
 
-.InputIcon {
+.Input-Icon {
   width: 2.35rem;
   height: 2.35rem;
   border-radius: 14px;
@@ -33,7 +33,7 @@
   background: rgba(255, 255, 255, 0.03);
 }
 
-.InputShortcut {
+.Input-Shortcut {
   min-width: 4.6rem;
   padding: 0.55rem 0.8rem;
   border-radius: 12px;
@@ -43,7 +43,7 @@
   background: rgba(255, 255, 255, 0.025);
 }
 
-.Input {
+.Input-Field {
   width: 100%;
   padding: 0;
   border: 0;
@@ -55,16 +55,16 @@
   letter-spacing: -0.03em;
 }
 
-.Input::placeholder {
+.Input-Field::placeholder {
   color: rgba(238, 240, 247, 0.26);
 }
 
 @media (max-width: 720px) {
-  .InputWrap {
+  .Input {
     grid-template-columns: auto 1fr;
   }
 
-  .InputShortcut {
+  .Input-Shortcut {
     display: none;
   }
 }

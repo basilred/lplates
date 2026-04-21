@@ -94,50 +94,50 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
 
     return (
       <div className="App">
-        <div className="App-backdrop" />
-        <main className="App-shell">
-          <section className="App-intro">
-            <p className="App-eyebrow">Regional lookup</p>
-            <h1 className="App-title">Find a license plate region in one keystroke.</h1>
-            <p className="App-description">
+        <div className="App-Backdrop" />
+        <main className="App-Shell">
+          <section className="App-Intro">
+            <p className="App-Eyebrow">Regional lookup</p>
+            <h1 className="App-Title">Find a license plate region in one keystroke.</h1>
+            <p className="App-Description">
               A focused lookup tool for regional plate codes. Type a numeric or letter code and
               get the matching region instantly.
             </p>
 
-            <div className="App-stats" aria-label="Dataset summary">
-              <div className="App-stat">
-                <span className="App-statValue">{totalRegions}</span>
-                <span className="App-statLabel">regions indexed</span>
+            <div className="App-Stats" aria-label="Dataset summary">
+              <div className="App-Stat">
+                <span className="App-StatValue">{totalRegions}</span>
+                <span className="App-StatLabel">regions indexed</span>
               </div>
-              <div className="App-stat">
-                <span className="App-statValue">{totalCodes}</span>
-                <span className="App-statLabel">codes available</span>
+              <div className="App-Stat">
+                <span className="App-StatValue">{totalCodes}</span>
+                <span className="App-StatLabel">codes available</span>
               </div>
-              <div className="App-stat">
-                <span className="App-statValue">2</span>
-                <span className="App-statLabel">countries covered</span>
+              <div className="App-Stat">
+                <span className="App-StatValue">2</span>
+                <span className="App-StatLabel">countries covered</span>
               </div>
             </div>
           </section>
 
           <section className="LookupPanel" aria-label="License plate lookup">
-            <div className="LookupPanel-topbar">
-              <span className="LookupPanel-dot" />
-              <span className="LookupPanel-dot" />
-              <span className="LookupPanel-dot" />
+            <div className="LookupPanel-Topbar">
+              <span className="LookupPanel-Dot" />
+              <span className="LookupPanel-Dot" />
+              <span className="LookupPanel-Dot" />
             </div>
 
-            <div className="LookupPanel-command">
-              <div className="LookupPanel-commandMeta">
-                <span className="LookupPanel-commandLabel">Search</span>
-                <span className="LookupPanel-commandHint">Exact code match</span>
+            <div className="LookupPanel-Command">
+              <div className="LookupPanel-CommandMeta">
+                <span className="LookupPanel-CommandLabel">Search</span>
+                <span className="LookupPanel-CommandHint">Exact code match</span>
               </div>
               <Input onChange={this.handleInputChange} />
             </div>
 
-            <div className="LookupPanel-summary">
-              <span className="LookupPanel-summaryLabel">Available examples</span>
-              <div className="LookupPanel-tags" aria-label="Example codes">
+            <div className="LookupPanel-Summary">
+              <span className="LookupPanel-SummaryLabel">Available examples</span>
+              <div className="LookupPanel-Tags" aria-label="Example codes">
                 <span>77</span>
                 <span>92</span>
                 <span>AA</span>

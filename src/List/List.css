@@ -2,7 +2,7 @@
   padding-top: 0.2rem;
 }
 
-.Results-header {
+.Results-Header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,14 +10,14 @@
   padding: 0.9rem 0.4rem;
 }
 
-.Results-title {
+.Results-Title {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(238, 240, 247, 0.52);
 }
 
-.Results-count {
+.Results-Count {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@
   padding: 0;
 }
 
-.ListItem {
+.List-Item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -53,43 +53,43 @@
     background 140ms ease;
 }
 
-.ListItem + .ListItem {
+.List-Item + .List-Item {
   margin-top: 0.75rem;
 }
 
-.ListItem:hover {
+.List-Item:hover {
   transform: translateY(-1px);
   border-color: rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.045);
 }
 
-.ListItem-main {
+.List-ItemMain {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   min-width: 0;
 }
 
-.ListItem-name {
+.List-ItemName {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.35;
   color: var(--color-text);
 }
 
-.ListItem-country {
+.List-ItemCountry {
   font-size: 0.84rem;
   color: var(--color-text-subtle);
 }
 
-.ListItem-codes {
+.List-ItemCodes {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.45rem;
 }
 
-.ListItem-code {
+.List-ItemCode {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -104,7 +104,7 @@
   letter-spacing: 0.04em;
 }
 
-.Results-empty {
+.Results-Empty {
   padding: 2.2rem 1.1rem 2.4rem;
   border: 1px dashed rgba(255, 255, 255, 0.1);
   border-radius: 20px;
@@ -112,7 +112,7 @@
   background: rgba(255, 255, 255, 0.02);
 }
 
-.Results-emptyTitle {
+.Results-EmptyTitle {
   margin: 0;
   font-family: var(--font-display);
   font-size: 2rem;
@@ -121,7 +121,7 @@
   color: var(--color-text);
 }
 
-.Results-emptyText {
+.Results-EmptyText {
   max-width: 28rem;
   margin: 0.8rem auto 0;
   font-size: 0.95rem;
@@ -130,12 +130,12 @@
 }
 
 @media (max-width: 720px) {
-  .ListItem {
+  .List-Item {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .ListItem-codes {
+  .List-ItemCodes {
     justify-content: flex-start;
   }
 }

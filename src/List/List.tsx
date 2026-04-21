@@ -11,23 +11,23 @@ const List = (props: {
 
   return (
     <section className="Results" aria-label="Search results">
-      <div className="Results-header">
-        <span className="Results-title">Matches</span>
-        <span className="Results-count">{data.length}</span>
+      <div className="Results-Header">
+        <span className="Results-Title">Matches</span>
+        <span className="Results-Count">{data.length}</span>
       </div>
 
       {data.length ? (
         <ul className="List">
           {data.map(region => {
             return (
-              <li className="ListItem" key={`${region.country}-${region.name}`}>
-                <div className="ListItem-main">
-                  <span className="ListItem-name">{region.name}</span>
-                  <span className="ListItem-country">{getCountryLabel(region.country)}</span>
+              <li className="List-Item" key={`${region.country}-${region.name}`}>
+                <div className="List-ItemMain">
+                  <span className="List-ItemName">{region.name}</span>
+                  <span className="List-ItemCountry">{getCountryLabel(region.country)}</span>
                 </div>
-                <div className="ListItem-codes" aria-label={`Codes for ${region.name}`}>
+                <div className="List-ItemCodes" aria-label={`Codes for ${region.name}`}>
                   {region.codes.map(code => (
-                    <span className="ListItem-code" key={`${region.name}-${code}`}>
+                    <span className="List-ItemCode" key={`${region.name}-${code}`}>
                       {code}
                     </span>
                   ))}
@@ -37,11 +37,11 @@ const List = (props: {
           })}
         </ul>
       ) : (
-        <div className="Results-empty">
-          <p className="Results-emptyTitle">
+        <div className="Results-Empty">
+          <p className="Results-EmptyTitle">
             {query ? 'No exact match found' : 'Start with a plate code'}
           </p>
-          <p className="Results-emptyText">
+          <p className="Results-EmptyText">
             {query
               ? 'Try another exact code to see matching license plate regions.'
               : 'Enter an exact regional code to see matching license plate regions.'}
