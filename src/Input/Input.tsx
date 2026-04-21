@@ -35,7 +35,7 @@ export default class Input extends React.Component<InputProps, InputState> {
         </span>
         <input
           className="Input-Field"
-          placeholder="Type a code: AA, AK, 77, 178"
+          placeholder="Type a code: AA, AK, 77, 178, A"
           value={value}
           onChange={this.handleChange}
         />

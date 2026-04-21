@@ -53,6 +53,8 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
         return 'Russia';
       case 'ua':
         return 'Ukraine';
+      case 'cz':
+        return 'Czech Republic';
       default:
         return country.toUpperCase();
     }
@@ -91,6 +93,7 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
   render() {
     const totalRegions = this.originalList.length;
     const totalCodes = this.originalList.reduce((sum, region) => sum + region.codes.length, 0);
+    const totalCountries = Object.keys(this.props.data).length;
 
     return (
       <div className="App">
@@ -114,7 +117,7 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
                 <span className="App-StatLabel">codes available</span>
               </div>
               <div className="App-Stat">
-                <span className="App-StatValue">2</span>
+                <span className="App-StatValue">{totalCountries}</span>
                 <span className="App-StatLabel">countries covered</span>
               </div>
             </div>
@@ -143,6 +146,8 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
                 <span>AA</span>
                 <span>AK</span>
                 <span>178</span>
+                <span>A</span>
+                <span>777</span>
               </div>
             </div>
 
