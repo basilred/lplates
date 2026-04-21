@@ -5,6 +5,7 @@ import Input from '../Input/Input';
 import List from '../List/List';
 
 import { IData, IDataList } from '../interfaces';
+import { parsePlate, IParsedCodes } from '../utils/plateParser';
 
 
 class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: string; showFlags: boolean}> {
@@ -87,23 +88,22 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
       return;
     }
 
+    const potentials = parsePlate(value);
     const list = this.originalList;
-    let newDataList: IDataList[] = [];
+    const newDataList: IDataList[] = [];
 
-    for (const region in list) {
-      if (list.hasOwnProperty(region)) {
-        const {name, codes} = list[region];
-        let codeExists: boolean = false;
+    for (const item of list) {
+      const { codes, country } = item;
+      
+      // Check if any of the "any" codes match (direct input or standardized)
+      const matchInAny = codes.some(code => potentials.any.includes(code));
+      
+      // Check if the country-specific extracted code matches
+      const countryPotentials = potentials[country as keyof Omit<IParsedCodes, 'any'>];
+      const matchInCountry = countryPotentials && codes.some(code => countryPotentials.includes(code));
 
-        codes.forEach(code => {
-          if (code === value) {
-            codeExists = true;
-          }
-        });
-
-        if (codeExists) {
-          newDataList.push({ name, codes, country: list[region].country });
-        }
+      if (matchInAny || matchInCountry) {
+        newDataList.push(item);
       }
     }
     this.setState({ dataList: newDataList });
@@ -174,7 +174,7 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
             <div className="LookupPanel-Command">
               <div className="LookupPanel-CommandMeta">
                 <span className="LookupPanel-CommandLabel">Search</span>
-                <span className="LookupPanel-CommandHint">Exact code match</span>
+                <span className="LookupPanel-CommandHint">Code or full plate</span>
               </div>
               <Input onChange={this.handleInputChange} />
             </div>
@@ -183,12 +183,11 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
               <span className="LookupPanel-SummaryLabel">Available examples</span>
               <div className="LookupPanel-Tags" aria-label="Example codes">
                 <span>77</span>
-                <span>92</span>
+                <span>A 123 BC 77</span>
                 <span>AA</span>
-                <span>AK</span>
-                <span>178</span>
+                <span>AA 1234 BB</span>
                 <span>A</span>
-                <span>777</span>
+                <span>1A2 3456</span>
               </div>
             </div>
 
