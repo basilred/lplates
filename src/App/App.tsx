@@ -7,7 +7,7 @@ import List from '../List/List';
 import { IData, IDataList } from '../interfaces';
 
 
-class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: string}> {
+class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: string; showFlags: boolean}> {
 
   private originalList = this.getPlainData(this.props.data);
 
@@ -17,9 +17,11 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
     this.state = {
       dataList: [],
       query: '',
+      showFlags: true,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleToggleFlags = this.handleToggleFlags.bind(this);
   }
 
   private getPlainData(data: IData): IDataList[] {
@@ -47,6 +49,19 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
     return result;
   }
 
+  private getCountryFlag(country: string) {
+    switch (country) {
+      case 'ru':
+        return '🇷🇺';
+      case 'ua':
+        return '🇺🇦';
+      case 'cz':
+        return '🇨🇿';
+      default:
+        return '🏳️';
+    }
+  }
+
   private getCountryLabel(country: string) {
     switch (country) {
       case 'ru':
@@ -58,6 +73,10 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
       default:
         return country.toUpperCase();
     }
+  }
+
+  private handleToggleFlags() {
+    this.setState(prevState => ({ showFlags: !prevState.showFlags }));
   }
 
   private handleInputChange(value: string) {
@@ -117,7 +136,18 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
                 <span className="App-StatLabel">codes available</span>
               </div>
               <div className="App-Stat">
-                <span className="App-StatValue">{totalCountries}</span>
+                <span className="App-StatValue">
+                  {totalCountries}
+                  {this.state.showFlags && (
+                    <div className="App-StatFlags">
+                      {Object.keys(this.props.data).map(country => (
+                        <span key={country} title={this.getCountryLabel(country)}>
+                          {this.getCountryFlag(country)}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </span>
                 <span className="App-StatLabel">countries covered</span>
               </div>
             </div>
@@ -125,9 +155,20 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
 
           <section className="LookupPanel" aria-label="License plate lookup">
             <div className="LookupPanel-Topbar">
-              <span className="LookupPanel-Dot" />
-              <span className="LookupPanel-Dot" />
-              <span className="LookupPanel-Dot" />
+              <div className="LookupPanel-Dots">
+                <span className="LookupPanel-Dot" />
+                <span className="LookupPanel-Dot" />
+                <span className="LookupPanel-Dot" />
+              </div>
+              <button
+                className={`FlagToggle ${this.state.showFlags ? 'FlagToggle_active' : ''}`}
+                onClick={this.handleToggleFlags}
+                aria-label="Toggle flags"
+                title={this.state.showFlags ? 'Hide flags' : 'Show flags'}
+              >
+                <span className="FlagToggle-Icon">🏳️</span>
+                <span className="FlagToggle-Label">Flags</span>
+              </button>
             </div>
 
             <div className="LookupPanel-Command">
@@ -154,6 +195,8 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
             <List
               data={this.state.dataList}
               getCountryLabel={this.getCountryLabel}
+              getCountryFlag={this.getCountryFlag}
+              showFlags={this.state.showFlags}
               query={this.state.query}
             />
           </section>

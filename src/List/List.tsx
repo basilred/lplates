@@ -5,9 +5,11 @@ import { IDataList } from '../interfaces';
 const List = (props: {
   data: IDataList[];
   getCountryLabel: (country: string) => string;
+  getCountryFlag: (country: string) => string;
+  showFlags: boolean;
   query: string;
 }) => {
-  const { data, getCountryLabel, query } = props;
+  const { data, getCountryLabel, getCountryFlag, showFlags, query } = props;
 
   return (
     <section className="Results" aria-label="Search results">
@@ -23,7 +25,10 @@ const List = (props: {
               <li className="List-Item" key={`${region.country}-${region.name}`}>
                 <div className="List-ItemMain">
                   <span className="List-ItemName">{region.name}</span>
-                  <span className="List-ItemCountry">{getCountryLabel(region.country)}</span>
+                  <span className="List-ItemCountry">
+                    {showFlags && <span className="List-ItemFlag">{getCountryFlag(region.country)}</span>}
+                    {getCountryLabel(region.country)}
+                  </span>
                 </div>
                 <div className="List-ItemCodes" aria-label={`Codes for ${region.name}`}>
                   {region.codes.map(code => (

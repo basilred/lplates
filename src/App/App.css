@@ -87,6 +87,24 @@
   color: var(--color-text-subtle);
 }
 
+.App-StatValue {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.App-StatFlags {
+  display: flex;
+  gap: 0.25rem;
+  font-size: 1.1rem;
+  animation: flagFadeIn 0.3s ease-out;
+}
+
+@keyframes flagFadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .LookupPanel {
   position: relative;
   max-width: 760px;
@@ -105,8 +123,15 @@
 
 .LookupPanel-Topbar {
   display: flex;
-  gap: 0.45rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   padding: 0.15rem 0 0.85rem;
+}
+
+.LookupPanel-Dots {
+  display: flex;
+  gap: 0.45rem;
 }
 
 .LookupPanel-Dot {
@@ -114,6 +139,45 @@
   height: 0.7rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.12);
+}
+
+.FlagToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.FlagToggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-text);
+}
+
+.FlagToggle_active {
+  background: rgba(255, 153, 56, 0.1);
+  border-color: rgba(255, 153, 56, 0.25);
+  color: #ff9938;
+}
+
+.FlagToggle-Icon {
+  font-size: 0.9rem;
+  filter: grayscale(1);
+  transition: filter 0.2s ease;
+}
+
+.FlagToggle_active .FlagToggle-Icon {
+  filter: grayscale(0);
 }
 
 .LookupPanel-Command {
