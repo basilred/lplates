@@ -4,7 +4,7 @@
   overflow: hidden;
 }
 
-.App-backdrop {
+.App-Backdrop {
   position: absolute;
   inset: 0;
   background:
@@ -14,7 +14,7 @@
   pointer-events: none;
 }
 
-.App-shell {
+.App-Shell {
   position: relative;
   z-index: 1;
   min-height: 100vh;
@@ -25,12 +25,12 @@
   padding: 48px 28px;
 }
 
-.App-intro {
+.App-Intro {
   max-width: 24rem;
   animation: introRise 0.65s ease-out;
 }
 
-.App-eyebrow {
+.App-Eyebrow {
   margin: 0 0 1rem;
   font-size: 0.72rem;
   font-weight: 700;
@@ -39,7 +39,7 @@
   color: var(--color-accent);
 }
 
-.App-title {
+.App-Title {
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(3rem, 7vw, 5.5rem);
@@ -48,7 +48,7 @@
   color: var(--color-text);
 }
 
-.App-description {
+.App-Description {
   max-width: 32rem;
   margin: 1.5rem 0 0;
   font-size: 1rem;
@@ -56,14 +56,14 @@
   color: var(--color-text-muted);
 }
 
-.App-stats {
+.App-Stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.85rem;
   margin-top: 2rem;
 }
 
-.App-stat {
+.App-Stat {
   padding: 1rem 1rem 1.1rem;
   border: 1px solid var(--color-border);
   border-radius: 18px;
@@ -72,14 +72,14 @@
   backdrop-filter: blur(18px);
 }
 
-.App-statValue {
+.App-StatValue {
   display: block;
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--color-text);
 }
 
-.App-statLabel {
+.App-StatLabel {
   display: block;
   margin-top: 0.45rem;
   font-size: 0.8rem;
@@ -103,27 +103,27 @@
   animation: panelRise 0.75s ease-out;
 }
 
-.LookupPanel-topbar {
+.LookupPanel-Topbar {
   display: flex;
   gap: 0.45rem;
   padding: 0.15rem 0 0.85rem;
 }
 
-.LookupPanel-dot {
+.LookupPanel-Dot {
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.12);
 }
 
-.LookupPanel-command {
+.LookupPanel-Command {
   padding: 1rem;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.LookupPanel-commandMeta {
+.LookupPanel-CommandMeta {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -131,24 +131,24 @@
   margin-bottom: 0.85rem;
 }
 
-.LookupPanel-commandLabel,
-.LookupPanel-commandHint,
-.LookupPanel-summaryLabel {
+.LookupPanel-CommandLabel,
+.LookupPanel-CommandHint,
+.LookupPanel-SummaryLabel {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.LookupPanel-commandLabel {
+.LookupPanel-CommandLabel {
   color: var(--color-text-subtle);
 }
 
-.LookupPanel-commandHint,
-.LookupPanel-summaryLabel {
+.LookupPanel-CommandHint,
+.LookupPanel-SummaryLabel {
   color: rgba(238, 240, 247, 0.45);
 }
 
-.LookupPanel-summary {
+.LookupPanel-Summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -156,13 +156,13 @@
   padding: 1rem 0.4rem 0.7rem;
 }
 
-.LookupPanel-tags {
+.LookupPanel-Tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
 }
 
-.LookupPanel-tags > span {
+.LookupPanel-Tags > span {
   padding: 0.38rem 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 999px;
@@ -194,32 +194,32 @@
 }
 
 @media (max-width: 1100px) {
-  .App-shell {
+  .App-Shell {
     grid-template-columns: 1fr;
     align-items: start;
     padding: 28px 18px 40px;
   }
 
-  .App-intro {
+  .App-Intro {
     max-width: none;
   }
 
-  .App-title {
+  .App-Title {
     max-width: 10ch;
   }
 }
 
 @media (max-width: 720px) {
-  .App-shell {
+  .App-Shell {
     gap: 1.5rem;
   }
 
-  .App-stats {
+  .App-Stats {
     grid-template-columns: 1fr;
   }
 
-  .LookupPanel-summary,
-  .LookupPanel-commandMeta {
+  .LookupPanel-Summary,
+  .LookupPanel-CommandMeta {
     flex-direction: column;
     align-items: flex-start;
   }
