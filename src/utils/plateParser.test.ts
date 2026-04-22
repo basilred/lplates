@@ -55,6 +55,22 @@ describe('parsePlate', () => {
       expect(parsePlate('5E78901').cz).toEqual(['E']);
     });
   });
+  
+  describe('BY (Belarus) plates', () => {
+    it('should extract region from standard car plates', () => {
+      expect(parsePlate('1234 AB-7').by).toEqual(['7']);
+      expect(parsePlate('5678 KH 1').by).toEqual(['1']);
+    });
+
+    it('should extract region from truck/bus plates', () => {
+      expect(parsePlate('AB 1234-7').by).toEqual(['7']);
+      expect(parsePlate('KH 5678 1').by).toEqual(['1']);
+    });
+
+    it('should handle Cyrillic characters', () => {
+      expect(parsePlate('1234 АВ-7').by).toEqual(['7']);
+    });
+  });
 
   describe('False Positives', () => {
     it('should not extract RU region from random digits', () => {
@@ -70,6 +86,11 @@ describe('parsePlate', () => {
     it('should not extract CZ region from random strings', () => {
       expect(parsePlate('ABCDEFG').cz).toBeUndefined();
       expect(parsePlate('1234567').cz).toBeUndefined();
+    });
+
+    it('should not extract BY region from random strings', () => {
+      expect(parsePlate('1234567').by).toBeUndefined();
+      expect(parsePlate('ABCDEFG').by).toBeUndefined();
     });
   });
 

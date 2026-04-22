@@ -58,6 +58,8 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
         return '🇺🇦';
       case 'cz':
         return '🇨🇿';
+      case 'by':
+        return '🇧🇾';
       default:
         return '🏳️';
     }
@@ -71,6 +73,8 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
         return 'Ukraine';
       case 'cz':
         return 'Czech Republic';
+      case 'by':
+        return 'Belarus';
       default:
         return country.toUpperCase();
     }
@@ -188,6 +192,8 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
                 <span>AA 1234 BB</span>
                 <span>A</span>
                 <span>1A2 3456</span>
+                <span>7</span>
+                <span>1234 AB 7</span>
               </div>
             </div>
 

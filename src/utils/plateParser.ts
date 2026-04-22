@@ -2,6 +2,7 @@ export interface IParsedCodes {
   ru?: string[];
   ua?: string[];
   cz?: string[];
+  by?: string[];
   any: string[];
 }
 
@@ -57,6 +58,12 @@ export function parsePlate(input: string): IParsedCodes {
   const czMatch = standardized.match(/^\d([A-Z])[\dA-Z]\d{4}$/);
   if (czMatch) {
     results.cz = [czMatch[1]];
+  }
+  
+  // BY: Belarusian plates (e.g., 1234 AB-7, AB 1234-7)
+  const byMatch = standardized.match(/^(\d{4}[A-Z]{2}|[A-Z]{2}\d{4})(\d)$/);
+  if (byMatch) {
+    results.by = [byMatch[2]];
   }
 
   return results;
