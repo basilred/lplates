@@ -139,11 +139,22 @@
 
 @media (max-width: 720px) {
   .List-Item {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 0.8rem 1rem;
+    border-radius: 14px;
   }
 
-  .List-ItemCodes {
-    justify-content: flex-start;
+  .List-ItemMain {
+    gap: 0.2rem;
+  }
+
+  .List-ItemName {
+    font-size: 0.95rem;
+  }
+
+  .List-ItemCode {
+    min-width: 2.5rem;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    border-radius: 10px;
   }
 }
