@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo, useCallback, useContext } from 'react';
 import './App.css';
 
 import Input from '../Input/Input';
@@ -9,30 +9,21 @@ import { IData, IDataList } from '../interfaces';
 import { parsePlate, IParsedCodes } from '../utils/plateParser';
 import LanguageContext from '../contexts/LanguageContext';
 
+interface AppProps {
+  data: IData;
+}
 
-class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: string; showFlags: boolean; isFocused: boolean}> {
-  static contextType = LanguageContext;
-  declare context: React.ContextType<typeof LanguageContext>;
+const App: React.FC<AppProps> = ({ data }) => {
+  const languageContext = useContext(LanguageContext);
+  const { t } = languageContext || { t: (key: string) => key };
 
-  private originalList = this.getPlainData(this.props.data);
+  const [dataList, setDataList] = useState<IDataList[]>([]);
+  const [query, setQuery] = useState('');
+  const [showFlags, setShowFlags] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
 
-  constructor(props: {data: IData}) {
-    super(props);
-
-    this.state = {
-      dataList: [],
-      query: '',
-      showFlags: true,
-      isFocused: false,
-    }
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleToggleFlags = this.handleToggleFlags.bind(this);
-    this.getCountryLabel = this.getCountryLabel.bind(this);
-    this.getCountryFlag = this.getCountryFlag.bind(this);
-  }
-
-  private getPlainData(data: IData): IDataList[] {
+  // Преобразование данных в плоский список (мемоизировано)
+  const originalList = useMemo(() => {
     const result: IDataList[] = [];
 
     for (const country in data) {
@@ -55,9 +46,9 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
     }
 
     return result;
-  }
+  }, [data]);
 
-  private getCountryFlag(country: string) {
+  const getCountryFlag = useCallback((country: string) => {
     switch (country) {
       case 'ru':
         return '🇷🇺';
@@ -70,13 +61,13 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
       default:
         return '🏳️';
     }
-  }
+  }, []);
 
-  private getCountryLabel(country: string) {
+  const getCountryLabel = useCallback((country: string) => {
     // Если контекст доступен, пробуем получить перевод
-    if (this.context) {
-      const { t } = this.context;
-      const translated = t(`countries.${country}`);
+    if (languageContext) {
+      const { t: contextT } = languageContext;
+      const translated = contextT(`countries.${country}`);
       // Проверяем, что перевод существует и не равен исходному ключу
       if (translated && translated !== `countries.${country}`) {
         return translated;
@@ -97,33 +88,32 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
       default:
         return country.toUpperCase();
     }
-  }
+  }, [languageContext]);
 
-  private handleToggleFlags() {
-    this.setState(prevState => ({ showFlags: !prevState.showFlags }));
-  }
+  const handleToggleFlags = useCallback(() => {
+    setShowFlags(prev => !prev);
+  }, []);
 
-  private handleFocus = () => {
-    this.setState({ isFocused: true });
-  }
+  const handleFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
 
-  private handleBlur = () => {
-    this.setState({ isFocused: false });
-  }
+  const handleBlur = useCallback(() => {
+    setIsFocused(false);
+  }, []);
 
-  private handleInputChange(value: string) {
-    this.setState({ query: value });
+  const handleInputChange = useCallback((value: string) => {
+    setQuery(value);
 
     if (!value.trim()) {
-      this.setState({ dataList: [] });
+      setDataList([]);
       return;
     }
 
     const potentials = parsePlate(value);
-    const list = this.originalList;
     const newDataList: IDataList[] = [];
 
-    for (const item of list) {
+    for (const item of originalList) {
       const { codes, country } = item;
       
       // Check if any of the "any" codes match (direct input or standardized)
@@ -137,125 +127,122 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
         newDataList.push(item);
       }
     }
-    this.setState({ dataList: newDataList });
-  }
+    setDataList(newDataList);
+  }, [originalList]);
 
-  render() {
-    const totalRegions = this.originalList.length;
-    const totalCodes = this.originalList.reduce((sum, region) => sum + region.codes.length, 0);
-    const totalCountries = Object.keys(this.props.data).length;
+  const totalRegions = originalList.length;
+  const totalCodes = originalList.reduce((sum, region) => sum + region.codes.length, 0);
+  const totalCountries = Object.keys(data).length;
 
-    const isActive = this.state.isFocused || this.state.query.length > 0;
-    const { t } = this.context || { t: (key: string) => key };
+  const isActive = isFocused || query.length > 0;
 
-    return (
-      <div className={`App ${isActive ? 'App_active' : ''}`}>
-        <div className="App-Backdrop" />
-        <main className="App-Shell">
+  return (
+    <div className={`App ${isActive ? 'App_active' : ''}`}>
+      <div className="App-Backdrop" />
+      <main className="App-Shell">
+        {!isActive && (
+          <section className="App-Intro">
+            <div className="App-HeaderRow">
+              <p className="App-Eyebrow">{t('app.eyebrow')}</p>
+              <LanguageSwitcher />
+            </div>
+            <h1 className="App-Title">{t('app.title')}</h1>
+            <p className="App-Description">
+              {t('app.description')}
+            </p>
+
+            <div className="App-Stats" aria-label={t('app.datasetSummary')}>
+              <div className="App-Stat">
+                <span className="App-StatValue">{totalRegions}</span>
+                <span className="App-StatLabel">{t('app.stats.regionsIndexed')}</span>
+              </div>
+              <div className="App-Stat">
+                <span className="App-StatValue">{totalCodes}</span>
+                <span className="App-StatLabel">{t('app.stats.codesAvailable')}</span>
+              </div>
+              <div className="App-Stat">
+                <span className="App-StatValue">
+                  {totalCountries}
+                  {showFlags && (
+                    <div className="App-StatFlags">
+                      {Object.keys(data).map(country => (
+                        <span key={country} title={getCountryLabel(country)}>
+                          {getCountryFlag(country)}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </span>
+                <span className="App-StatLabel">{t('app.stats.countriesCovered')}</span>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <section className="LookupPanel" aria-label={t('app.licensePlateLookup')}>
+          <div className="LookupPanel-Topbar">
+            <div className="LookupPanel-Dots">
+              <span className="LookupPanel-Dot" />
+              <span className="LookupPanel-Dot" />
+              <span className="LookupPanel-Dot" />
+            </div>
+            <button
+              className={`FlagToggle ${showFlags ? 'FlagToggle_active' : ''}`}
+              onClick={handleToggleFlags}
+              aria-label={t('app.toggleFlags')}
+              title={showFlags ? t('app.hideFlags') : t('app.showFlags')}
+            >
+              <span className="FlagToggle-Icon">🏳️</span>
+              <span className="FlagToggle-Label">{t('app.toggleFlags')}</span>
+            </button>
+          </div>
+
+          <div className={`LookupPanel-Command ${isActive ? 'LookupPanel-Command_active' : ''}`}>
+            {!isActive && (
+              <div className="LookupPanel-CommandMeta">
+                <span className="LookupPanel-CommandLabel">{t('app.search')}</span>
+                <span className="LookupPanel-CommandHint">{t('app.codeOrFullPlate')}</span>
+              </div>
+            )}
+            <Input
+              value={query}
+              onChange={handleInputChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </div>
+
           {!isActive && (
-            <section className="App-Intro">
-              <div className="App-HeaderRow">
-                <p className="App-Eyebrow">{t('app.eyebrow')}</p>
-                <LanguageSwitcher />
+            <div className="LookupPanel-Summary">
+              <span className="LookupPanel-SummaryLabel">{t('app.availableExamples')}</span>
+              <div className="LookupPanel-Tags" aria-label={t('app.exampleCodes')}>
+                <span>77</span>
+                <span>A 123 BC 77</span>
+                <span>AA</span>
+                <span>AA 1234 BB</span>
+                <span>A</span>
+                <span>1A2 3456</span>
+                <span>7</span>
+                <span>1234 AB 7</span>
               </div>
-              <h1 className="App-Title">{t('app.title')}</h1>
-              <p className="App-Description">
-                {t('app.description')}
-              </p>
-
-              <div className="App-Stats" aria-label={t('app.datasetSummary')}>
-                <div className="App-Stat">
-                  <span className="App-StatValue">{totalRegions}</span>
-                  <span className="App-StatLabel">{t('app.stats.regionsIndexed')}</span>
-                </div>
-                <div className="App-Stat">
-                  <span className="App-StatValue">{totalCodes}</span>
-                  <span className="App-StatLabel">{t('app.stats.codesAvailable')}</span>
-                </div>
-                <div className="App-Stat">
-                  <span className="App-StatValue">
-                    {totalCountries}
-                    {this.state.showFlags && (
-                      <div className="App-StatFlags">
-                        {Object.keys(this.props.data).map(country => (
-                          <span key={country} title={this.getCountryLabel(country)}>
-                            {this.getCountryFlag(country)}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </span>
-                  <span className="App-StatLabel">{t('app.stats.countriesCovered')}</span>
-                </div>
-              </div>
-            </section>
+            </div>
           )}
 
-          <section className="LookupPanel" aria-label={t('app.licensePlateLookup')}>
-            <div className="LookupPanel-Topbar">
-              <div className="LookupPanel-Dots">
-                <span className="LookupPanel-Dot" />
-                <span className="LookupPanel-Dot" />
-                <span className="LookupPanel-Dot" />
-              </div>
-              <button
-                className={`FlagToggle ${this.state.showFlags ? 'FlagToggle_active' : ''}`}
-                onClick={this.handleToggleFlags}
-                aria-label={t('app.toggleFlags')}
-                title={this.state.showFlags ? t('app.hideFlags') : t('app.showFlags')}
-              >
-                <span className="FlagToggle-Icon">🏳️</span>
-                <span className="FlagToggle-Label">{t('app.toggleFlags')}</span>
-              </button>
-            </div>
-
-            <div className={`LookupPanel-Command ${isActive ? 'LookupPanel-Command_active' : ''}`}>
-              {!isActive && (
-                <div className="LookupPanel-CommandMeta">
-                  <span className="LookupPanel-CommandLabel">{t('app.search')}</span>
-                  <span className="LookupPanel-CommandHint">{t('app.codeOrFullPlate')}</span>
-                </div>
-              )}
-              <Input
-                value={this.state.query}
-                onChange={this.handleInputChange}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur}
+          {isActive && (
+            <div className="LookupPanel-ResultsArea">
+              <List
+                data={dataList}
+                getCountryLabel={getCountryLabel}
+                getCountryFlag={getCountryFlag}
+                showFlags={showFlags}
+                query={query}
               />
             </div>
-
-            {!isActive && (
-              <div className="LookupPanel-Summary">
-                <span className="LookupPanel-SummaryLabel">{t('app.availableExamples')}</span>
-                <div className="LookupPanel-Tags" aria-label={t('app.exampleCodes')}>
-                  <span>77</span>
-                  <span>A 123 BC 77</span>
-                  <span>AA</span>
-                  <span>AA 1234 BB</span>
-                  <span>A</span>
-                  <span>1A2 3456</span>
-                  <span>7</span>
-                  <span>1234 AB 7</span>
-                </div>
-              </div>
-            )}
-
-            {isActive && (
-              <div className="LookupPanel-ResultsArea">
-                <List
-                  data={this.state.dataList}
-                  getCountryLabel={this.getCountryLabel}
-                  getCountryFlag={this.getCountryFlag}
-                  showFlags={this.state.showFlags}
-                  query={this.state.query}
-                />
-              </div>
-            )}
-          </section>
-        </main>
-      </div>
-    );
-  }
-}
+          )}
+        </section>
+      </main>
+    </div>
+  );
+};
 
 export default App;
