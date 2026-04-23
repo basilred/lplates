@@ -3,12 +3,16 @@ import './App.css';
 
 import Input from '../Input/Input';
 import List from '../List/List';
+import LanguageSwitcher from '../components/LanguageSwitcher/LanguageSwitcher';
 
 import { IData, IDataList } from '../interfaces';
 import { parsePlate, IParsedCodes } from '../utils/plateParser';
+import LanguageContext from '../contexts/LanguageContext';
 
 
 class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: string; showFlags: boolean; isFocused: boolean}> {
+  static contextType = LanguageContext;
+  declare context: React.ContextType<typeof LanguageContext>;
 
   private originalList = this.getPlainData(this.props.data);
 
@@ -24,6 +28,8 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleToggleFlags = this.handleToggleFlags.bind(this);
+    this.getCountryLabel = this.getCountryLabel.bind(this);
+    this.getCountryFlag = this.getCountryFlag.bind(this);
   }
 
   private getPlainData(data: IData): IDataList[] {
@@ -67,6 +73,18 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
   }
 
   private getCountryLabel(country: string) {
+    // Если контекст доступен, пробуем получить перевод
+    if (this.context) {
+      const { t } = this.context;
+      const translated = t(`countries.${country}`);
+      // Проверяем, что перевод существует и не равен исходному ключу
+      if (translated && translated !== `countries.${country}`) {
+        return translated;
+      }
+    }
+    // Fallback для случаев:
+    // 1. Контекст недоступен (редко)
+    // 2. Перевод не найден
     switch (country) {
       case 'ru':
         return 'Russia';
@@ -128,6 +146,7 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
     const totalCountries = Object.keys(this.props.data).length;
 
     const isActive = this.state.isFocused || this.state.query.length > 0;
+    const { t } = this.context || { t: (key: string) => key };
 
     return (
       <div className={`App ${isActive ? 'App_active' : ''}`}>
@@ -135,21 +154,23 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
         <main className="App-Shell">
           {!isActive && (
             <section className="App-Intro">
-              <p className="App-Eyebrow">Regional lookup</p>
-              <h1 className="App-Title">Find a license plate region in one keystroke.</h1>
+              <div className="App-HeaderRow">
+                <p className="App-Eyebrow">{t('app.eyebrow')}</p>
+                <LanguageSwitcher />
+              </div>
+              <h1 className="App-Title">{t('app.title')}</h1>
               <p className="App-Description">
-                A focused lookup tool for regional plate codes. Type a numeric or letter code and
-                get the matching region instantly.
+                {t('app.description')}
               </p>
 
-              <div className="App-Stats" aria-label="Dataset summary">
+              <div className="App-Stats" aria-label={t('app.datasetSummary')}>
                 <div className="App-Stat">
                   <span className="App-StatValue">{totalRegions}</span>
-                  <span className="App-StatLabel">regions indexed</span>
+                  <span className="App-StatLabel">{t('app.stats.regionsIndexed')}</span>
                 </div>
                 <div className="App-Stat">
                   <span className="App-StatValue">{totalCodes}</span>
-                  <span className="App-StatLabel">codes available</span>
+                  <span className="App-StatLabel">{t('app.stats.codesAvailable')}</span>
                 </div>
                 <div className="App-Stat">
                   <span className="App-StatValue">
@@ -164,13 +185,13 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
                       </div>
                     )}
                   </span>
-                  <span className="App-StatLabel">countries covered</span>
+                  <span className="App-StatLabel">{t('app.stats.countriesCovered')}</span>
                 </div>
               </div>
             </section>
           )}
 
-          <section className="LookupPanel" aria-label="License plate lookup">
+          <section className="LookupPanel" aria-label={t('app.licensePlateLookup')}>
             <div className="LookupPanel-Topbar">
               <div className="LookupPanel-Dots">
                 <span className="LookupPanel-Dot" />
@@ -180,24 +201,24 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
               <button
                 className={`FlagToggle ${this.state.showFlags ? 'FlagToggle_active' : ''}`}
                 onClick={this.handleToggleFlags}
-                aria-label="Toggle flags"
-                title={this.state.showFlags ? 'Hide flags' : 'Show flags'}
+                aria-label={t('app.toggleFlags')}
+                title={this.state.showFlags ? t('app.hideFlags') : t('app.showFlags')}
               >
                 <span className="FlagToggle-Icon">🏳️</span>
-                <span className="FlagToggle-Label">Flags</span>
+                <span className="FlagToggle-Label">{t('app.toggleFlags')}</span>
               </button>
             </div>
 
             <div className={`LookupPanel-Command ${isActive ? 'LookupPanel-Command_active' : ''}`}>
               {!isActive && (
                 <div className="LookupPanel-CommandMeta">
-                  <span className="LookupPanel-CommandLabel">Search</span>
-                  <span className="LookupPanel-CommandHint">Code or full plate</span>
+                  <span className="LookupPanel-CommandLabel">{t('app.search')}</span>
+                  <span className="LookupPanel-CommandHint">{t('app.codeOrFullPlate')}</span>
                 </div>
               )}
-              <Input 
+              <Input
                 value={this.state.query}
-                onChange={this.handleInputChange} 
+                onChange={this.handleInputChange}
                 onFocus={this.handleFocus}
                 onBlur={this.handleBlur}
               />
@@ -205,8 +226,8 @@ class App extends React.Component<{data: IData}, {dataList: IDataList[]; query: 
 
             {!isActive && (
               <div className="LookupPanel-Summary">
-                <span className="LookupPanel-SummaryLabel">Available examples</span>
-                <div className="LookupPanel-Tags" aria-label="Example codes">
+                <span className="LookupPanel-SummaryLabel">{t('app.availableExamples')}</span>
+                <div className="LookupPanel-Tags" aria-label={t('app.exampleCodes')}>
                   <span>77</span>
                   <span>A 123 BC 77</span>
                   <span>AA</span>

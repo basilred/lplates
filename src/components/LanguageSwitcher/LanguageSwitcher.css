@@ -1,0 +1,95 @@
+.LanguageSwitcher {
+  position: relative;
+  display: inline-block;
+}
+
+.LanguageSwitcher-Button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  outline: none;
+}
+
+.LanguageSwitcher-Button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.LanguageSwitcher-Button:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.LanguageSwitcher-Flag {
+  font-size: 16px;
+}
+
+.LanguageSwitcher-Code {
+  opacity: 0.9;
+}
+
+.LanguageSwitcher-Arrow {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+.LanguageSwitcher-Dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 160px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.LanguageSwitcher-Option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.LanguageSwitcher-Option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.LanguageSwitcher-Option_active {
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 500;
+}
+
+.LanguageSwitcher-OptionFlag {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.LanguageSwitcher-OptionLabel {
+  flex-grow: 1;
+}
+
+.LanguageSwitcher-OptionCode {
+  opacity: 0.6;
+  font-size: 12px;
+  font-family: monospace;
+}
