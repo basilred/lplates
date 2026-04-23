@@ -33,8 +33,15 @@
   animation: introRise 0.65s ease-out;
 }
 
+.App-HeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 .App-Eyebrow {
-  margin: 0 0 1rem;
+  margin: 0;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.2em;

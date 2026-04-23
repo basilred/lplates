@@ -38,6 +38,13 @@ export default class Input extends React.Component<InputProps, InputState> {
     }
   }
 
+  componentDidUpdate(prevProps: InputProps) {
+    // Синхронизация значения из пропсов, если оно изменилось извне
+    if (prevProps.value !== this.props.value) {
+      this.setState({ value: this.props.value || '' });
+    }
+  }
+
   render() {
     const { value } = this.state;
 

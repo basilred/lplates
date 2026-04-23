@@ -1,0 +1,44 @@
+{
+  "app": {
+    "eyebrow": "Regional lookup",
+    "title": "Find a license plate region in one keystroke.",
+    "description": "A focused lookup tool for regional plate codes. Type a numeric or letter code and get the matching region instantly.",
+    "stats": {
+      "regionsIndexed": "regions indexed",
+      "codesAvailable": "codes available",
+      "countriesCovered": "countries covered"
+    },
+    "search": "Search",
+    "codeOrFullPlate": "Code or full plate",
+    "availableExamples": "Available examples",
+    "toggleFlags": "Toggle flags",
+    "showFlags": "Show flags",
+    "hideFlags": "Hide flags",
+    "datasetSummary": "Dataset summary",
+    "licensePlateLookup": "License plate lookup",
+    "exampleCodes": "Example codes",
+    "clearInput": "Clear input",
+    "selectLanguage": "Select language"
+  },
+  "list": {
+    "matches": "Matches",
+    "noMatch": "No exact match found",
+    "start": "Start with a plate code",
+    "tryAnother": "Try another exact code to see matching license plate regions.",
+    "enterExact": "Enter an exact regional code to see matching license plate regions.",
+    "searchResults": "Search results"
+  },
+  "countries": {
+    "ru": "Russia",
+    "ua": "Ukraine",
+    "cz": "Czech Republic",
+    "by": "Belarus"
+  },
+  "languages": {
+    "en": "English",
+    "ru": "Русский",
+    "ua": "Українська",
+    "cz": "Čeština",
+    "by": "Беларуская"
+  }
+}

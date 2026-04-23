@@ -1,6 +1,7 @@
 
 import './List.css';
 import { IDataList } from '../interfaces';
+import { useTranslation } from '../hooks/useTranslation';
 
 const List = (props: {
   data: IDataList[];
@@ -10,11 +11,12 @@ const List = (props: {
   query: string;
 }) => {
   const { data, getCountryLabel, getCountryFlag, showFlags, query } = props;
+  const { t } = useTranslation();
 
   return (
-    <section className="Results" aria-label="Search results">
+    <section className="Results" aria-label={t('list.searchResults')}>
       <div className="Results-Header">
-        <span className="Results-Title">Matches</span>
+        <span className="Results-Title">{t('list.matches')}</span>
         <span className="Results-Count">{data.length}</span>
       </div>
 
@@ -44,12 +46,12 @@ const List = (props: {
       ) : (
         <div className="Results-Empty">
           <p className="Results-EmptyTitle">
-            {query ? 'No exact match found' : 'Start with a plate code'}
+            {query ? t('list.noMatch') : t('list.start')}
           </p>
           <p className="Results-EmptyText">
             {query
-              ? 'Try another exact code to see matching license plate regions.'
-              : 'Enter an exact regional code to see matching license plate regions.'}
+              ? t('list.tryAnother')
+              : t('list.enterExact')}
           </p>
         </div>
       )}

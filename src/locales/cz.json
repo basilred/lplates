@@ -1,0 +1,44 @@
+{
+  "app": {
+    "eyebrow": "Vyhledávání regionů",
+    "title": "Najděte region podle poznávací značky jedním klepnutím.",
+    "description": "Nástroj pro rychlé vyhledávání regionálních kódů. Zadejte číselný nebo písmenný kód a okamžitě získáte odpovídající region.",
+    "stats": {
+      "regionsIndexed": "regionů v databázi",
+      "codesAvailable": "dostupných kódů",
+      "countriesCovered": "zemí pokryto"
+    },
+    "search": "Hledat",
+    "codeOrFullPlate": "Kód nebo celá značka",
+    "availableExamples": "Dostupné příklady",
+    "toggleFlags": "Přepnout vlajky",
+    "showFlags": "Zobrazit vlajky",
+    "hideFlags": "Skrýt vlajky",
+    "datasetSummary": "Souhrn datové sady",
+    "licensePlateLookup": "Vyhledávání poznávacích značek",
+    "exampleCodes": "Příklady kódů",
+    "clearInput": "Vymazat vstup",
+    "selectLanguage": "Vybrat jazyk"
+  },
+  "list": {
+    "matches": "Shody",
+    "noMatch": "Nenalezena přesná shoda",
+    "start": "Začněte s kódem značky",
+    "tryAnother": "Zkuste jiný přesný kód, abyste viděli odpovídající regiony.",
+    "enterExact": "Zadejte přesný regionální kód, abyste viděli odpovídající regiony.",
+    "searchResults": "Výsledky hledání"
+  },
+  "countries": {
+    "ru": "Rusko",
+    "ua": "Ukrajina",
+    "cz": "Česko",
+    "by": "Bělorusko"
+  },
+  "languages": {
+    "en": "English",
+    "ru": "Русский",
+    "ua": "Українська",
+    "cz": "Čeština",
+    "by": "Беларуская"
+  }
+}
