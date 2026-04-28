@@ -12,29 +12,25 @@ const defaultLocale: Locale = 'en';
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale);
-
   // Инициализация локали из localStorage или определение языка браузера
-  useEffect(() => {
+  const [locale, setLocaleState] = useState<Locale>(() => {
     const savedLocale = localStorage.getItem('locale') as Locale | null;
     if (savedLocale && savedLocale in translations) {
-      setLocaleState(savedLocale);
-      return;
+      return savedLocale;
     }
 
     // Определение языка браузера
     const browserLang = navigator.language.split('-')[0] as Locale;
     if (browserLang in translations) {
-      setLocaleState(browserLang);
-    } else {
-      setLocaleState(defaultLocale);
+      return browserLang;
     }
-  }, []);
 
-  // Сохранение локали в localStorage при изменении
+    return defaultLocale;
+  });
+
+  // Сохранение локали в localStorage при изменении и обновление атрибута lang у html
   useEffect(() => {
     localStorage.setItem('locale', locale);
-    // Обновляем атрибут lang у html
     document.documentElement.lang = locale;
   }, [locale]);
 

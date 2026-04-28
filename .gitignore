@@ -45,3 +45,7 @@ dist-ssr/
 
 #LLM
 qdrant_storage/
+
+# Playwright artifacts
+playwright-report/
+test-results/
