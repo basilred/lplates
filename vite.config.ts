@@ -11,15 +11,13 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      srcDir: 'src',
+      filename: 'sw.ts',
+      strategies: 'injectManifest',
       registerType: 'autoUpdate',
       injectRegister: 'inline',
-      workbox: {
+      injectManifest: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,webp}'],
-        cleanupOutdatedCaches: true,
-        clientsClaim: true,
-        skipWaiting: true,
-        navigateFallback: 'index.html',
-        navigateFallbackDenylist: [/sw\.js$/, /manifest\.webmanifest$/, /workbox-.*\.js$/]
       },
       devOptions: {
         enabled: true
