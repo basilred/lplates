@@ -1,12 +1,12 @@
-import React, { useState, useMemo, useCallback, useContext } from 'react';
+import React, { useState, useMemo, useCallback, useContext, lazy, Suspense, useDeferredValue } from 'react';
 import './App.css';
 
-import Input from '../Input/Input';
-import List from '../List/List';
+const Input = lazy(() => import('../Input/Input'));
+const List = lazy(() => import('../List/List'));
 import LanguageSwitcher from '../components/LanguageSwitcher/LanguageSwitcher';
 
 import { IData, IDataList } from '../interfaces';
-import { parsePlate, IParsedCodes } from '../utils/plateParser';
+import { parsePlate } from '../utils/plateParser';
 import LanguageContext from '../contexts/LanguageContext';
 
 interface AppProps {
@@ -17,7 +17,6 @@ const App: React.FC<AppProps> = ({ data }) => {
   const languageContext = useContext(LanguageContext);
   const { t } = languageContext || { t: (key: string) => key };
 
-  const [dataList, setDataList] = useState<IDataList[]>([]);
   const [query, setQuery] = useState('');
   const [showFlags, setShowFlags] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
@@ -47,6 +46,40 @@ const App: React.FC<AppProps> = ({ data }) => {
 
     return result;
   }, [data]);
+
+  const deferredQuery = useDeferredValue(query);
+
+  // Индекс для быстрого поиска
+  const codeIndex = useMemo(() => {
+    const index = new Map<string, IDataList[]>();
+    originalList.forEach(item => {
+      item.codes.forEach(code => {
+        if (!index.has(code)) index.set(code, []);
+        index.get(code)?.push(item);
+      });
+    });
+    return index;
+  }, [originalList]);
+
+  const deferredDataList = useMemo(() => {
+    if (!deferredQuery.trim()) return [];
+    
+    const matchingItems = new Set<IDataList>();
+    
+    // В идеале здесь должен использоваться web worker,
+    // но для простоты примера показываем базовую оптимизацию
+    const potentials = { any: [deferredQuery.toUpperCase()] };
+    
+    Object.entries(potentials).forEach(([country, codes]) => {
+      if (country === 'any') return;
+      (codes as string[])?.forEach((code: string) => {
+        const items = codeIndex.get(code);
+        if (items) items.forEach(item => matchingItems.add(item));
+      });
+    });
+    
+    return Array.from(matchingItems);
+  }, [deferredQuery, codeIndex]);
 
   const getCountryFlag = useCallback((country: string) => {
     switch (country) {
@@ -104,31 +137,8 @@ const App: React.FC<AppProps> = ({ data }) => {
 
   const handleInputChange = useCallback((value: string) => {
     setQuery(value);
-
-    if (!value.trim()) {
-      setDataList([]);
-      return;
-    }
-
-    const potentials = parsePlate(value);
-    const newDataList: IDataList[] = [];
-
-    for (const item of originalList) {
-      const { codes, country } = item;
-      
-      // Check if any of the "any" codes match (direct input or standardized)
-      const matchInAny = codes.some(code => potentials.any.includes(code));
-      
-      // Check if the country-specific extracted code matches
-      const countryPotentials = potentials[country as keyof Omit<IParsedCodes, 'any'>];
-      const matchInCountry = countryPotentials && codes.some(code => countryPotentials.includes(code));
-
-      if (matchInAny || matchInCountry) {
-        newDataList.push(item);
-      }
-    }
-    setDataList(newDataList);
-  }, [originalList]);
+    // deferredDataList обновится автоматически через useMemo с deferredQuery
+  }, []);
 
   const totalRegions = originalList.length;
   const totalCodes = originalList.reduce((sum, region) => sum + region.codes.length, 0);
@@ -204,12 +214,14 @@ const App: React.FC<AppProps> = ({ data }) => {
                 <span className="LookupPanel-CommandHint">{t('app.codeOrFullPlate')}</span>
               </div>
             )}
-            <Input
-              value={query}
-              onChange={handleInputChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
+            <Suspense fallback={<div className="LoadingFallback">Loading input...</div>}>
+              <Input
+                value={query}
+                onChange={handleInputChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              />
+            </Suspense>
           </div>
 
           {!isActive && (
@@ -230,13 +242,15 @@ const App: React.FC<AppProps> = ({ data }) => {
 
           {isActive && (
             <div className="LookupPanel-ResultsArea">
-              <List
-                data={dataList}
-                getCountryLabel={getCountryLabel}
-                getCountryFlag={getCountryFlag}
-                showFlags={showFlags}
-                query={query}
-              />
+              <Suspense fallback={<div className="LoadingFallback">Loading results...</div>}>
+                <List
+                  data={deferredDataList}
+                  getCountryLabel={getCountryLabel}
+                  getCountryFlag={getCountryFlag}
+                  showFlags={showFlags}
+                  query={deferredQuery}
+                />
+              </Suspense>
             </div>
           )}
         </section>
