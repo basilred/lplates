@@ -6,7 +6,6 @@ const List = lazy(() => import('../List/List'));
 import LanguageSwitcher from '../components/LanguageSwitcher/LanguageSwitcher';
 
 import { IData, IDataList } from '../interfaces';
-import { parsePlate } from '../utils/plateParser';
 import LanguageContext from '../contexts/LanguageContext';
 
 interface AppProps {
