@@ -6,6 +6,7 @@ const List = lazy(() => import('../List/List'));
 import LanguageSwitcher from '../components/LanguageSwitcher/LanguageSwitcher';
 
 import { IData, IDataList } from '../interfaces';
+import { parsePlate } from '../utils/plateParser';
 import LanguageContext from '../contexts/LanguageContext';
 
 interface AppProps {
@@ -65,15 +66,18 @@ const App: React.FC<AppProps> = ({ data }) => {
     
     const matchingItems = new Set<IDataList>();
     
-    // В идеале здесь должен использоваться web worker,
-    // но для простоты примера показываем базовую оптимизацию
-    const potentials = { any: [deferredQuery.toUpperCase()] };
+    const potentials = parsePlate(deferredQuery);
     
     Object.entries(potentials).forEach(([country, codes]) => {
-      if (country === 'any') return;
       (codes as string[])?.forEach((code: string) => {
         const items = codeIndex.get(code);
-        if (items) items.forEach(item => matchingItems.add(item));
+        if (items) {
+          items.forEach(item => {
+            if (country === 'any' || item.country === country) {
+              matchingItems.add(item);
+            }
+          });
+        }
       });
     });
     
