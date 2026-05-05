@@ -51,6 +51,13 @@ test.describe('Localization and language switching', () => {
     expect(currentLang).toBe('BY');
   });
 
+  test('should switch to Crimean Tatar language', async () => {
+    await appPage.switchLanguage('CRH');
+    
+    const currentLang = await appPage.getCurrentLanguage();
+    expect(currentLang).toBe('CRH');
+  });
+
   test('should maintain search functionality after language switch', async () => {
     // Switch to Russian first (LanguageSwitcher is visible)
     await appPage.switchLanguage('RU');
@@ -108,7 +115,7 @@ test.describe('Localization and language switching', () => {
     // Проверяем наличие опций языков
     const options = dropdown.locator('.LanguageSwitcher-Option');
     const count = await options.count();
-    expect(count).toBeGreaterThanOrEqual(4); // EN, RU, UA, CZ, BY
+    expect(count).toBeGreaterThanOrEqual(5); // EN, RU, UA, CZ, BY, CRH
     
     // Проверяем что текущий язык отмечен как активный
     const activeOption = dropdown.locator('.LanguageSwitcher-Option_active');
