@@ -309,12 +309,28 @@
 }
 
 @media (max-width: 720px) {
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+
   .App-Shell {
     gap: 1.5rem;
   }
 
+  .App-Intro {
+    scroll-snap-align: start;
+    scroll-margin-top: 24px;
+  }
+
   .App-Stats {
     grid-template-columns: 1fr;
+  }
+
+  .LookupPanel {
+    scroll-snap-align: start;
+    scroll-margin-top: 24px;
+    min-height: calc(100dvh - 48px);
   }
 
   .LookupPanel-Summary,

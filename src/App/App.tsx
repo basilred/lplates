@@ -19,7 +19,6 @@ const App: React.FC<AppProps> = ({ data }) => {
 
   const [query, setQuery] = useState('');
   const [showFlags, setShowFlags] = useState(true);
-  const [isFocused, setIsFocused] = useState(false);
 
   // Преобразование данных в плоский список (мемоизировано)
   const originalList = useMemo(() => {
@@ -130,14 +129,6 @@ const App: React.FC<AppProps> = ({ data }) => {
     setShowFlags(prev => !prev);
   }, []);
 
-  const handleFocus = useCallback(() => {
-    setIsFocused(true);
-  }, []);
-
-  const handleBlur = useCallback(() => {
-    setIsFocused(false);
-  }, []);
-
   const handleInputChange = useCallback((value: string) => {
     setQuery(value);
     // deferredDataList обновится автоматически через useMemo с deferredQuery
@@ -147,13 +138,12 @@ const App: React.FC<AppProps> = ({ data }) => {
   const totalCodes = originalList.reduce((sum, region) => sum + region.codes.length, 0);
   const totalCountries = Object.keys(data).length;
 
-  const isActive = isFocused || query.length > 0;
+  const isActive = query.length > 0;
 
   return (
     <div className={`App ${isActive ? 'App_active' : ''}`}>
       <div className="App-Backdrop" />
       <main className="App-Shell">
-        {!isActive && (
           <section className="App-Intro">
             <div className="App-HeaderRow">
               <p className="App-Eyebrow">{t('app.eyebrow')}</p>
@@ -190,7 +180,6 @@ const App: React.FC<AppProps> = ({ data }) => {
               </div>
             </div>
           </section>
-        )}
 
         <section className="LookupPanel" aria-label={t('app.licensePlateLookup')}>
           <div className="LookupPanel-Topbar">
@@ -211,18 +200,15 @@ const App: React.FC<AppProps> = ({ data }) => {
           </div>
 
           <div className={`LookupPanel-Command ${isActive ? 'LookupPanel-Command_active' : ''}`}>
-            {!isActive && (
-              <div className="LookupPanel-CommandMeta">
-                <span className="LookupPanel-CommandLabel">{t('app.search')}</span>
-                <span className="LookupPanel-CommandHint">{t('app.codeOrFullPlate')}</span>
-              </div>
-            )}
+            <div className="LookupPanel-CommandMeta">
+              <span className="LookupPanel-CommandLabel">{t('app.search')}</span>
+              <span className="LookupPanel-CommandHint">{t('app.codeOrFullPlate')}</span>
+            </div>
+
             <Suspense fallback={<div className="LoadingFallback">Loading input...</div>}>
               <Input
                 value={query}
                 onChange={handleInputChange}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
               />
             </Suspense>
           </div>
