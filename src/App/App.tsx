@@ -1,11 +1,13 @@
-import React, { useState, useMemo, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import './App.css';
 
 import LanguageSwitcher from '../components/LanguageSwitcher/LanguageSwitcher';
 import LookupPanel from '../components/LookupPanel/LookupPanel';
 
-import { IData, IDataList } from '../interfaces';
+import { IData } from '../interfaces';
 import LanguageContext from '../contexts/LanguageContext';
+import { getCountryFlag, getCountryLabel } from '../utils/countryUtils';
+import { useRegionData } from '../hooks/useRegionData';
 
 interface AppProps {
   data: IData;
@@ -18,54 +20,10 @@ const App: React.FC<AppProps> = ({ data }) => {
   const [isActive, setIsActive] = useState(false);
   const [showFlags, setShowFlags] = useState(true);
 
-  // Преобразование данных в плоский список (мемоизировано)
-  const originalList = useMemo(() => {
-    const result: IDataList[] = [];
-    for (const country in data) {
-      if (data.hasOwnProperty(country)) {
-        const currentCountry = data[country];
-        for (const region in currentCountry) {
-          if (currentCountry.hasOwnProperty(region)) {
-            const regionCodes = currentCountry[region];
-            const stringCodes = regionCodes.map(code => code.toString());
-            result.push({
-              name: region,
-              codes: stringCodes,
-              country,
-            });
-          }
-        }
-      }
-    }
-    return result;
-  }, [data]);
+  const { originalList } = useRegionData(data);
 
-  const getCountryFlag = useCallback((country: string) => {
-    switch (country) {
-      case 'ru': return '🇷🇺';
-      case 'ua': return '🇺🇦';
-      case 'cz': return '🇨🇿';
-      case 'by': return '🇧🇾';
-      default: return '🏳️';
-    }
-  }, []);
-
-  const getCountryLabel = useCallback((country: string) => {
-    if (languageContext) {
-      const { t: contextT } = languageContext;
-      const translated = contextT(`countries.${country}`);
-      if (translated && translated !== `countries.${country}`) {
-        return translated;
-      }
-    }
-    switch (country) {
-      case 'ru': return 'Russia';
-      case 'ua': return 'Ukraine';
-      case 'cz': return 'Czech Republic';
-      case 'by': return 'Belarus';
-      default: return country.toUpperCase();
-    }
-  }, [languageContext]);
+  const countryFlagGetter = useCallback((country: string) => getCountryFlag(country), []);
+  const countryLabelGetter = useCallback((country: string) => getCountryLabel(country, t), [t]);
 
   const totalRegions = originalList.length;
   const totalCodes = originalList.reduce((sum, region) => sum + region.codes.length, 0);
@@ -104,8 +62,8 @@ const App: React.FC<AppProps> = ({ data }) => {
                 {showFlags && (
                   <div className="App-StatFlags">
                     {Object.keys(data).map(country => (
-                      <span key={country} title={getCountryLabel(country)}>
-                        {getCountryFlag(country)}
+                      <span key={country} title={countryLabelGetter(country)}>
+                        {countryFlagGetter(country)}
                       </span>
                     ))}
                   </div>

@@ -1,7 +1,7 @@
 
 import './List.css';
-import { IDataList } from '../interfaces';
-import { useTranslation } from '../hooks/useTranslation';
+import { IDataList } from '../../interfaces';
+import { useTranslation } from '../../hooks/useTranslation';
 
 const List = (props: {
   data: IDataList[];
