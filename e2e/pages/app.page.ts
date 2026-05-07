@@ -93,6 +93,7 @@ export class AppPage {
       if (buttonText && buttonText.includes('UA')) return 'UA';
       if (buttonText && buttonText.includes('CZ')) return 'CZ';
       if (buttonText && buttonText.includes('BY')) return 'BY';
+      if (buttonText && buttonText.includes('CRH')) return 'CRH';
     }
     
     // Если LanguageSwitcher скрыт, проверяем атрибут lang у html
