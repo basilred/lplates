@@ -26,7 +26,18 @@ const List = React.memo((props: {
             return (
               <li className="List-Item" key={`${region.country}-${region.name}`}>
                 <div className="List-ItemMain">
-                  <span className="List-ItemName">{region.name}</span>
+                  <span className="List-ItemName">
+                    {region.name}
+                    <a 
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(region.name + ' ' + getCountryLabel(region.country))}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="List-ItemMapLink"
+                      title={t('list.viewOnMap')}
+                    >
+                      ↗
+                    </a>
+                  </span>
                   <span className="List-ItemCountry">
                     {showFlags ? <span className="List-ItemFlag">{getCountryFlag(region.country)}</span> : null}
                     {getCountryLabel(region.country)}
