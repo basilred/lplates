@@ -40,6 +40,12 @@
   margin-bottom: 1rem;
 }
 
+.App-Controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .App-Eyebrow {
   margin: 0;
   font-size: 0.72rem;
