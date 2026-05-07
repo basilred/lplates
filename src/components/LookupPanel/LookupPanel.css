@@ -131,25 +131,67 @@
 
 .LookupPanel-Summary {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.5rem 0.4rem 0.7rem;
+}
+
+.LookupPanel-History {
+  width: 100%;
+}
+
+.LookupPanel-HistoryHeader {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 0.4rem 0.7rem;
+  margin-bottom: 0.75rem;
+}
+
+.LookupPanel-HistoryClear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(244, 245, 248, 0.52);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.LookupPanel-HistoryClear:hover {
+  border-color: #ffb25a;
+  color: #ffb25a;
 }
 
 .LookupPanel-Tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
+  margin-top: 0.5rem;
 }
 
-.LookupPanel-Tags > span {
+.LookupPanel-Tag {
   padding: 0.38rem 0.75rem;
   border: 1px solid var(--color-border-subtle);
   border-radius: 999px;
   font-size: 0.84rem;
   color: var(--color-text-muted);
   background: var(--color-tag-bg);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.LookupPanel-Tag:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #ffb25a;
+  color: #ffb25a;
+  transform: translateY(-1px);
 }
 
 @keyframes panelRise {

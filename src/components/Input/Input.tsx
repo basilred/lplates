@@ -58,4 +58,4 @@ const Input: React.FC<InputProps> = ({ value: propValue = '', onChange, onFocus,
   );
 };
 
-export default Input;
+export default React.memo(Input);
