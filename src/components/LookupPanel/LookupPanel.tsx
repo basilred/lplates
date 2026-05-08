@@ -1,11 +1,13 @@
 import React, { useState, useMemo, useCallback, useContext, lazy, Suspense, useDeferredValue } from 'react';
 import { IData, IDataList } from '../../interfaces';
 import { parsePlate } from '../../utils/plateParser';
+import { getCountryFlag, getCountryLabel } from '../../utils/countryUtils';
+import { useRegionData } from '../../hooks/useRegionData';
 import LanguageContext from '../../contexts/LanguageContext';
 import './LookupPanel.css';
 
-const Input = lazy(() => import('../../Input/Input'));
-const List = lazy(() => import('../../List/List'));
+const Input = lazy(() => import('../Input/Input'));
+const List = lazy(() => import('../List/List'));
 
 interface LookupPanelProps {
   data: IData;
@@ -20,45 +22,9 @@ const LookupPanel: React.FC<LookupPanelProps> = ({ data, showFlags, onToggleFlag
 
   const [query, setQuery] = useState('');
 
-  // Преобразование данных в плоский список (мемоизировано)
-  const originalList = useMemo(() => {
-    const result: IDataList[] = [];
-
-    for (const country in data) {
-      if (data.hasOwnProperty(country)) {
-        const currentCountry = data[country];
-
-        for (const region in currentCountry) {
-          if (currentCountry.hasOwnProperty(region)) {
-            const regionCodes = currentCountry[region];
-            const stringCodes = regionCodes.map(code => code.toString());
-
-            result.push({
-              name: region,
-              codes: stringCodes,
-              country,
-            });
-          }
-        }
-      }
-    }
-
-    return result;
-  }, [data]);
+  const { codeIndex } = useRegionData(data);
 
   const deferredQuery = useDeferredValue(query);
-
-  // Индекс для быстрого поиска
-  const codeIndex = useMemo(() => {
-    const index = new Map<string, IDataList[]>();
-    originalList.forEach(item => {
-      item.codes.forEach(code => {
-        if (!index.has(code)) index.set(code, []);
-        index.get(code)?.push(item);
-      });
-    });
-    return index;
-  }, [originalList]);
 
   const deferredDataList = useMemo(() => {
     if (!deferredQuery.trim()) return [];
@@ -83,43 +49,6 @@ const LookupPanel: React.FC<LookupPanelProps> = ({ data, showFlags, onToggleFlag
     return Array.from(matchingItems);
   }, [deferredQuery, codeIndex]);
 
-  const getCountryFlag = useCallback((country: string) => {
-    switch (country) {
-      case 'ru':
-        return '🇷🇺';
-      case 'ua':
-        return '🇺🇦';
-      case 'cz':
-        return '🇨🇿';
-      case 'by':
-        return '🇧🇾';
-      default:
-        return '🏳️';
-    }
-  }, []);
-
-  const getCountryLabel = useCallback((country: string) => {
-    if (languageContext) {
-      const { t: contextT } = languageContext;
-      const translated = contextT(`countries.${country}`);
-      if (translated && translated !== `countries.${country}`) {
-        return translated;
-      }
-    }
-    switch (country) {
-      case 'ru':
-        return 'Russia';
-      case 'ua':
-        return 'Ukraine';
-      case 'cz':
-        return 'Czech Republic';
-      case 'by':
-        return 'Belarus';
-      default:
-        return country.toUpperCase();
-    }
-  }, [languageContext]);
-
   const handleInputChange = useCallback((value: string) => {
     const wasActive = query.length > 0;
     const isNowActive = value.length > 0;
@@ -130,6 +59,8 @@ const LookupPanel: React.FC<LookupPanelProps> = ({ data, showFlags, onToggleFlag
       onActiveChange(isNowActive);
     }
   }, [query, onActiveChange]);
+
+  const getCountryLabelInside = useCallback((country: string) => getCountryLabel(country, t), [t]);
 
   const isActive = query.length > 0;
 
@@ -187,7 +118,7 @@ const LookupPanel: React.FC<LookupPanelProps> = ({ data, showFlags, onToggleFlag
           <Suspense fallback={<div className="LoadingFallback">Loading results...</div>}>
             <List
               data={deferredDataList}
-              getCountryLabel={getCountryLabel}
+              getCountryLabel={getCountryLabelInside}
               getCountryFlag={getCountryFlag}
               showFlags={showFlags}
               query={deferredQuery}
