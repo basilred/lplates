@@ -14,7 +14,7 @@
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(238, 240, 247, 0.52);
+  color: var(--color-text-subtle);
 }
 
 .Results-Count {
@@ -25,11 +25,11 @@
   height: 2.2rem;
   padding: 0 0.7rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border-subtle);
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-text);
-  background: rgba(255, 255, 255, 0.035);
+  background: var(--color-surface-soft);
 }
 
 .List {
@@ -43,10 +43,10 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.1rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 18px;
   list-style: none;
-  background: rgba(255, 255, 255, 0.028);
+  background: var(--color-surface);
   transition:
     transform 140ms ease,
     border-color 140ms ease,
@@ -59,8 +59,8 @@
 
 .List-Item:hover {
   transform: translateY(-1px);
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.045);
+  border-color: var(--color-border);
+  background: var(--color-surface-hover);
 }
 
 .List-ItemMain {
@@ -104,8 +104,8 @@
   min-width: 3rem;
   padding: 0.5rem 0.72rem;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-tag-bg);
   color: var(--color-text);
   font-size: 0.86rem;
   font-weight: 700;
@@ -114,10 +114,10 @@
 
 .Results-Empty {
   padding: 2.2rem 1.1rem 2.4rem;
-  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border: 1px dashed var(--color-border);
   border-radius: 20px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--color-surface-soft);
 }
 
 .Results-EmptyTitle {
