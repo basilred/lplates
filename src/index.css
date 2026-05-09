@@ -1,4 +1,20 @@
 :root {
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+  --color-bg: #f8f9fc;
+  --color-panel-soft: rgba(0, 0, 0, 0.03);
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-text: #1a1c22;
+  --color-text-muted: rgba(26, 28, 34, 0.74);
+  --color-text-subtle: rgba(26, 28, 34, 0.52);
+  --color-accent: #e67e22;
+}
+
+[data-theme='dark'] {
   color-scheme: dark;
   --color-bg: #090b10;
   --color-panel-soft: rgba(255, 255, 255, 0.035);
@@ -7,8 +23,6 @@
   --color-text-muted: rgba(244, 245, 248, 0.74);
   --color-text-subtle: rgba(244, 245, 248, 0.52);
   --color-accent: #ffb25a;
-  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
 }
 
 * {
@@ -22,11 +36,11 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body);
-  background:
-    linear-gradient(180deg, #0a0d13 0%, #090b10 100%);
+  background: var(--color-bg);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button,
