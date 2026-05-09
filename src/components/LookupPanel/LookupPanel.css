@@ -6,14 +6,10 @@
   max-width: 760px;
   margin: 0 auto;
   padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-glass-border);
   border-radius: 28px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
-    rgba(12, 14, 19, 0.88);
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.42),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: var(--color-glass-bg);
+  box-shadow: 0 24px 70px var(--color-shadow);
   backdrop-filter: blur(28px);
   animation: panelRise 0.75s ease-out;
   max-height: calc(100dvh - 48px);
@@ -58,7 +54,7 @@
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--color-border);
 }
 
 .FlagToggle {
@@ -66,9 +62,9 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.4rem 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-surface-hover);
   color: var(--color-text-muted);
   font-size: 0.75rem;
   font-weight: 600;
@@ -79,15 +75,15 @@
 }
 
 .FlagToggle:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: var(--color-surface-active);
+  border-color: var(--color-border);
   color: var(--color-text);
 }
 
 .FlagToggle_active {
-  background: rgba(255, 153, 56, 0.1);
-  border-color: rgba(255, 153, 56, 0.25);
-  color: #ff9938;
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .FlagToggle-Icon {
@@ -103,8 +99,8 @@
 .LookupPanel-Command {
   padding: 1rem;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border-subtle);
 }
 
 .LookupPanel-CommandMeta {
@@ -129,7 +125,8 @@
 
 .LookupPanel-CommandHint,
 .LookupPanel-SummaryLabel {
-  color: rgba(238, 240, 247, 0.45);
+  color: var(--color-text-muted);
+  opacity: 0.6;
 }
 
 .LookupPanel-Summary {
@@ -148,11 +145,11 @@
 
 .LookupPanel-Tags > span {
   padding: 0.38rem 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 999px;
   font-size: 0.84rem;
   color: var(--color-text-muted);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-tag-bg);
 }
 
 @keyframes panelRise {
