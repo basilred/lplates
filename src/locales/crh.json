@@ -18,7 +18,13 @@
     "licensePlateLookup": "Автомобиль номер къыдырышы",
     "exampleCodes": "Мисал кодлар",
     "clearInput": "Киришни темизле",
-    "selectLanguage": "Тилни сайла"
+    "selectLanguage": "Тилни сайла",
+    "theme": {
+      "switchToDark": "Къаранъгъы мевзугъа дегиштир",
+      "switchToSystem": "Система мевзусына дегиштир",
+      "switchToLight": "Айдын мевзугъа дегиштир",
+      "toggle": "Мевзуны дегиштир"
+    }
   },
   "list": {
     "matches": "Уйгъунлыкълар",

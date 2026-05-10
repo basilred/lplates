@@ -18,7 +18,13 @@
     "licensePlateLookup": "License plate lookup",
     "exampleCodes": "Example codes",
     "clearInput": "Clear input",
-    "selectLanguage": "Select language"
+    "selectLanguage": "Select language",
+    "theme": {
+      "switchToDark": "Switch to dark theme",
+      "switchToSystem": "Switch to system theme",
+      "switchToLight": "Switch to light theme",
+      "toggle": "Toggle theme"
+    }
   },
   "list": {
     "matches": "Matches",

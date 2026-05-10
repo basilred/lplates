@@ -178,8 +178,8 @@ test.describe('Localization and language switching', () => {
     const dropdown = appPage.page.locator('.LanguageSwitcher-Dropdown');
     await expect(dropdown).toBeVisible();
     
-    // Кликаем вне dropdown (например, на заголовок)
-    await appPage.page.locator('.App-Title').click();
+    // Кликаем вне dropdown (например, на body)
+    await appPage.page.locator('body').click({ force: true });
     
     // Проверяем что dropdown закрылся
     await expect(dropdown).toBeHidden();

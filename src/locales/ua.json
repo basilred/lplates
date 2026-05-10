@@ -18,7 +18,13 @@
     "licensePlateLookup": "Пошук номерних знаків",
     "exampleCodes": "Приклади кодів",
     "clearInput": "Очистити введення",
-    "selectLanguage": "Вибрати мову"
+    "selectLanguage": "Вибрати мову",
+    "theme": {
+      "switchToDark": "Перемкнути на темну тему",
+      "switchToSystem": "Перемкнути на системну тему",
+      "switchToLight": "Перемкнути на світлу тему",
+      "toggle": "Перемкнути тему"
+    }
   },
   "list": {
     "matches": "Збіги",
