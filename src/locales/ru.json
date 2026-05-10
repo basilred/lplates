@@ -18,7 +18,13 @@
     "licensePlateLookup": "Поиск номерных знаков",
     "exampleCodes": "Примеры кодов",
     "clearInput": "Очистить ввод",
-    "selectLanguage": "Выбрать язык"
+    "selectLanguage": "Выбрать язык",
+    "theme": {
+      "switchToDark": "Переключить на темную тему",
+      "switchToSystem": "Переключить на системную тему",
+      "switchToLight": "Переключить на светлую тему",
+      "toggle": "Переключить тему"
+    }
   },
   "list": {
     "matches": "Совпадения",

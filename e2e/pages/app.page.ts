@@ -143,4 +143,16 @@ export class AppPage {
   async waitForResults() {
     await this.page.waitForSelector('.List, .Results-Empty', { state: 'visible' });
   }
+
+  async toggleTheme() {
+    await this.page.locator('.ThemeToggle').click();
+  }
+
+  async getTheme(): Promise<string | null> {
+    return await this.page.locator('body').getAttribute('data-theme');
+  }
+
+  async getThemeSelection(): Promise<string | null> {
+    return await this.page.evaluate(() => localStorage.getItem('theme'));
+  }
 }

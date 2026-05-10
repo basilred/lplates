@@ -18,7 +18,13 @@
     "licensePlateLookup": "Vyhledávání poznávacích značek",
     "exampleCodes": "Příklady kódů",
     "clearInput": "Vymazat vstup",
-    "selectLanguage": "Vybrat jazyk"
+    "selectLanguage": "Vybrat jazyk",
+    "theme": {
+      "switchToDark": "Přepnout na tmavý motiv",
+      "switchToSystem": "Přepnout na systémový motiv",
+      "switchToLight": "Přepnout na světlý motiv",
+      "toggle": "Přepnout motiv"
+    }
   },
   "list": {
     "matches": "Shody",
