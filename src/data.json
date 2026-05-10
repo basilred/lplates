@@ -1,526 +1,526 @@
 {
-    "ru": {
-        "Адыгея": [
-            "01"
-        ],
-        "Башкортостан": [
-            "02",
-            102,
-            702
-        ],
-        "Бурятия": [
-            "03"
-        ],
-        "Республика Алтай": [
-            "04"
-        ],
-        "Дагестан": [
-            "05",
-            105
-        ],
-        "Ингушетия": [
-            "06"
-        ],
-        "Кабардино-Балкария": [
-            "07"
-        ],
-        "Калмыкия": [
-            "08"
-        ],
-        "Карачаево-Черкесия": [
-            "09"
-        ],
-        "Карелия": [
-            10
-        ],
-        "Республика Коми": [
-            11
-        ],
-        "Марий Эл": [
-            12
-        ],
-        "Мордовия": [
-            13,
-            113
-        ],
-        "Саха (Якутия)": [
-            14
-        ],
-        "Северная Осетия": [
-            15
-        ],
-        "Татарстан": [
-            16,
-            116,
-            716
-        ],
-        "Тыва": [
-            17
-        ],
-        "Удмуртия": [
-            18
-        ],
-        "Хакасия": [
-            19
-        ],
-        "Чувашия": [
-            21,
-            121
-        ],
-        "Алтайский край": [
-            22,
-            122
-        ],
-        "Краснодарский край": [
-            23,
-            93,
-            123,
-            193,
-            323
-        ],
-        "Красноярский край": [
-            24,
-            84,
-            88,
-            124,
-            224
-        ],
-        "Приморский край": [
-            25,
-            125
-        ],
-        "Ставропольский край": [
-            26,
-            126
-        ],
-        "Хабаровский край": [
-            27
-        ],
-        "Амурская область": [
-            28
-        ],
-        "Архангельская область": [
-            29
-        ],
-        "Астраханская область": [
-            30
-        ],
-        "Белгородская область": [
-            31,
-            131
-        ],
-        "Брянская область": [
-            32
-        ],
-        "Владимирская область": [
-            33,
-            133
-        ],
-        "Волгоградская область": [
-            34,
-            134
-        ],
-        "Вологодская область": [
-            35
-        ],
-        "Воронежская область": [
-            36,
-            136
-        ],
-        "Ивановская область": [
-            37
-        ],
-        "Иркутская область": [
-            38,
-            85,
-            138
-        ],
-        "Калининградская область": [
-            39,
-            91
-        ],
-        "Калужская область": [
-            40
-        ],
-        "Камчатский край": [
-            41,
-            82
-        ],
-        "Кемеровская область — Кузбасс": [
-            42,
-            142
-        ],
-        "Кировская область": [
-            43
-        ],
-        "Костромская область": [
-            44
-        ],
-        "Курганская область": [
-            45
-        ],
-        "Курская область": [
-            46
-        ],
-        "Ленинградская область": [
-            47,
-            147
-        ],
-        "Липецкая область": [
-            48
-        ],
-        "Магаданская область": [
-            49
-        ],
-        "Московская область": [
-            50,
-            90,
-            150,
-            190,
-            250,
-            550,
-            750,
-            790
-        ],
-        "Мурманская область": [
-            51
-        ],
-        "Нижегородская область": [
-            52,
-            152,
-            252
-        ],
-        "Новгородская область": [
-            53
-        ],
-        "Новосибирская область": [
-            54,
-            154
-        ],
-        "Омская область": [
-            55,
-            155
-        ],
-        "Оренбургская область": [
-            56,
-            156
-        ],
-        "Орловская область": [
-            57
-        ],
-        "Пензенская область": [
-            58
-        ],
-        "Пермский край": [
-            59,
-            81,
-            159
-        ],
-        "Псковская область": [
-            60
-        ],
-        "Ростовская область": [
-            61,
-            161,
-            761
-        ],
-        "Рязанская область": [
-            62
-        ],
-        "Самарская область": [
-            63,
-            163,
-            763
-        ],
-        "Саратовская область": [
-            64,
-            164
-        ],
-        "Сахалинская область": [
-            65
-        ],
-        "Свердловская область": [
-            66,
-            96,
-            166,
-            196
-        ],
-        "Смоленская область": [
-            67
-        ],
-        "Тамбовская область": [
-            68
-        ],
-        "Тверская область": [
-            69
-        ],
-        "Томская область": [
-            70
-        ],
-        "Тульская область": [
-            71
-        ],
-        "Тюменская область": [
-            72,
-            172
-        ],
-        "Ульяновская область": [
-            73,
-            173
-        ],
-        "Челябинская область": [
-            74,
-            174,
-            774
-        ],
-        "Забайкальский край": [
-            75,
-            80
-        ],
-        "Ярославская область": [
-            76
-        ],
-        "Москва": [
-            77,
-            97,
-            99,
-            177,
-            197,
-            199,
-            777,
-            797,
-            799,
-            977
-        ],
-        "Санкт-Петербург": [
-            78,
-            98,
-            178,
-            198,
-            778
-        ],
-        "Еврейская автономная область": [
-            79
-        ],
-        "Донецкая Народная Республика": [
-            80,
-            180
-        ],
-        "Луганская Народная Республика": [
-            81,
-            181
-        ],
-        "Республика Крым": [
-            82,
-            777
-        ],
-        "Ненецкий автономный округ": [
-            83
-        ],
-        "Херсонская область": [
-            84,
-            184
-        ],
-        "Запорожская область": [
-            85,
-            185
-        ],
-        "Ханты-Мансийский автономный округ — Югра": [
-            86,
-            186
-        ],
-        "Чукотский автономный округ": [
-            87
-        ],
-        "Ямало-Ненецкий автономный округ": [
-            89
-        ],
-        "Севастополь": [
-            92
-        ],
-        "Территории за пределами РФ": [
-            94
-        ],
-        "Чеченская Республика": [
-            95
-        ]
-    },
-    "ua": {
-        "Киев": [
-            "AA",
-            "KA"
-        ],
-        "Винницкая область": [
-            "AB",
-            "KB"
-        ],
-        "Волынская область": [
-            "AC",
-            "KC"
-        ],
-        "Днепропетровская область": [
-            "AE",
-            "KE"
-        ],
-        "Донецкая область": [
-            "AH",
-            "KH"
-        ],
-        "Киевская область": [
-            "AI",
-            "KI"
-        ],
-        "Житомирская область": [
-            "AM",
-            "KM"
-        ],
-        "Закарпатская область": [
-            "AO",
-            "KO"
-        ],
-        "Запорожская область": [
-            "AP",
-            "KP"
-        ],
-        "Ивано-Франковская область": [
-            "AT",
-            "KT"
-        ],
-        "Харьковская область": [
-            "AX",
-            "KX"
-        ],
-        "Кировоградская область": [
-            "BA",
-            "HA"
-        ],
-        "Луганская область": [
-            "BB",
-            "HB"
-        ],
-        "Львовская область": [
-            "BC",
-            "HC"
-        ],
-        "Николаевская область": [
-            "BE",
-            "HE"
-        ],
-        "Одесская область": [
-            "BH",
-            "HH"
-        ],
-        "Полтавская область": [
-            "BI",
-            "HI"
-        ],
-        "Ровенская область": [
-            "BK",
-            "HK"
-        ],
-        "Сумская область": [
-            "BM",
-            "HM"
-        ],
-        "Тернопольская область": [
-            "BO",
-            "HO"
-        ],
-        "Херсонская область": [
-            "BT",
-            "HT"
-        ],
-        "Хмельницкая область": [
-            "BX",
-            "HX"
-        ],
-        "Черкасская область": [
-            "CA",
-            "IA"
-        ],
-        "Черниговская область": [
-            "CB",
-            "IB"
-        ],
-        "Черновицкая область": [
-            "CE",
-            "IE"
-        ],
-        "Севастополь": [
-            "CH",
-            "IH"
-        ],
-        "АР Крым": [
-            "AK",
-            "KK"
-        ]
-    },
-    "cz": {
-        "Praha": [
-            "A"
-        ],
-        "Jihomoravský kraj (Brno)": [
-            "B"
-        ],
-        "Jihočeský kraj (České Budějovice)": [
-            "C"
-        ],
-        "Pardubický kraj (Pardubice)": [
-            "E"
-        ],
-        "Královéhradecký kraj (Hradec Králové)": [
-            "H"
-        ],
-        "Kraj Vysočina (Jihlava)": [
-            "J"
-        ],
-        "Karlovarský kraj (Karlovy Vary)": [
-            "K"
-        ],
-        "Liberecký kraj (Liberec)": [
-            "L"
-        ],
-        "Olomoucký kraj (Olomouc)": [
-            "M"
-        ],
-        "Plzeňský kraj (Plzeň)": [
-            "P"
-        ],
-        "Středočeský kraj (Praha-venkov)": [
-            "S"
-        ],
-        "Moravskoslezský kraj (Ostrava)": [
-            "T"
-        ],
-        "Ústecký kraj (Ústí nad Labem)": [
-            "U"
-        ],
-        "Zlínský kraj (Zlín)": [
-            "Z"
-        ]
-    },
-    "by": {
-        "Брестская область": [
-            "1"
-        ],
-        "Витебская область": [
-            "2"
-        ],
-        "Гомельская область": [
-            "3"
-        ],
-        "Гродненская область": [
-            "4"
-        ],
-        "Минская область": [
-            "5"
-        ],
-        "Могилевская область": [
-            "6"
-        ],
-        "Минск": [
-            "7",
-            "8"
-        ]
-    }
+  "ru": {
+    "adygeya": [
+      "01"
+    ],
+    "bashkortostan": [
+      "02",
+      102,
+      702
+    ],
+    "buryatyya": [
+      "03"
+    ],
+    "respublykaAltay": [
+      "04"
+    ],
+    "dagestan": [
+      "05",
+      105
+    ],
+    "yngushetyya": [
+      "06"
+    ],
+    "kabardynoBalkaryya": [
+      "07"
+    ],
+    "kalmykyya": [
+      "08"
+    ],
+    "karachaevoCherkesyya": [
+      "09"
+    ],
+    "karelyya": [
+      10
+    ],
+    "respublykaKomy": [
+      11
+    ],
+    "maryyEl": [
+      12
+    ],
+    "mordovyya": [
+      13,
+      113
+    ],
+    "sakhaYakutyya": [
+      14
+    ],
+    "severnayaOsetyya": [
+      15
+    ],
+    "tatarstan": [
+      16,
+      116,
+      716
+    ],
+    "tyva": [
+      17
+    ],
+    "udmurtyya": [
+      18
+    ],
+    "khakasyya": [
+      19
+    ],
+    "chuvashyya": [
+      21,
+      121
+    ],
+    "altayskyyKray": [
+      22,
+      122
+    ],
+    "krasnodarskyyKray": [
+      23,
+      93,
+      123,
+      193,
+      323
+    ],
+    "krasnoyarskyyKray": [
+      24,
+      84,
+      88,
+      124,
+      224
+    ],
+    "prymorskyyKray": [
+      25,
+      125
+    ],
+    "stavropolskyyKray": [
+      26,
+      126
+    ],
+    "khabarovskyyKray": [
+      27
+    ],
+    "amurskayaOblast": [
+      28
+    ],
+    "arkhangelskayaOblast": [
+      29
+    ],
+    "astrakhanskayaOblast": [
+      30
+    ],
+    "belgorodskayaOblast": [
+      31,
+      131
+    ],
+    "bryanskayaOblast": [
+      32
+    ],
+    "vladymyrskayaOblast": [
+      33,
+      133
+    ],
+    "volgogradskayaOblast": [
+      34,
+      134
+    ],
+    "vologodskayaOblast": [
+      35
+    ],
+    "voronezhskayaOblast": [
+      36,
+      136
+    ],
+    "yvanovskayaOblast": [
+      37
+    ],
+    "yrkutskayaOblast": [
+      38,
+      85,
+      138
+    ],
+    "kalynyngradskayaOblast": [
+      39,
+      91
+    ],
+    "kaluzhskayaOblast": [
+      40
+    ],
+    "kamchatskyyKray": [
+      41,
+      82
+    ],
+    "kemerovskayaOblastKuzbass": [
+      42,
+      142
+    ],
+    "kyrovskayaOblast": [
+      43
+    ],
+    "kostromskayaOblast": [
+      44
+    ],
+    "kurganskayaOblast": [
+      45
+    ],
+    "kurskayaOblast": [
+      46
+    ],
+    "lenyngradskayaOblast": [
+      47,
+      147
+    ],
+    "lypetskayaOblast": [
+      48
+    ],
+    "magadanskayaOblast": [
+      49
+    ],
+    "moskovskayaOblast": [
+      50,
+      90,
+      150,
+      190,
+      250,
+      550,
+      750,
+      790
+    ],
+    "murmanskayaOblast": [
+      51
+    ],
+    "nyzhegorodskayaOblast": [
+      52,
+      152,
+      252
+    ],
+    "novgorodskayaOblast": [
+      53
+    ],
+    "novosybyrskayaOblast": [
+      54,
+      154
+    ],
+    "omskayaOblast": [
+      55,
+      155
+    ],
+    "orenburgskayaOblast": [
+      56,
+      156
+    ],
+    "orlovskayaOblast": [
+      57
+    ],
+    "penzenskayaOblast": [
+      58
+    ],
+    "permskyyKray": [
+      59,
+      81,
+      159
+    ],
+    "pskovskayaOblast": [
+      60
+    ],
+    "rostovskayaOblast": [
+      61,
+      161,
+      761
+    ],
+    "ryazanskayaOblast": [
+      62
+    ],
+    "samarskayaOblast": [
+      63,
+      163,
+      763
+    ],
+    "saratovskayaOblast": [
+      64,
+      164
+    ],
+    "sakhalynskayaOblast": [
+      65
+    ],
+    "sverdlovskayaOblast": [
+      66,
+      96,
+      166,
+      196
+    ],
+    "smolenskayaOblast": [
+      67
+    ],
+    "tambovskayaOblast": [
+      68
+    ],
+    "tverskayaOblast": [
+      69
+    ],
+    "tomskayaOblast": [
+      70
+    ],
+    "tulskayaOblast": [
+      71
+    ],
+    "tyumenskayaOblast": [
+      72,
+      172
+    ],
+    "ulyanovskayaOblast": [
+      73,
+      173
+    ],
+    "chelyabynskayaOblast": [
+      74,
+      174,
+      774
+    ],
+    "zabaykalskyyKray": [
+      75,
+      80
+    ],
+    "yaroslavskayaOblast": [
+      76
+    ],
+    "moskva": [
+      77,
+      97,
+      99,
+      177,
+      197,
+      199,
+      777,
+      797,
+      799,
+      977
+    ],
+    "sanktPeterburg": [
+      78,
+      98,
+      178,
+      198,
+      778
+    ],
+    "evreyskayaAvtonomnayaOblast": [
+      79
+    ],
+    "donetskayaNarodnayaRespublyka": [
+      80,
+      180
+    ],
+    "luganskayaNarodnayaRespublyka": [
+      81,
+      181
+    ],
+    "respublykaKrym": [
+      82,
+      777
+    ],
+    "nenetskyyAvtonomnyyOkrug": [
+      83
+    ],
+    "khersonskayaOblast": [
+      84,
+      184
+    ],
+    "zaporozhskayaOblast": [
+      85,
+      185
+    ],
+    "khantyMansyyskyyAvtonomnyyOkrugYugra": [
+      86,
+      186
+    ],
+    "chukotskyyAvtonomnyyOkrug": [
+      87
+    ],
+    "yamaloNenetskyyAvtonomnyyOkrug": [
+      89
+    ],
+    "sevastopol": [
+      92
+    ],
+    "terrytoryyZaPredelamyRf": [
+      94
+    ],
+    "chechenskayaRespublyka": [
+      95
+    ]
+  },
+  "ua": {
+    "kyyiv": [
+      "AA",
+      "KA"
+    ],
+    "vinnytskaOblast": [
+      "AB",
+      "KB"
+    ],
+    "volynskaOblast": [
+      "AC",
+      "KC"
+    ],
+    "dnipropetrovskaOblast": [
+      "AE",
+      "KE"
+    ],
+    "donetskaOblast": [
+      "AH",
+      "KH"
+    ],
+    "kyyivskaOblast": [
+      "AI",
+      "KI"
+    ],
+    "zhytomyrskaOblast": [
+      "AM",
+      "KM"
+    ],
+    "zakarpatskaOblast": [
+      "AO",
+      "KO"
+    ],
+    "zaporizkaOblast": [
+      "AP",
+      "KP"
+    ],
+    "ivanoFrankivskaOblast": [
+      "AT",
+      "KT"
+    ],
+    "kharkivskaOblast": [
+      "AX",
+      "KX"
+    ],
+    "kirovogradskaOblast": [
+      "BA",
+      "HA"
+    ],
+    "luganskaOblast": [
+      "BB",
+      "HB"
+    ],
+    "lvivskaOblast": [
+      "BC",
+      "HC"
+    ],
+    "mykolayivskaOblast": [
+      "BE",
+      "HE"
+    ],
+    "odeskaOblast": [
+      "BH",
+      "HH"
+    ],
+    "poltavskaOblast": [
+      "BI",
+      "HI"
+    ],
+    "rivnenskaOblast": [
+      "BK",
+      "HK"
+    ],
+    "sumskaOblast": [
+      "BM",
+      "HM"
+    ],
+    "ternopilskaOblast": [
+      "BO",
+      "HO"
+    ],
+    "khersonskaOblast": [
+      "BT",
+      "HT"
+    ],
+    "khmelnytskaOblast": [
+      "BX",
+      "HX"
+    ],
+    "cherkaskaOblast": [
+      "CA",
+      "IA"
+    ],
+    "chernigivskaOblast": [
+      "CB",
+      "IB"
+    ],
+    "chernivetskaOblast": [
+      "CE",
+      "IE"
+    ],
+    "sevastopol": [
+      "CH",
+      "IH"
+    ],
+    "arKrym": [
+      "AK",
+      "KK"
+    ]
+  },
+  "cz": {
+    "praha": [
+      "A"
+    ],
+    "jihomoravskyKrajBrno": [
+      "B"
+    ],
+    "jihoceskyKrajCeskeBudejovice": [
+      "C"
+    ],
+    "pardubickyKrajPardubice": [
+      "E"
+    ],
+    "kralovehradeckyKrajHradecKralove": [
+      "H"
+    ],
+    "krajVysocinaJihlava": [
+      "J"
+    ],
+    "karlovarskyKrajKarlovyVary": [
+      "K"
+    ],
+    "libereckyKrajLiberec": [
+      "L"
+    ],
+    "olomouckyKrajOlomouc": [
+      "M"
+    ],
+    "plzenskyKrajPlzen": [
+      "P"
+    ],
+    "stredoceskyKrajPrahaVenkov": [
+      "S"
+    ],
+    "moravskoslezskyKrajOstrava": [
+      "T"
+    ],
+    "usteckyKrajUstiNadLabem": [
+      "U"
+    ],
+    "zlinskyKrajZlin": [
+      "Z"
+    ]
+  },
+  "by": {
+    "brestskayaOblast": [
+      "1"
+    ],
+    "vytebskayaOblast": [
+      "2"
+    ],
+    "gomelskayaOblast": [
+      "3"
+    ],
+    "grodnenskayaOblast": [
+      "4"
+    ],
+    "mynskayaOblast": [
+      "5"
+    ],
+    "mogylevskayaOblast": [
+      "6"
+    ],
+    "mynsk": [
+      "7",
+      "8"
+    ]
+  }
 }

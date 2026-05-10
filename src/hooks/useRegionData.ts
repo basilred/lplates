@@ -8,7 +8,7 @@ import { IData, IDataList } from '../interfaces';
  * @param data Исходные данные о странах и регионах
  * @returns Объект с плоским списком регионов (originalList) и Map-индексом (codeIndex)
  */
-export const useRegionData = (data: IData) => {
+export const useRegionData = (data: IData, t: (key: string) => string) => {
   const originalList = useMemo(() => {
     const result: IDataList[] = [];
 
@@ -22,7 +22,7 @@ export const useRegionData = (data: IData) => {
             const stringCodes = regionCodes.map(code => code.toString());
 
             result.push({
-              name: region,
+              name: t(`regions.${country}.${region}`),
               codes: stringCodes,
               country,
             });
@@ -32,7 +32,7 @@ export const useRegionData = (data: IData) => {
     }
 
     return result;
-  }, [data]);
+  }, [data, t]);
 
   const codeIndex = useMemo(() => {
     const index = new Map<string, IDataList[]>();

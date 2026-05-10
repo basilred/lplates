@@ -22,7 +22,7 @@ const LookupPanel: React.FC<LookupPanelProps> = ({ data, showFlags, onToggleFlag
 
   const [query, setQuery] = useState('');
 
-  const { codeIndex } = useRegionData(data);
+  const { codeIndex } = useRegionData(data, t);
 
   const deferredQuery = useDeferredValue(query);
 
