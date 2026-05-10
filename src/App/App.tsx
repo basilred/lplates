@@ -21,7 +21,7 @@ const App: React.FC<AppProps> = ({ data }) => {
   const [isActive, setIsActive] = useState(false);
   const [showFlags, setShowFlags] = useState(true);
 
-  const { originalList } = useRegionData(data);
+  const { originalList } = useRegionData(data, t);
 
   const countryFlagGetter = useCallback((country: string) => getCountryFlag(country), []);
   const countryLabelGetter = useCallback((country: string) => getCountryLabel(country, t), [t]);
