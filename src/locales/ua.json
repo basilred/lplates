@@ -19,6 +19,8 @@
     "exampleCodes": "Приклади кодів",
     "clearInput": "Очистити введення",
     "selectLanguage": "Вибрати мову",
+    "recent": "Нещодавні",
+    "clearHistory": "Очистити історію",
     "theme": {
       "switchToDark": "Перемкнути на темну тему",
       "switchToSystem": "Перемкнути на системну тему",

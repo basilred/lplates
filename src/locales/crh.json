@@ -19,6 +19,8 @@
     "exampleCodes": "Мисал кодлар",
     "clearInput": "Киришни темизле",
     "selectLanguage": "Тилни сайла",
+    "recent": "Сонъгъы",
+    "clearHistory": "Къыдырыш кечмишини темизле",
     "theme": {
       "switchToDark": "Къаранъгъы мевзугъа дегиштир",
       "switchToSystem": "Система мевзусына дегиштир",

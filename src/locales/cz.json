@@ -19,6 +19,8 @@
     "exampleCodes": "Příklady kódů",
     "clearInput": "Vymazat vstup",
     "selectLanguage": "Vybrat jazyk",
+    "recent": "Nedávné",
+    "clearHistory": "Vymazat historii",
     "theme": {
       "switchToDark": "Přepnout na tmavý motiv",
       "switchToSystem": "Přepnout na systémový motiv",
