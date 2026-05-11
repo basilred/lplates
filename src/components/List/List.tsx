@@ -1,9 +1,9 @@
-
+import React from 'react';
 import './List.css';
 import { IDataList } from '../../interfaces';
 import { useTranslation } from '../../hooks/useTranslation';
 
-const List = (props: {
+const List = React.memo((props: {
   data: IDataList[];
   getCountryLabel: (country: string) => string;
   getCountryFlag: (country: string) => string;
@@ -28,7 +28,7 @@ const List = (props: {
                 <div className="List-ItemMain">
                   <span className="List-ItemName">{region.name}</span>
                   <span className="List-ItemCountry">
-                    {showFlags && <span className="List-ItemFlag">{getCountryFlag(region.country)}</span>}
+                    {showFlags ? <span className="List-ItemFlag">{getCountryFlag(region.country)}</span> : null}
                     {getCountryLabel(region.country)}
                   </span>
                 </div>
@@ -57,6 +57,6 @@ const List = (props: {
       )}
     </section>
   );
-};
+});
 
 export default List;

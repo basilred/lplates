@@ -19,6 +19,8 @@
     "exampleCodes": "Example codes",
     "clearInput": "Clear input",
     "selectLanguage": "Select language",
+    "recent": "Recent",
+    "clearHistory": "Clear history",
     "theme": {
       "switchToDark": "Switch to dark theme",
       "switchToSystem": "Switch to system theme",
