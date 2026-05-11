@@ -155,4 +155,32 @@ export class AppPage {
   async getThemeSelection(): Promise<string | null> {
     return await this.page.evaluate(() => localStorage.getItem('theme'));
   }
+
+  async getHistoryItems(): Promise<string[]> {
+    const items = this.page.locator('.LookupPanel-Tag');
+    const count = await items.count();
+    const results: string[] = [];
+    
+    // В истории поиска теги находятся в блоке LookupPanel-History
+    const historySection = this.page.locator('.LookupPanel-History');
+    if (await historySection.count() === 0) return [];
+    
+    const historyItems = historySection.locator('.LookupPanel-Tag');
+    const historyCount = await historyItems.count();
+    
+    for (let i = 0; i < historyCount; i++) {
+      const text = await historyItems.nth(i).textContent();
+      if (text) results.push(text.trim());
+    }
+    
+    return results;
+  }
+
+  async clearHistory() {
+    await this.page.locator('.LookupPanel-HistoryClear').click();
+  }
+
+  async clickHistoryItem(text: string) {
+    await this.page.locator('.LookupPanel-History .LookupPanel-Tag', { hasText: text }).click();
+  }
 }
