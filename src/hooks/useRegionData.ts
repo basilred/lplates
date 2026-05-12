@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
-import { IData, IDataList } from '../interfaces';
+import { IData, IDataList, IDataRegion } from '../interfaces';
 
 /**
  * Хук для обработки и индексации данных о регионах.
  * Трансформирует древовидную структуру данных в плоский список и создает индекс для быстрого поиска по коду.
- * 
+ * Поддерживает как старый формат (массив кодов), так и новый формат (объект с codes и mapName).
+ *
  * @param data Исходные данные о странах и регионах
  * @returns Объект с плоским списком регионов (originalList) и Map-индексом (codeIndex)
  */
@@ -18,13 +19,29 @@ export const useRegionData = (data: IData) => {
 
         for (const region in currentCountry) {
           if (currentCountry.hasOwnProperty(region)) {
-            const regionCodes = currentCountry[region];
-            const stringCodes = regionCodes.map(code => code.toString());
+            const regionValue = currentCountry[region];
+            let codes: (string | number)[];
+            let mapName: string | undefined;
+
+            // Проверяем формат данных
+            if (Array.isArray(regionValue)) {
+              // Старый формат: массив кодов
+              codes = regionValue;
+              mapName = undefined;
+            } else {
+              // Новый формат: объект IDataRegion
+              const regionData = regionValue as IDataRegion;
+              codes = regionData.codes;
+              mapName = regionData.mapName;
+            }
+
+            const stringCodes = codes.map(code => code.toString());
 
             result.push({
               name: region,
               codes: stringCodes,
               country,
+              mapName,
             });
           }
         }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { IDataList } from '../../interfaces';
 import { useTranslation } from '../../hooks/useTranslation';
-import { normalizeRegionNameForMap } from '../../utils/countryUtils';
 import './List.css';
 
 const List = React.memo((props: {
@@ -24,8 +23,8 @@ const List = React.memo((props: {
       {data.length ? (
         <ul className="List">
           {data.map(region => {
-            const normalizedName = normalizeRegionNameForMap(region.name, region.country);
-            const mapQuery = `${normalizedName}, ${getCountryLabel(region.country)}`;
+            const mapName = region.mapName || region.name;
+            const mapQuery = `${mapName}, ${getCountryLabel(region.country)}`;
             return (
               <li className="List-Item" key={`${region.country}-${region.name}`}>
                 <div className="List-ItemMain">
