@@ -43,9 +43,12 @@
             13,
             113
         ],
-        "Саха (Якутия)": [
-            14
-        ],
+        "Саха (Якутия)": {
+            "codes": [
+                14
+            ],
+            "mapName": "Саха"
+        },
         "Северная Осетия": [
             15
         ],
@@ -146,10 +149,13 @@
             41,
             82
         ],
-        "Кемеровская область — Кузбасс": [
-            42,
-            142
-        ],
+        "Кемеровская область — Кузбасс": {
+            "codes": [
+                42,
+                142
+            ],
+            "mapName": "Кемеровская область"
+        },
         "Кировская область": [
             43
         ],
@@ -325,10 +331,13 @@
             85,
             185
         ],
-        "Ханты-Мансийский автономный округ — Югра": [
-            86,
-            186
-        ],
+        "Ханты-Мансийский автономный округ — Югра": {
+            "codes": [
+                86,
+                186
+            ],
+            "mapName": "Ханты-Мансийский автономный округ"
+        },
         "Чукотский автономный округ": [
             87
         ],
@@ -456,48 +465,90 @@
         ]
     },
     "cz": {
-        "Praha": [
-            "A"
-        ],
-        "Jihomoravský kraj (Brno)": [
-            "B"
-        ],
-        "Jihočeský kraj (České Budějovice)": [
-            "C"
-        ],
-        "Pardubický kraj (Pardubice)": [
-            "E"
-        ],
-        "Královéhradecký kraj (Hradec Králové)": [
-            "H"
-        ],
-        "Kraj Vysočina (Jihlava)": [
-            "J"
-        ],
-        "Karlovarský kraj (Karlovy Vary)": [
-            "K"
-        ],
-        "Liberecký kraj (Liberec)": [
-            "L"
-        ],
-        "Olomoucký kraj (Olomouc)": [
-            "M"
-        ],
-        "Plzeňský kraj (Plzeň)": [
-            "P"
-        ],
-        "Středočeský kraj (Praha-venkov)": [
-            "S"
-        ],
-        "Moravskoslezský kraj (Ostrava)": [
-            "T"
-        ],
-        "Ústecký kraj (Ústí nad Labem)": [
-            "U"
-        ],
-        "Zlínský kraj (Zlín)": [
-            "Z"
-        ]
+        "Praha": {
+            "codes": [
+                "A"
+            ],
+            "mapName": "Prague"
+        },
+        "Jihomoravský kraj (Brno)": {
+            "codes": [
+                "B"
+            ],
+            "mapName": "Jihomoravský kraj"
+        },
+        "Jihočeský kraj (České Budějovice)": {
+            "codes": [
+                "C"
+            ],
+            "mapName": "Jihočeský kraj"
+        },
+        "Pardubický kraj (Pardubice)": {
+            "codes": [
+                "E"
+            ],
+            "mapName": "Pardubický kraj"
+        },
+        "Královéhradecký kraj (Hradec Králové)": {
+            "codes": [
+                "H"
+            ],
+            "mapName": "Královéhradecký kraj"
+        },
+        "Kraj Vysočina (Jihlava)": {
+            "codes": [
+                "J"
+            ],
+            "mapName": "Kraj Vysočina"
+        },
+        "Karlovarský kraj (Karlovy Vary)": {
+            "codes": [
+                "K"
+            ],
+            "mapName": "Karlovarský kraj"
+        },
+        "Liberecký kraj (Liberec)": {
+            "codes": [
+                "L"
+            ],
+            "mapName": "Liberecký kraj"
+        },
+        "Olomoucký kraj (Olomouc)": {
+            "codes": [
+                "M"
+            ],
+            "mapName": "Olomoucký kraj"
+        },
+        "Plzeňský kraj (Plzeň)": {
+            "codes": [
+                "P"
+            ],
+            "mapName": "Plzeňský kraj"
+        },
+        "Středočeský kraj (Praha-venkov)": {
+            "codes": [
+                "S"
+            ],
+            "mapName": "Středočeský kraj"
+        },
+        "Moravskoslezský kraj (Ostrava)": {
+            "codes": [
+                "T"
+            ],
+            "mapName": "Moravskoslezský kraj"
+        },
+        "Ústecký kraj (Ústí nad Labem)": {
+            "codes": [
+                "U"
+            ],
+            "mapName": "Ústecký kraj"
+        },
+        "Zlínský kraj (Zlín)": {
+            "codes": [
+                "Z"
+            ],
+            "mapName": "Zlínský kraj"
+        }
     },
     "by": {
         "Брестская область": [

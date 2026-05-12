@@ -1,7 +1,7 @@
 import React from 'react';
-import './List.css';
 import { IDataList } from '../../interfaces';
 import { useTranslation } from '../../hooks/useTranslation';
+import './List.css';
 
 const List = React.memo((props: {
   data: IDataList[];
@@ -23,10 +23,23 @@ const List = React.memo((props: {
       {data.length ? (
         <ul className="List">
           {data.map(region => {
+            const mapName = region.mapName || region.name;
+            const mapQuery = `${mapName}, ${getCountryLabel(region.country)}`;
             return (
               <li className="List-Item" key={`${region.country}-${region.name}`}>
                 <div className="List-ItemMain">
-                  <span className="List-ItemName">{region.name}</span>
+                  <span className="List-ItemName">
+                    {region.name}
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="List-ItemMapLink"
+                      title={t('list.viewOnMap')}
+                    >
+                      ↗
+                    </a>
+                  </span>
                   <span className="List-ItemCountry">
                     {showFlags ? <span className="List-ItemFlag">{getCountryFlag(region.country)}</span> : null}
                     {getCountryLabel(region.country)}

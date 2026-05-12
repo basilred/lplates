@@ -34,7 +34,8 @@
     "start": "Start with a plate code",
     "tryAnother": "Try another exact code to see matching license plate regions.",
     "enterExact": "Enter an exact regional code to see matching license plate regions.",
-    "searchResults": "Search results"
+    "searchResults": "Search results",
+    "viewOnMap": "View on map"
   },
   "countries": {
     "ru": "Russia",

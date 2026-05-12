@@ -22,7 +22,7 @@ export const getCountryFlag = (country: string): string => {
 /**
  * Возвращает локализованное название страны.
  * Если перевод отсутствует, возвращает название на английском по умолчанию.
- * 
+ *
  * @param country Код страны
  * @param t Функция перевода
  * @returns Название страны
@@ -46,3 +46,4 @@ export const getCountryLabel = (country: string, t: (key: string) => string): st
       return country.toUpperCase();
   }
 };
+

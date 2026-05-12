@@ -71,10 +71,30 @@
 }
 
 .List-ItemName {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.35;
   color: var(--color-text);
+}
+
+.List-ItemMapLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 0.75rem;
+  color: var(--color-text-subtle);
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.List-ItemMapLink:hover {
+  color: var(--color-accent);
+  opacity: 1;
+  transform: translate(1px, -1px);
 }
 
 .List-ItemCountry {
