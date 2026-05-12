@@ -77,7 +77,7 @@
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.35;
-  color: #f4f5f8;
+  color: var(--color-text);
 }
 
 .List-ItemMapLink {
@@ -86,13 +86,13 @@
   justify-content: center;
   text-decoration: none;
   font-size: 0.75rem;
-  color: rgba(244, 245, 248, 0.52);
+  color: var(--color-text-subtle);
   opacity: 0.6;
   transition: all 0.2s ease;
 }
 
 .List-ItemMapLink:hover {
-  color: #ffb25a;
+  color: var(--color-accent);
   opacity: 1;
   transform: translate(1px, -1px);
 }
