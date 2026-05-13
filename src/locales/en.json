@@ -41,7 +41,8 @@
     "ru": "Russia",
     "ua": "Ukraine",
     "cz": "Czech Republic",
-    "by": "Belarus"
+    "by": "Belarus",
+    "es": "Spain"
   },
   "languages": {
     "en": "English",
@@ -49,6 +50,7 @@
     "ua": "Українська",
     "cz": "Čeština",
     "by": "Беларуская",
-    "crh": "Къырымтатарджа"
+    "crh": "Къырымтатарджа",
+    "es": "Español"
   }
 }

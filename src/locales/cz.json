@@ -40,7 +40,8 @@
     "ru": "Rusko",
     "ua": "Ukrajina",
     "cz": "Česko",
-    "by": "Bělorusko"
+    "by": "Bělorusko",
+    "es": "Španělsko"
   },
   "languages": {
     "en": "English",
@@ -48,6 +49,7 @@
     "ua": "Українська",
     "cz": "Čeština",
     "by": "Беларуская",
-    "crh": "Къырымтатарджа"
+    "crh": "Къырымтатарджа",
+    "es": "Español"
   }
 }
