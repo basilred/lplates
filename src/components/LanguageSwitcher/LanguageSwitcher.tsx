@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
-import { Locale } from '../../locales';
+import { Locale, LANGUAGES } from '../../locales';
 import './LanguageSwitcher.css';
 
 const LanguageSwitcher: React.FC = () => {
@@ -8,17 +8,7 @@ const LanguageSwitcher: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const languages: { code: Locale; flag: string; label: string }[] = [
-    { code: 'en', flag: '🇺🇸', label: t('languages.en') },
-    { code: 'ru', flag: '🇷🇺', label: t('languages.ru') },
-    { code: 'ua', flag: '🇺🇦', label: t('languages.ua') },
-    { code: 'cz', flag: '🇨🇿', label: t('languages.cz') },
-    { code: 'by', flag: '🇧🇾', label: t('languages.by') },
-    { code: 'crh', flag: '🇺🇦', label: t('languages.crh') },
-    { code: 'es', flag: '🇪🇸', label: t('languages.es') },
-  ];
-
-  const currentLanguage = languages.find(lang => lang.code === locale) || languages[0];
+  const currentLanguage = LANGUAGES.find(lang => lang.code === locale) || LANGUAGES[0];
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -65,7 +55,7 @@ const LanguageSwitcher: React.FC = () => {
       </button>
       {isOpen && (
         <div className="LanguageSwitcher-Dropdown">
-          {languages.map(lang => (
+          {LANGUAGES.map(lang => (
             <button
               key={lang.code}
               className={`LanguageSwitcher-Option ${locale === lang.code ? 'LanguageSwitcher-Option_active' : ''}`}
