@@ -5,8 +5,9 @@ import cz from './cz.json';
 import by from './by.json';
 import crh from './crh.json';
 import es from './es.json';
+import { Locale } from './config';
 
-export type Locale = 'en' | 'ru' | 'ua' | 'cz' | 'by' | 'crh' | 'es';
+export type { Locale };
 
 export const translations = {
   en,
@@ -21,3 +22,4 @@ export const translations = {
 export type TranslationKey = keyof typeof en;
 
 export default translations;
+export * from './config';
