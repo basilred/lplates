@@ -14,6 +14,8 @@ export const getCountryFlag = (country: string): string => {
       return '🇨🇿';
     case 'by':
       return '🇧🇾';
+    case 'es':
+      return '🇪🇸';
     default:
       return '🏳️';
   }
@@ -42,6 +44,8 @@ export const getCountryLabel = (country: string, t: (key: string) => string): st
       return 'Czech Republic';
     case 'by':
       return 'Belarus';
+    case 'es':
+      return 'Spain';
     default:
       return country.toUpperCase();
   }

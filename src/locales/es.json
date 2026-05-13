@@ -1,0 +1,56 @@
+{
+  "app": {
+    "eyebrow": "Búsqueda regional",
+    "title": "Encuentra una región de matrícula con una sola pulsación.",
+    "description": "Una herramienta de búsqueda enfocada para códigos de matrículas regionales. Escribe un código numérico o de letra y obtén la región coincidente al instante.",
+    "stats": {
+      "regionsIndexed": "regiones indexadas",
+      "codesAvailable": "códigos disponibles",
+      "countriesCovered": "países cubiertos"
+    },
+    "search": "Buscar",
+    "codeOrFullPlate": "Código o matrícula completa",
+    "availableExamples": "Ejemplos disponibles",
+    "toggleFlags": "Alternar banderas",
+    "showFlags": "Mostrar banderas",
+    "hideFlags": "Ocultar banderas",
+    "datasetSummary": "Resumen del conjunto de datos",
+    "licensePlateLookup": "Búsqueda de matrículas",
+    "exampleCodes": "Códigos de ejemplo",
+    "clearInput": "Limpiar entrada",
+    "selectLanguage": "Seleccionar idioma",
+    "recent": "Recientes",
+    "clearHistory": "Limpiar historial",
+    "theme": {
+      "switchToDark": "Cambiar a tema oscuro",
+      "switchToSystem": "Cambiar a tema del sistema",
+      "switchToLight": "Cambiar a tema claro",
+      "toggle": "Alternar tema"
+    }
+  },
+  "list": {
+    "matches": "Coincidencias",
+    "noMatch": "No se encontró coincidencia exacta",
+    "start": "Empieza con un código de matrícula",
+    "tryAnother": "Prueba con otro código exacto para ver las regiones de matrículas coincidentes.",
+    "enterExact": "Introduce un código regional exacto para ver las regiones de matrículas coincidentes.",
+    "searchResults": "Resultados de búsqueda",
+    "viewOnMap": "Ver en el mapa"
+  },
+  "countries": {
+    "ru": "Rusia",
+    "ua": "Ucrania",
+    "cz": "República Checa",
+    "by": "Bielorrusia",
+    "es": "España"
+  },
+  "languages": {
+    "en": "English",
+    "ru": "Русский",
+    "ua": "Українська",
+    "cz": "Čeština",
+    "by": "Беларуская",
+    "crh": "Къырымтатарджа",
+    "es": "Español"
+  }
+}
