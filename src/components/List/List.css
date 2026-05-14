@@ -39,9 +39,8 @@
 
 .List-Item {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
   padding: 1rem 1.1rem;
   border: 1px solid var(--color-border-subtle);
   border-radius: 18px;
@@ -55,6 +54,14 @@
 
 .List-Item + .List-Item {
   margin-top: 0.75rem;
+}
+
+.List-ItemContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
 }
 
 .List-Item:hover {
