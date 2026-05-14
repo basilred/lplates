@@ -1,6 +1,9 @@
 import React from 'react';
 import { IDataList } from '../../interfaces';
 import { useTranslation } from '../../hooks/useTranslation';
+
+const RegionMap = React.lazy(() => import('../RegionMap/RegionMap'));
+
 import './List.css';
 
 const List = React.memo((props: {
@@ -27,7 +30,8 @@ const List = React.memo((props: {
             const mapQuery = `${mapName}, ${getCountryLabel(region.country)}`;
             return (
               <li className="List-Item" key={`${region.country}-${region.name}`}>
-                <div className="List-ItemMain">
+                <div className="List-ItemContent">
+                  <div className="List-ItemMain">
                   <span className="List-ItemName">
                     {region.name}
                     <a
@@ -52,6 +56,10 @@ const List = React.memo((props: {
                     </span>
                   ))}
                 </div>
+              </div>
+                <React.Suspense fallback={<div className="RegionMap-Placeholder" />}>
+                  <RegionMap country={region.country} regionName={region.name} />
+                </React.Suspense>
               </li>
             );
           })}
