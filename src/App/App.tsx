@@ -1,8 +1,7 @@
 import React, { useState, useCallback, useContext } from 'react';
 import './App.css';
 
-import LanguageSwitcher from '../components/LanguageSwitcher/LanguageSwitcher';
-import ThemeToggle from '../components/ThemeToggle/ThemeToggle';
+import Header from '../components/Header/Header';
 import LookupPanel from '../components/LookupPanel/LookupPanel';
 
 import { IData } from '../interfaces';
@@ -37,15 +36,10 @@ const App: React.FC<AppProps> = ({ data }) => {
   return (
     <div className={`App ${isActive ? 'App_active' : ''}`}>
       <div className="App-Backdrop" />
+      <Header />
       <main className="App-Shell">
         <section className="App-Intro">
-          <div className="App-HeaderRow">
-            <p className="App-Eyebrow">{t('app.eyebrow')}</p>
-            <div className="App-Controls">
-              <ThemeToggle />
-              <LanguageSwitcher />
-            </div>
-          </div>
+          <p className="App-Eyebrow">{t('app.eyebrow')}</p>
           <h1 className="App-Title">{t('app.title')}</h1>
           <p className="App-Description">
             {t('app.description')}

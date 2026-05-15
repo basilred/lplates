@@ -18,39 +18,27 @@
 .App-Shell {
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 24px 16px;
-  gap: 1.5rem;
+  padding: 40px 24px;
+  gap: 2rem;
 }
 
 .App-Intro {
-  max-width: 24rem;
+  width: 100%;
   animation: introRise 0.65s ease-out;
 }
 
-.App-HeaderRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.App-Controls {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
 .App-Eyebrow {
-  margin: 0;
-  font-size: 0.72rem;
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  padding: 4px 12px;
+  background: var(--color-accent-soft);
+  border-radius: 8px;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-accent);
 }
@@ -58,21 +46,21 @@
 .App-Title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2.85rem, 6.5vw, 5.1rem);
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
   font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   color: var(--color-text);
   text-wrap: balance;
   font-feature-settings: 'kern' 1, 'liga' 1;
-  text-shadow: 0 18px 42px var(--color-shadow);
+  text-shadow: 0 10px 30px var(--color-shadow);
 }
 
 .App-Description {
-  max-width: 32rem;
-  margin: 1.5rem 0 0;
-  font-size: 1rem;
-  line-height: 1.75;
+  max-width: 28rem;
+  margin: 1.25rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: var(--color-text-muted);
 }
 
@@ -132,13 +120,54 @@
   }
 }
 
-@media (max-width: 1100px) {
+@media (min-width: 1024px) {
+  .App-Shell {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+    align-items: start;
+    gap: 4rem;
+    padding: 64px 32px;
+  }
+
   .App-Intro {
-    max-width: none;
+    position: sticky;
+    top: 120px;
+    max-height: calc(100vh - 160px);
+    display: flex;
+    flex-direction: column;
   }
 
   .App-Title {
-    max-width: none;
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    line-height: 1;
+  }
+
+  .App-Stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 0;
+  }
+
+  .App-Stat {
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+  }
+
+  .App-StatValue {
+    font-size: 1.2rem;
+  }
+
+  .App-StatLabel {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .App-Shell {
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -154,7 +183,7 @@
 
   .App-Intro {
     scroll-snap-align: start;
-    scroll-margin-top: 24px;
+    scroll-margin-top: 80px;
   }
 
   .App-Stats {
