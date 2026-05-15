@@ -49,3 +49,7 @@ qdrant_storage/
 # Playwright artifacts
 playwright-report/
 test-results/
+
+# Local libraries
+public/libs/
+public/models/

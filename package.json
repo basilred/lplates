@@ -4,9 +4,10 @@
   "version": "2.6.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "dev:https": "vite --host",
-    "build": "tsc && vite build",
+    "dev": "node scripts/download-libs.js && vite",
+    "dev:https": "node scripts/download-libs.js && vite --host",
+    "build": "node scripts/download-libs.js && tsc && vite build",
+    "postinstall": "node scripts/download-libs.js",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
     "test": "vitest run",
@@ -18,6 +19,7 @@
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
     "d3-geo": "^3.1.1",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",

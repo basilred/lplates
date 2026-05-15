@@ -1,15 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import { useCamera } from '../../hooks/useCamera';
+import { useOCR } from '../../hooks/useOCR';
 import './CameraScanner.css';
 
 interface CameraScannerProps {
-  onCapture: (imageData: string) => void;
+  onCapture: (plate: string) => void;
   onClose: () => void;
 }
 
-const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose }) => {
+export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { stream, error, isLoading, startCamera, stopCamera, captureFrame } = useCamera();
+  const { stream, error, isLoading: isCameraLoading, startCamera, stopCamera } = useCamera();
+  const { isReady: isOCRReady, lastResult, isModelLoading } = useOCR(!!stream, videoRef);
+
+  const isInitialLoading = isCameraLoading || isModelLoading || !isOCRReady;
 
   useEffect(() => {
     startCamera();
@@ -27,12 +31,9 @@ const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose }) => 
     }
   }, [stream]);
 
-  const handleCapture = () => {
-    if (videoRef.current) {
-      const imageData = captureFrame(videoRef.current);
-      if (imageData) {
-        onCapture(imageData);
-      }
+  const handleManualCapture = () => {
+    if (lastResult) {
+      onCapture(lastResult.text);
     }
   };
 
@@ -63,6 +64,11 @@ const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose }) => 
       <div className="CameraScanner-Overlay">
         <div className="CameraScanner-Viewfinder">
           <div className="CameraScanner-ScanLine" />
+          {lastResult && (
+            <div className="CameraScanner-Result">
+              {lastResult.text}
+            </div>
+          )}
         </div>
         
         <button className="CameraScanner-Close" onClick={onClose}>
@@ -70,12 +76,16 @@ const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose }) => 
         </button>
 
         <div className="CameraScanner-Controls">
+          <div className="CameraScanner-Status">
+            {!isOCRReady ? 'Initializing AI...' : lastResult ? 'Plate Detected' : 'Scanning...'}
+          </div>
+          
           <button 
             className="CameraScanner-Button" 
-            onClick={handleCapture}
-            disabled={isLoading || !stream}
+            onClick={handleManualCapture}
+            disabled={isInitialLoading || !stream}
           >
-            {isLoading ? 'Loading...' : 'Capture Plate'}
+            {isInitialLoading ? 'Loading...' : 'Manual Capture'}
           </button>
         </div>
       </div>

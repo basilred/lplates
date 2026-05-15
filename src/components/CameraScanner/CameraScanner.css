@@ -58,14 +58,48 @@
 }
 
 .CameraScanner-Viewfinder {
-  position: relative;
-  width: 80%;
-  max-width: 400px;
-  aspect-ratio: 4 / 1;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  width: 300px;
+  height: 120px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
   border-radius: 12px;
-  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: border-color 0.3s ease;
+}
+
+.CameraScanner-Result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(var(--color-primary-rgb), 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+.CameraScanner-Status {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .CameraScanner-Viewfinder_active {
