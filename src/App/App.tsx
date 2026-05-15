@@ -3,6 +3,7 @@ import './App.css';
 
 import Header from '../components/Header/Header';
 import LookupPanel from '../components/LookupPanel/LookupPanel';
+import CameraScanner from '../components/CameraScanner/CameraScanner';
 
 import { IData } from '../interfaces';
 import LanguageContext from '../contexts/LanguageContext';
@@ -19,6 +20,7 @@ const App: React.FC<AppProps> = ({ data }) => {
 
   const [isActive, setIsActive] = useState(false);
   const [showFlags, setShowFlags] = useState(true);
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
 
   const { originalList } = useRegionData(data);
 
@@ -70,6 +72,16 @@ const App: React.FC<AppProps> = ({ data }) => {
               <span className="App-StatLabel">{t('app.stats.countriesCovered')}</span>
             </div>
           </div>
+
+          <div className="App-Actions">
+            <button 
+              className="App-ActionButton App-ActionButton_primary"
+              onClick={() => setIsScannerOpen(true)}
+            >
+              <span className="App-ActionButtonIcon">📸</span>
+              <span className="App-ActionButtonLabel">{t('app.scanPlate')}</span>
+            </button>
+          </div>
         </section>
 
         <LookupPanel 
@@ -79,6 +91,17 @@ const App: React.FC<AppProps> = ({ data }) => {
           onActiveChange={setIsActive}
         />
       </main>
+
+      {isScannerOpen && (
+        <CameraScanner 
+          onClose={() => setIsScannerOpen(false)}
+          onCapture={(imageData) => {
+            console.log('Captured image:', imageData.substring(0, 50) + '...');
+            setIsScannerOpen(false);
+            // Future logic for OCR will go here
+          }}
+        />
+      )}
     </div>
   );
 };
