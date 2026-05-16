@@ -20,6 +20,7 @@ export default defineConfig({
       injectRegister: 'inline',
       injectManifest: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,webp}'],
+        maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
       },
       devOptions: {
         enabled: true

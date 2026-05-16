@@ -21,6 +21,7 @@ const App: React.FC<AppProps> = ({ data }) => {
   const [isActive, setIsActive] = useState(false);
   const [showFlags, setShowFlags] = useState(true);
   const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const [scannedPlate, setScannedPlate] = useState('');
 
   const { originalList } = useRegionData(data);
 
@@ -33,6 +34,16 @@ const App: React.FC<AppProps> = ({ data }) => {
 
   const handleToggleFlags = useCallback(() => {
     setShowFlags(prev => !prev);
+  }, []);
+
+  const handleScanClick = useCallback(() => {
+    setScannedPlate('');
+    setIsScannerOpen(true);
+  }, []);
+
+  const handleCapture = useCallback((plate: string) => {
+    setScannedPlate(plate);
+    setIsScannerOpen(false);
   }, []);
 
   return (
@@ -73,15 +84,6 @@ const App: React.FC<AppProps> = ({ data }) => {
             </div>
           </div>
 
-          <div className="App-Actions">
-            <button 
-              className="App-ActionButton App-ActionButton_primary"
-              onClick={() => setIsScannerOpen(true)}
-            >
-              <span className="App-ActionButtonIcon">📸</span>
-              <span className="App-ActionButtonLabel">{t('app.scanPlate')}</span>
-            </button>
-          </div>
         </section>
 
         <LookupPanel 
@@ -89,17 +91,15 @@ const App: React.FC<AppProps> = ({ data }) => {
           showFlags={showFlags}
           onToggleFlags={handleToggleFlags}
           onActiveChange={setIsActive}
+          externalQuery={scannedPlate}
+          onScanClick={handleScanClick}
         />
       </main>
 
       {isScannerOpen && (
         <CameraScanner 
           onClose={() => setIsScannerOpen(false)}
-          onCapture={(imageData) => {
-            console.log('Captured image:', imageData.substring(0, 50) + '...');
-            setIsScannerOpen(false);
-            // Future logic for OCR will go here
-          }}
+          onCapture={handleCapture}
         />
       )}
     </div>

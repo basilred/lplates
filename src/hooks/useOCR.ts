@@ -25,12 +25,22 @@ export const useOCR = (isActive: boolean, videoRef: React.RefObject<HTMLVideoEle
   const requestRef = useRef<number | null>(null);
   const isProcessingRef = useRef(false);
   const lastProcessTimeRef = useRef<number>(0);
+  const isPageVisibleRef = useRef(!document.hidden);
 
   const isActiveRef = useRef(isActive);
   
   useEffect(() => {
     isActiveRef.current = isActive;
   }, [isActive]);
+
+  // Pause OCR loop when page is hidden to prevent device overheating
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      isPageVisibleRef.current = !document.hidden;
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
 
   // 1. Initialize Tesseract Worker
   useEffect(() => {
@@ -85,8 +95,14 @@ export const useOCR = (isActive: boolean, videoRef: React.RefObject<HTMLVideoEle
       return;
     }
 
-    // Throttle: Process more frequently for better responsiveness (every 100ms)
-    if (time - lastProcessTimeRef.current < 100) {
+    // Pause when tab is hidden to avoid device overheating
+    if (!isPageVisibleRef.current) {
+      requestRef.current = requestAnimationFrame(processFrame);
+      return;
+    }
+
+    // Throttle: process every 150ms for a good balance of responsiveness and CPU usage
+    if (time - lastProcessTimeRef.current < 150) {
       requestRef.current = requestAnimationFrame(processFrame);
       return;
     }

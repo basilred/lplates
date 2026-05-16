@@ -44,5 +44,15 @@
     "cz": "Czech Republic",
     "by": "Belarus",
     "es": "Spain"
+  },
+  "camera": {
+    "initializing": "Initializing AI...",
+    "scanning": "Scanning...",
+    "detecting": "Detecting...",
+    "recognized": "Plate Recognized",
+    "error": "AI Error",
+    "manualCapture": "Manual Capture",
+    "loading": "Loading...",
+    "close": "Close"
   }
 }

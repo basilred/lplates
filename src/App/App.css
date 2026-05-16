@@ -162,47 +162,9 @@
     font-size: 0.75rem;
     margin-top: 0.25rem;
   }
-
-  .App-Actions {
-    margin-top: 2.5rem;
-  }
 }
 
-.App-Actions {
-  margin-top: 2rem;
-  display: flex;
-  gap: 1rem;
-}
-
-.App-ActionButton {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-  border-radius: 16px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid var(--color-border);
-}
-
-.App-ActionButton_primary {
-  background: var(--color-accent);
-  color: white;
-  border: none;
-  box-shadow: 0 8px 20px var(--color-accent-soft);
-}
-
-.App-ActionButton_primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px var(--color-accent-soft);
-  filter: brightness(1.1);
-}
-
-.App-ActionButtonIcon {
-  font-size: 1.25rem;
-}
+/* Styles for App-Actions were removed as the scan button moved into Input */
 
 @media (max-width: 1023px) {
   .App-Shell {

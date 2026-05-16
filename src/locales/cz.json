@@ -42,5 +42,15 @@
     "cz": "Česko",
     "by": "Bělorusko",
     "es": "Španělsko"
+  },
+  "camera": {
+    "initializing": "Inicializace AI...",
+    "scanning": "Skenování...",
+    "detecting": "Detekce...",
+    "recognized": "Značka rozpoznána",
+    "error": "Chyba AI",
+    "manualCapture": "Zachytit ručně",
+    "loading": "Načítání...",
+    "close": "Zavřít"
   }
 }

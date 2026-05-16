@@ -16,11 +16,20 @@ interface LookupPanelProps {
   showFlags: boolean;
   onToggleFlags: () => void;
   onActiveChange?: (isActive: boolean) => void;
+  externalQuery?: string;
+  onScanClick?: () => void;
 }
 
 const DEFAULT_CONTEXT = { t: (key: string) => key };
 
-const LookupPanel: React.FC<LookupPanelProps> = React.memo(({ data, showFlags, onToggleFlags, onActiveChange }) => {
+const LookupPanel: React.FC<LookupPanelProps> = React.memo(({ 
+  data, 
+  showFlags, 
+  onToggleFlags, 
+  onActiveChange, 
+  externalQuery,
+  onScanClick
+}) => {
   const languageContext = useContext(LanguageContext);
   const { t } = languageContext || DEFAULT_CONTEXT;
 
@@ -31,6 +40,25 @@ const LookupPanel: React.FC<LookupPanelProps> = React.memo(({ data, showFlags, o
   });
 
   const { codeIndex } = useRegionData(data);
+
+  const handleInputChange = useCallback((value: string) => {
+    setQuery(prev => {
+      const wasActive = prev.length > 0;
+      const isNowActive = value.length > 0;
+      
+      if (wasActive !== isNowActive && onActiveChange) {
+        onActiveChange(isNowActive);
+      }
+      return value;
+    });
+  }, [onActiveChange]);
+
+  // Sync external query (e.g. from OCR scanner)
+  React.useEffect(() => {
+    if (externalQuery) {
+      handleInputChange(externalQuery);
+    }
+  }, [externalQuery, handleInputChange]);
 
   const deferredQuery = useDeferredValue(query);
 
@@ -70,20 +98,7 @@ const LookupPanel: React.FC<LookupPanelProps> = React.memo(({ data, showFlags, o
     }
   }, [deferredDataList, deferredQuery]);
 
-  const handleInputChange = useCallback((value: string) => {
-    setQuery(prev => {
-      const wasActive = prev.length > 0;
-      const isNowActive = value.length > 0;
-      
-      if (wasActive !== isNowActive && onActiveChange) {
-        onActiveChange(isNowActive);
-      }
-      return value;
-    });
-  }, [onActiveChange]);
-
   const getCountryLabelInside = useCallback((country: string) => getCountryLabel(country, t), [t]);
-
   const isActive = query.length > 0;
 
   return (
@@ -115,6 +130,8 @@ const LookupPanel: React.FC<LookupPanelProps> = React.memo(({ data, showFlags, o
           <Input
             value={query}
             onChange={handleInputChange}
+            onScanClick={onScanClick}
+            scanLabel={t('app.scanPlate')}
           />
         </Suspense>
       </div>

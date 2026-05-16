@@ -6,9 +6,18 @@ interface InputProps {
   onChange: (val: string) => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  onScanClick?: () => void;
+  scanLabel?: string;
 };
 
-const Input: React.FC<InputProps> = ({ value: propValue = '', onChange, onFocus, onBlur }) => {
+const Input: React.FC<InputProps> = ({ 
+  value: propValue = '', 
+  onChange, 
+  onFocus, 
+  onBlur, 
+  onScanClick,
+  scanLabel = 'Scan'
+}) => {
   const [internalValue, setInternalValue] = useState(propValue);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -33,9 +42,18 @@ const Input: React.FC<InputProps> = ({ value: propValue = '', onChange, onFocus,
 
   return (
     <div className="Input">
-      <span className="Input-Icon" aria-hidden="true">
-        /
-      </span>
+      <button 
+        className="Input-Scan" 
+        onClick={onScanClick} 
+        type="button"
+        aria-label={scanLabel}
+        title={scanLabel}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+          <circle cx="12" cy="13" r="4"></circle>
+        </svg>
+      </button>
       <input
         ref={inputRef}
         className="Input-Field"
