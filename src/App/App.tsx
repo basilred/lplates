@@ -9,6 +9,7 @@ import { IData } from '../interfaces';
 import LanguageContext from '../contexts/LanguageContext';
 import { getCountryFlag, getCountryLabel } from '../utils/countryUtils';
 import { useRegionData } from '../hooks/useRegionData';
+import { ensureHapticContext } from '../utils/haptic';
 
 interface AppProps {
   data: IData;
@@ -37,6 +38,7 @@ const App: React.FC<AppProps> = ({ data }) => {
   }, []);
 
   const handleScanClick = useCallback(() => {
+    ensureHapticContext();
     setScannedPlate('');
     setIsScannerOpen(true);
   }, []);

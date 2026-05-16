@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useContext } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import { useCamera } from '../../hooks/useCamera';
 import { useOCR } from '../../hooks/useOCR';
 import LanguageContext from '../../contexts/LanguageContext';
+import { triggerHaptic, ensureHapticContext } from '../../utils/haptic';
 import './CameraScanner.css';
 
 interface CameraScannerProps {
@@ -26,6 +27,15 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
   // Persistent stable result to avoid timer resets on mobile jitter
   const stableResultRef = useRef<{text: string, time: number} | null>(null);
   const lastVibratedTextRef = useRef<string | null>(null);
+  const hapticInitedRef = useRef(false);
+  const [popView, setPopView] = useState(false);
+
+  const initHapticOnGesture = () => {
+    if (!hapticInitedRef.current) {
+      ensureHapticContext();
+      hapticInitedRef.current = true;
+    }
+  };
 
   useEffect(() => {
     if (lastResult?.isStable) {
@@ -34,8 +44,9 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
       stableResultRef.current = { text: lastResult.text, time: Date.now() };
 
       if (isNewResult) {
-        // Haptic feedback only on the first detection of a new stable result
-        navigator.vibrate?.(200);
+        triggerHaptic(200);
+        setPopView(true);
+        setTimeout(() => setPopView(false), 300);
         lastVibratedTextRef.current = lastResult.text;
       }
     } else if (stableResultRef.current && Date.now() - stableResultRef.current.time > 1000) {
@@ -90,7 +101,7 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
 
   if (error) {
     return (
-      <div className="CameraScanner">
+      <div className="CameraScanner" onClick={initHapticOnGesture}>
         <div className="CameraScanner-Error">
           <div className="CameraScanner-ErrorIcon">🚫</div>
           <p>{error}</p>
@@ -113,7 +124,7 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
   })();
 
   return (
-    <div className="CameraScanner">
+    <div className="CameraScanner" onClick={initHapticOnGesture}>
       <video
         ref={videoRef}
         autoPlay
@@ -129,7 +140,7 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
             <div className="CameraScanner-SkeletonLine CameraScanner-SkeletonLine_short" />
           </div>
         ) : (
-          <div className={`CameraScanner-Viewfinder CameraScanner-Viewfinder_${status}`}>
+          <div className={`CameraScanner-Viewfinder CameraScanner-Viewfinder_${status}${popView ? ' CameraScanner-Viewfinder_popping' : ''}`}>
             <div className="CameraScanner-ScanLine" />
             {(lastResult || previewResult) && (
               <div className={`CameraScanner-Result CameraScanner-Result_${status}`}>
