@@ -33,22 +33,33 @@ async function downloadFile(url, dest) {
   console.log(`⏳ Downloading ${dest}...`);
   
   return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(destPath);
-    https.get(url, (response) => {
-      if (response.statusCode !== 200) {
-        reject(new Error(`Failed to download ${url}: ${response.statusCode}`));
-        return;
-      }
-      response.pipe(file);
-      file.on('finish', () => {
-        file.close();
-        console.log(`✅ ${dest} downloaded!`);
-        resolve();
+    const download = (downloadUrl) => {
+      https.get(downloadUrl, (response) => {
+        if (response.statusCode === 301 || response.statusCode === 302) {
+          // Follow redirect
+          download(response.headers.location);
+          return;
+        }
+
+        if (response.statusCode !== 200) {
+          reject(new Error(`Failed to download ${downloadUrl}: ${response.statusCode}`));
+          return;
+        }
+
+        const file = fs.createWriteStream(destPath);
+        response.pipe(file);
+        file.on('finish', () => {
+          file.close();
+          console.log(`✅ ${dest} downloaded!`);
+          resolve();
+        });
+      }).on('error', (err) => {
+        fs.unlink(destPath, () => {});
+        reject(err);
       });
-    }).on('error', (err) => {
-      fs.unlink(destPath, () => {});
-      reject(err);
-    });
+    };
+
+    download(url);
   });
 }
 

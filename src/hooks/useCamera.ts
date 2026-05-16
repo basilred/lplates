@@ -18,8 +18,9 @@ export const useCamera = (): UseCameraResult => {
 
   const stopCamera = useCallback(() => {
     isActiveRef.current = false;
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track) => track.stop());
+    const currentStream = streamRef.current;
+    if (currentStream) {
+      currentStream.getTracks().forEach((track: MediaStreamTrack) => track.stop());
       streamRef.current = null;
       setStream(null);
     }
@@ -33,8 +34,9 @@ export const useCamera = (): UseCameraResult => {
     }
 
     // 1. Always stop previous stream if it exists
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
+    const prevStream = streamRef.current;
+    if (prevStream) {
+      prevStream.getTracks().forEach((track: MediaStreamTrack) => track.stop());
       streamRef.current = null;
     }
 
@@ -45,8 +47,11 @@ export const useCamera = (): UseCameraResult => {
       const constraints: MediaStreamConstraints = {
         video: {
           facingMode: 'environment',
-          width: { ideal: 1280 },
+          width: { ideal: 1280 }, // 720p is optimal for mobile OCR speed/quality
           height: { ideal: 720 },
+          // @ts-ignore - Some browsers support advanced constraints here
+          focusMode: 'continuous',
+          whiteBalanceMode: 'continuous'
         },
         audio: false,
       };
@@ -55,13 +60,14 @@ export const useCamera = (): UseCameraResult => {
       
       // 2. Check if we were cancelled while waiting
       if (!isActiveRef.current) {
-        newStream.getTracks().forEach(track => track.stop());
+        newStream.getTracks().forEach((track: MediaStreamTrack) => track.stop());
         return;
       }
 
       // 3. Double check if another stream was started in the meantime
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
+      const midStream = streamRef.current;
+      if (midStream) {
+        midStream.getTracks().forEach((track: MediaStreamTrack) => track.stop());
       }
 
       streamRef.current = newStream;

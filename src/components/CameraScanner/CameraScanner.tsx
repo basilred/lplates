@@ -10,20 +10,44 @@ interface CameraScannerProps {
 
 export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { stream, error, isLoading: isCameraLoading, startCamera, stopCamera } = useCamera();
-  const { isReady: isOCRReady, lastResult, isModelLoading } = useOCR(!!stream, videoRef);
+  const { stream, error: cameraError, isLoading: isCameraLoading, startCamera, stopCamera } = useCamera();
+  const { isReady: isOCRReady, lastResult, previewResult, isModelLoading, error: ocrError } = useOCR(!!stream, videoRef);
 
-  const isInitialLoading = isCameraLoading || isModelLoading || !isOCRReady;
+  const isInitialLoading = isCameraLoading || isModelLoading;
+  const error = cameraError || ocrError;
+
+  // Auto-capture when stable
+  // Persistent stable result to avoid timer resets on mobile jitter
+  const stableResultRef = useRef<{text: string, time: number} | null>(null);
 
   useEffect(() => {
-    startCamera();
+    if (lastResult?.isStable) {
+      stableResultRef.current = { text: lastResult.text, time: Date.now() };
+    } else if (stableResultRef.current && Date.now() - stableResultRef.current.time > 1000) {
+      // Only clear after 1 second of no stable frames
+      stableResultRef.current = null;
+    }
+
+    if (stableResultRef.current) {
+      const timer = setTimeout(() => {
+        if (stableResultRef.current) {
+          onCapture(stableResultRef.current.text);
+        }
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, [lastResult, onCapture]);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      startCamera();
+    }
     return () => {
+      isMounted = false;
       stopCamera();
-      if (videoRef.current) {
-        videoRef.current.srcObject = null;
-      }
     };
-  }, [startCamera, stopCamera]);
+  }, []); // Run only once on mount
 
   useEffect(() => {
     if (videoRef.current && stream) {
@@ -32,8 +56,9 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
   }, [stream]);
 
   const handleManualCapture = () => {
-    if (lastResult) {
-      onCapture(lastResult.text);
+    const result = lastResult || previewResult;
+    if (result) {
+      onCapture(result.text);
     }
   };
 
@@ -51,6 +76,8 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
     );
   }
 
+  const status = lastResult ? 'stable' : (previewResult ? 'detecting' : 'idle');
+
   return (
     <div className="CameraScanner">
       <video
@@ -60,13 +87,13 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
         muted
         className="CameraScanner-Video"
       />
-      
+
       <div className="CameraScanner-Overlay">
-        <div className="CameraScanner-Viewfinder">
+        <div className={`CameraScanner-Viewfinder CameraScanner-Viewfinder_${status}`}>
           <div className="CameraScanner-ScanLine" />
-          {lastResult && (
-            <div className="CameraScanner-Result">
-              {lastResult.text}
+          {(lastResult || previewResult) && (
+            <div className={`CameraScanner-Result CameraScanner-Result_${status}`}>
+              {(lastResult || previewResult)?.text}
             </div>
           )}
         </div>
@@ -77,7 +104,10 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
 
         <div className="CameraScanner-Controls">
           <div className="CameraScanner-Status">
-            {!isOCRReady ? 'Initializing AI...' : lastResult ? 'Plate Detected' : 'Scanning...'}
+            {ocrError ? `AI Error: ${ocrError.slice(0, 30)}...` : 
+             !isOCRReady ? 'Initializing AI...' : 
+             lastResult ? 'Plate Recognized' : 
+             previewResult ? 'Detecting...' : 'Scanning...'}
           </div>
           
           <button 

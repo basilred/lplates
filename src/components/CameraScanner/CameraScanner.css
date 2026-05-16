@@ -102,9 +102,26 @@
   to { opacity: 1; transform: scale(1); }
 }
 
-.CameraScanner-Viewfinder_active {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 20px var(--color-accent-soft), 0 0 0 1000px rgba(0, 0, 0, 0.6);
+.CameraScanner-Viewfinder_detecting {
+  border-color: #ff9800; /* Amber */
+  box-shadow: 0 0 20px rgba(255, 152, 0, 0.4), 0 0 0 9999px rgba(0, 0, 0, 0.6);
+}
+
+.CameraScanner-Viewfinder_stable {
+  border-color: #4caf50; /* Green */
+  box-shadow: 0 0 30px rgba(76, 175, 80, 0.6), 0 0 0 9999px rgba(0, 0, 0, 0.7);
+}
+
+.CameraScanner-Result_detecting {
+  background: rgba(255, 152, 0, 0.2);
+  color: #ff9800;
+}
+
+.CameraScanner-Result_stable {
+  background: rgba(76, 175, 80, 0.3);
+  color: #4caf50;
+  font-size: 2.2rem;
+  transition: all 0.2s ease;
 }
 
 .CameraScanner-ScanLine {
@@ -115,6 +132,25 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
   animation: scan 2s linear infinite;
+  z-index: 5;
+}
+
+.CameraScanner-Viewfinder_detecting .CameraScanner-ScanLine {
+  background: linear-gradient(90deg, transparent, #ff9800, transparent);
+}
+
+.CameraScanner-Viewfinder_stable .CameraScanner-ScanLine {
+  background: linear-gradient(90deg, transparent, #4caf50, transparent);
+  animation-duration: 1s; /* Scan faster when stable */
+}
+
+.CameraScanner-Viewfinder_stable {
+  animation: pulse-green 1s infinite alternate;
+}
+
+@keyframes pulse-green {
+  from { box-shadow: 0 0 20px rgba(76, 175, 80, 0.4), 0 0 0 9999px rgba(0, 0, 0, 0.7); }
+  to { box-shadow: 0 0 40px rgba(76, 175, 80, 0.8), 0 0 0 9999px rgba(0, 0, 0, 0.7); }
 }
 
 @keyframes scan {
