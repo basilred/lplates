@@ -3,11 +3,13 @@ import './App.css';
 
 import Header from '../components/Header/Header';
 import LookupPanel from '../components/LookupPanel/LookupPanel';
+import CameraScanner from '../components/CameraScanner/CameraScanner';
 
 import { IData } from '../interfaces';
 import LanguageContext from '../contexts/LanguageContext';
 import { getCountryFlag, getCountryLabel } from '../utils/countryUtils';
 import { useRegionData } from '../hooks/useRegionData';
+import { ensureHapticContext } from '../utils/haptic';
 
 interface AppProps {
   data: IData;
@@ -19,6 +21,8 @@ const App: React.FC<AppProps> = ({ data }) => {
 
   const [isActive, setIsActive] = useState(false);
   const [showFlags, setShowFlags] = useState(true);
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const [scannedPlate, setScannedPlate] = useState('');
 
   const { originalList } = useRegionData(data);
 
@@ -31,6 +35,17 @@ const App: React.FC<AppProps> = ({ data }) => {
 
   const handleToggleFlags = useCallback(() => {
     setShowFlags(prev => !prev);
+  }, []);
+
+  const handleScanClick = useCallback(() => {
+    ensureHapticContext();
+    setScannedPlate('');
+    setIsScannerOpen(true);
+  }, []);
+
+  const handleCapture = useCallback((plate: string) => {
+    setScannedPlate(plate);
+    setIsScannerOpen(false);
   }, []);
 
   return (
@@ -70,6 +85,7 @@ const App: React.FC<AppProps> = ({ data }) => {
               <span className="App-StatLabel">{t('app.stats.countriesCovered')}</span>
             </div>
           </div>
+
         </section>
 
         <LookupPanel 
@@ -77,8 +93,17 @@ const App: React.FC<AppProps> = ({ data }) => {
           showFlags={showFlags}
           onToggleFlags={handleToggleFlags}
           onActiveChange={setIsActive}
+          externalQuery={scannedPlate}
+          onScanClick={handleScanClick}
         />
       </main>
+
+      {isScannerOpen && (
+        <CameraScanner 
+          onClose={() => setIsScannerOpen(false)}
+          onCapture={handleCapture}
+        />
+      )}
     </div>
   );
 };

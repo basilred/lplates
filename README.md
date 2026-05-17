@@ -13,6 +13,7 @@
   - 🇧🇾 Беларусь
   - 🇨🇿 Чехия
 - **Интернационализация (i18n)**: Интерфейс доступен на 6 языках: Русский, Украинский, Белорусский, Английский, Чешский и Крымскотатарский.
+- **Сканирование номеров (OCR)**: Возможность автоматического распознавания номера автомобиля через камеру смартфона. Использует компьютерное зрение для детекции и OCR для извлечения текста. Детальное описание архитектуры доступно в [LPR_ARCHITECTURE.md](./LPR_ARCHITECTURE.md).
 - **PWA (Progressive Web App)**: Возможность установки на смартфон или компьютер, работа в оффлайн-режиме.
 - **Высокая производительность**: 
   - Использование **React 19** и **Concurrent Rendering**.
@@ -25,7 +26,8 @@
 - **Core**: `React 19`
 - **Build Tool**: `Vite 6`
 - **Language**: `TypeScript 5`
-- **Performance**: `React Suspense`, `useDeferredValue`.
+- **Vision \u0026 OCR**: `OpenCV.js` для предобработки изображений, `Tesseract.js` для распознавания текста.
+- **Performance**: `React Suspense`, `useDeferredValue`, Page Visibility API для оптимизации OCR.
 - **PWA**: `vite-plugin-pwa` для кэширования и установки.
 - **Testing**:
   - `Vitest` — для модульных тестов логики парсинга.
@@ -81,11 +83,11 @@ npm run deploy
 ├── public/             # Статические ресурсы и манифест PWA
 ├── src/
 │   ├── App/            # Основной компонент приложения (Layout и статика)
-│   ├── components/     # UI компоненты (Input, List, LookupPanel, LanguageSwitcher, ThemeToggle)
+│   ├── components/     # UI компоненты (Input, List, LookupPanel, CameraScanner, ThemeToggle)
 │   ├── contexts/       # Контексты (LanguageContext, ThemeContext)
-│   ├── hooks/          # Кастомные React-хуки (useRegionData, useTranslation)
+│   ├── hooks/          # Кастомные React-хуки (useOCR, useCamera, useRegionData)
 │   ├── locales/        # Файлы переводов (json)
-│   ├── utils/          # Утилиты, парсер номеров и countryUtils
+│   ├── utils/          # Утилиты, парсер номеров, cvUtils и countryUtils
 │   ├── data.json       # База данных регионов и кодов
 │   ├── index.css       # Глобальные стили и дизайн-система
 │   ├── index.tsx       # Точка входа
@@ -104,5 +106,6 @@ npm run deploy
 - [x] **Рефакторинг**: Перенос всех компонентов в `src/components` и вынос общей логики в хуки.
 - [x] **Dark Mode**: Поддержка темной темы оформления.
 - [x] **История поиска**: Локальное сохранение недавних запросов.
+- [x] **OCR Сканер**: Распознавание номеров в реальном времени через камеру (OpenCV + Tesseract).
 - [ ] **Детализация**: Добавление ISO-кодов и ссылок на карты для регионов.
 - [ ] **Расширение**: Добавление поддержки большего количества стран Европы.

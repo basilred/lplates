@@ -164,6 +164,8 @@
   }
 }
 
+/* Styles for App-Actions were removed as the scan button moved into Input */
+
 @media (max-width: 1023px) {
   .App-Shell {
     display: flex;

@@ -43,5 +43,15 @@
     "cz": "República Checa",
     "by": "Bielorrusia",
     "es": "España"
+  },
+  "camera": {
+    "initializing": "Inicializando IA...",
+    "scanning": "Escaneando...",
+    "detecting": "Detectando...",
+    "recognized": "Matrícula reconocida",
+    "error": "Error de IA",
+    "manualCapture": "Capturar manualmente",
+    "loading": "Cargando...",
+    "close": "Cerrar"
   }
 }

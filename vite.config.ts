@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,6 +11,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    basicSsl(),
     VitePWA({
       srcDir: 'src',
       filename: 'sw.ts',
@@ -18,6 +20,7 @@ export default defineConfig({
       injectRegister: 'inline',
       injectManifest: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,webp}'],
+        maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
       },
       devOptions: {
         enabled: true

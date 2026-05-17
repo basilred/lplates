@@ -11,7 +11,7 @@
   box-shadow: 0 10px 24px var(--color-shadow);
 }
 
-.Input-Icon,
+.Input-Scan,
 .Input-Shortcut {
   display: inline-flex;
   align-items: center;
@@ -20,13 +20,25 @@
   color: var(--color-text-subtle);
 }
 
-.Input-Icon {
+.Input-Scan {
   width: 2.35rem;
   height: 2.35rem;
   border-radius: 14px;
-  font-size: 1rem;
-  font-weight: 700;
   background: var(--color-surface-soft);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Input-Scan:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-color: var(--color-accent-soft);
+  transform: scale(1.05);
+}
+
+.Input-Scan:active {
+  transform: scale(0.95);
 }
 
 .Input-Shortcut,

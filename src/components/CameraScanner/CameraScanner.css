@@ -1,0 +1,400 @@
+.CameraScanner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.CameraScanner-Video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.CameraScanner-Error {
+  padding: 40px;
+  text-align: center;
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 24px;
+  background: var(--color-bg);
+}
+
+.CameraScanner-ErrorIcon {
+  font-size: 48px;
+  margin-bottom: 8px;
+  filter: grayscale(1) opacity(0.5);
+}
+
+.CameraScanner-Error p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 320px;
+  color: var(--color-text-muted);
+}
+
+.CameraScanner-Overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Viewfinder with Standard EU/RU Aspect Ratio (520:112) ── */
+.CameraScanner-Viewfinder {
+  width: 85%;
+  max-width: 340px;
+  aspect-ratio: 520 / 112;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reticle corner marks / scanning bounds */
+.CameraScanner-Viewfinder::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+
+.CameraScanner-Viewfinder_detecting {
+  border-color: #ff9800; /* Amber */
+  box-shadow: 0 0 24px rgba(255, 152, 0, 0.45), 0 0 0 9999px rgba(0, 0, 0, 0.6);
+}
+
+.CameraScanner-Viewfinder_detecting::before {
+  border-color: rgba(255, 152, 0, 0.4);
+}
+
+.CameraScanner-Viewfinder_stable {
+  border-color: #10b981; /* Emerald */
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.6), 0 0 0 9999px rgba(0, 0, 0, 0.7);
+  animation: pulse-green 1s infinite alternate;
+}
+
+.CameraScanner-Viewfinder_stable::before {
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.CameraScanner-Viewfinder_popping {
+  animation: popIn 0.25s ease-out;
+}
+
+/* ── Realistic License Plate Overlay on Scanning Result ── */
+.CameraScanner-Result {
+  position: absolute;
+  width: 93%;
+  height: 82%;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  color: #1a1a1a;
+  border: 1.5px solid #111111;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: min(1.65rem, 6.8vw);
+  letter-spacing: 2.5px;
+  padding-left: 24px; /* Space for the EU stripe on the left */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  animation: plateSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+  text-transform: uppercase;
+}
+
+/* Styled European/National left band */
+.CameraScanner-Result::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 24px;
+  background: #003399; /* Classic EU Blue */
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* Tiny detail: Add yellow star representation using styling inside the blue band */
+.CameraScanner-Result::after {
+  content: '★';
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffcc00;
+  font-size: 8px;
+  opacity: 0.8;
+}
+
+.CameraScanner-Result_detecting {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #ff9800;
+  color: #e65100;
+}
+
+.CameraScanner-Result_stable {
+  background: #ffffff;
+  border-color: #111111;
+  color: #000000;
+  font-size: min(1.75rem, 7.2vw);
+  transition: all 0.2s ease;
+}
+
+/* ── Scan Line ── */
+.CameraScanner-ScanLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  animation: scan 2s linear infinite;
+  z-index: 5;
+}
+
+.CameraScanner-Viewfinder_detecting .CameraScanner-ScanLine {
+  background: linear-gradient(90deg, transparent, #ff9800, transparent);
+}
+
+.CameraScanner-Viewfinder_stable .CameraScanner-ScanLine {
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+  animation-duration: 1s;
+}
+
+/* ── Close Button ── */
+.CameraScanner-Close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: white;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+  padding: 0;
+  padding-bottom: 4px;
+}
+
+.CameraScanner-Close:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(90deg);
+}
+
+/* ── Aligned Camera Controls & Status ── */
+.CameraScanner-Controls {
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  pointer-events: auto;
+  z-index: 20;
+}
+
+.CameraScanner-Status {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.85rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Status indicator dot */
+.CameraScanner-Status::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse-dot 1.5s infinite ease-in-out;
+}
+
+.CameraScanner-Status_detecting {
+  color: #ff9800;
+}
+
+.CameraScanner-Status_stable {
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* ── Premium Shutter/Capture Button ── */
+.CameraScanner-Button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 14px 28px;
+  border-radius: 50px;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.CameraScanner-Button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.CameraScanner-Button:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.CameraScanner-Button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.CameraScanner-ButtonIcon {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.CameraScanner-Button:hover:not(:disabled) .CameraScanner-ButtonIcon {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+/* ── Skeleton loader ── */
+.CameraScanner-Skeleton {
+  width: 85%;
+  max-width: 340px;
+  aspect-ratio: 520 / 112;
+  border-radius: 8px;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.CameraScanner-SkeletonLine {
+  width: 80%;
+  height: 20px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+.CameraScanner-SkeletonLine_short {
+  width: 50%;
+  height: 12px;
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse-green {
+  from { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), 0 0 0 9999px rgba(0, 0, 0, 0.7); }
+  to { box-shadow: 0 0 40px rgba(16, 185, 129, 0.8), 0 0 0 9999px rgba(0, 0, 0, 0.7); }
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.85); opacity: 0.6; }
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes plateSlideIn {
+  0% {
+    transform: scale(0.85) translateY(12px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
