@@ -11,12 +11,12 @@ test.describe('Camera Scanner', () => {
 
   test('scan plate button should be visible on the main page', async ({ page }) => {
     // The scan button should always be visible regardless of camera support
-    const scanButton = page.locator('.App-ActionButton_primary');
+    const scanButton = page.locator('.Input-Scan');
     await expect(scanButton).toBeVisible();
   });
 
   test('clicking scan plate button should open camera scanner overlay', async ({ page }) => {
-    const scanButton = page.locator('.App-ActionButton_primary');
+    const scanButton = page.locator('.Input-Scan');
     await scanButton.click();
 
     // CameraScanner overlay should appear
@@ -24,7 +24,7 @@ test.describe('Camera Scanner', () => {
   });
 
   test('close button should dismiss the scanner', async ({ page }) => {
-    const scanButton = page.locator('.App-ActionButton_primary');
+    const scanButton = page.locator('.Input-Scan');
     await scanButton.click();
 
     await expect(page.locator('.CameraScanner')).toBeVisible();
@@ -35,11 +35,13 @@ test.describe('Camera Scanner', () => {
     await expect(page.locator('.CameraScanner')).not.toBeVisible();
   });
 
-  test('scanner should show error state when camera is denied', async ({ page }) => {
-    // Grant no permissions — camera is blocked
+  test('scanner should show error state when camera is denied', async ({ page, browserName }) => {
+    // Grant no permissions — camera is blocked. Only supported on Chromium.
+    test.skip(browserName !== 'chromium', 'Permissions API is only supported on Chromium');
+
     await page.context().clearPermissions();
 
-    const scanButton = page.locator('.App-ActionButton_primary');
+    const scanButton = page.locator('.Input-Scan');
     await scanButton.click();
 
     // Wait for error to appear (camera access denied triggers error state)
@@ -56,7 +58,7 @@ test.describe('Camera Scanner', () => {
   test('onCapture should populate LookupPanel search field and show results', async ({ page }) => {
     // Simulate onCapture by injecting the scannedPlate state via window.__TEST_CAPTURE__
     // We open the scanner, then trigger capture programmatically through React fiber
-    const scanButton = page.locator('.App-ActionButton_primary');
+    const scanButton = page.locator('.Input-Scan');
     await scanButton.click();
 
     await expect(page.locator('.CameraScanner')).toBeVisible();
@@ -68,10 +70,7 @@ test.describe('Camera Scanner', () => {
       window.dispatchEvent(new CustomEvent('__test_ocr_capture__', { detail: { plate: 'A123BC77' } }));
     });
 
-    // The scanner stays open until capture is confirmed; we check if we can close it
-    // and then verify LookupPanel state via direct input injection instead
-    const closeButton = page.locator('.CameraScanner-Close');
-    await closeButton.click();
+    // The scanner closes automatically upon successful capture
     await expect(page.locator('.CameraScanner')).not.toBeVisible();
 
     // Verify LookupPanel search works independently with the same plate
@@ -87,7 +86,7 @@ test.describe('Camera Scanner', () => {
     // We mock the scan result by programmatically setting scannedPlate via React
 
     // Open scanner
-    const scanButton = page.locator('.App-ActionButton_primary');
+    const scanButton = page.locator('.Input-Scan');
     await scanButton.click();
     await expect(page.locator('.CameraScanner')).toBeVisible();
 
@@ -101,7 +100,7 @@ test.describe('Camera Scanner', () => {
   });
 
   test('manual capture button should be disabled during loading', async ({ page }) => {
-    const scanButton = page.locator('.App-ActionButton_primary');
+    const scanButton = page.locator('.Input-Scan');
     await scanButton.click();
 
     // When scanner opens, camera and OCR may still be loading
