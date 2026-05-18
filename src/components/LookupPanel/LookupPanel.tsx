@@ -18,6 +18,7 @@ interface LookupPanelProps {
   onActiveChange?: (isActive: boolean) => void;
   externalQuery?: string;
   onScanClick?: () => void;
+  onMatchFound?: () => void;
 }
 
 const DEFAULT_CONTEXT = { t: (key: string) => key };
@@ -28,7 +29,8 @@ const LookupPanel: React.FC<LookupPanelProps> = React.memo(({
   onToggleFlags, 
   onActiveChange, 
   externalQuery,
-  onScanClick
+  onScanClick,
+  onMatchFound
 }) => {
   const languageContext = useContext(LanguageContext);
   const { t } = languageContext || DEFAULT_CONTEXT;
@@ -38,6 +40,8 @@ const LookupPanel: React.FC<LookupPanelProps> = React.memo(({
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
   });
+
+  const matchFiredRef = React.useRef(false);
 
   const { codeIndex } = useRegionData(data);
 
@@ -87,6 +91,11 @@ const LookupPanel: React.FC<LookupPanelProps> = React.memo(({
   // side-effect: save to history (rerender-derived-state-no-effect)
   React.useEffect(() => {
     if (deferredDataList.length > 0 && deferredQuery.length >= 2) {
+      if (!matchFiredRef.current && onMatchFound) {
+        matchFiredRef.current = true;
+        onMatchFound();
+      }
+
       const trimmed = deferredQuery.trim().toUpperCase();
       
       setHistory(prev => {
