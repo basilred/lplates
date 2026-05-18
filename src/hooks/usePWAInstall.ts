@@ -45,11 +45,6 @@ export const usePWAInstall = (): UsePWAInstallResult => {
   });
 
   const deferredPromptRef = useRef<BeforeInstallPromptEvent | null>(null);
-  const dismissedRef = useRef<boolean>(isDismissed);
-
-  useEffect(() => {
-    dismissedRef.current = isDismissed;
-  }, [isDismissed]);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
