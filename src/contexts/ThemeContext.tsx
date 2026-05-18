@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 type Theme = 'light' | 'dark' | 'system';
+type ResolvedTheme = 'light' | 'dark';
 
 interface ThemeContextType {
   theme: Theme;
@@ -9,6 +10,27 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+const THEME_META_SELECTOR = 'meta[name="theme-color"]:not([media])';
+
+function ensureThemeMeta(): HTMLMetaElement {
+  let meta = document.querySelector<HTMLMetaElement>(THEME_META_SELECTOR);
+  if (!meta) {
+    meta = document.createElement('meta');
+    meta.name = 'theme-color';
+    document.head.appendChild(meta);
+  }
+  return meta;
+}
+
+function updateThemeColor(resolved: ResolvedTheme) {
+  const meta = ensureThemeMeta();
+  meta.content = resolved === 'dark' ? '#090b10' : '#f8f9fc';
+}
+
+function getSystemTheme(): ResolvedTheme {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem('theme') as Theme;
@@ -16,30 +38,32 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   });
 
   useEffect(() => {
-    const root = document.body;
     localStorage.setItem('theme', theme);
 
-    if (theme === 'system') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleChange = () => {
-        root.setAttribute('data-theme', mediaQuery.matches ? 'dark' : 'light');
-      };
-      
-      handleChange();
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
-    } else {
-      root.setAttribute('data-theme', theme);
-    }
+    const resolve: ResolvedTheme = theme === 'system' ? getSystemTheme() : theme;
+    document.body.setAttribute('data-theme', resolve);
+    updateThemeColor(resolve);
+
+    if (theme !== 'system') return;
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      const next = mediaQuery.matches ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', next);
+      updateThemeColor(next);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme(prev => {
       if (prev === 'light') return 'dark';
       if (prev === 'dark') return 'system';
       return 'light';
     });
-  };
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
