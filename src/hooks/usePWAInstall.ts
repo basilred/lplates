@@ -72,6 +72,8 @@ export const usePWAInstall = (): UsePWAInstallResult => {
     deferredPromptRef.current.prompt();
     deferredPromptRef.current.userChoice.then(() => {
       deferredPromptRef.current = null;
+    }).catch(() => {
+      deferredPromptRef.current = null;
     });
   }, []);
 
