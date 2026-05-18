@@ -1,9 +1,10 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect, useRef } from 'react';
 import './App.css';
 
 import Header from '../components/Header/Header';
 import LookupPanel from '../components/LookupPanel/LookupPanel';
 import CameraScanner from '../components/CameraScanner/CameraScanner';
+import PWAInstallPrompt from '../components/PWAInstallPrompt/PWAInstallPrompt';
 
 import { IData } from '../interfaces';
 import LanguageContext from '../contexts/LanguageContext';
@@ -23,6 +24,10 @@ const App: React.FC<AppProps> = ({ data }) => {
   const [showFlags, setShowFlags] = useState(true);
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [scannedPlate, setScannedPlate] = useState('');
+  const [firstActionDone, setFirstActionDone] = useState(false);
+  const [promptVisible, setPromptVisible] = useState(false);
+
+  const prevScannedPlateRef = useRef('');
 
   const { originalList } = useRegionData(data);
 
@@ -46,6 +51,32 @@ const App: React.FC<AppProps> = ({ data }) => {
   const handleCapture = useCallback((plate: string) => {
     setScannedPlate(plate);
     setIsScannerOpen(false);
+  }, []);
+
+  const handleFirstAction = useCallback(() => {
+    if (!firstActionDone) {
+      setFirstActionDone(true);
+    }
+  }, [firstActionDone]);
+
+  // Show prompt when first action completes (small delay so user sees results first)
+  useEffect(() => {
+    if (firstActionDone && !promptVisible) {
+      const timer = setTimeout(() => setPromptVisible(true), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [firstActionDone, promptVisible]);
+
+  // Trigger on camera scan success
+  useEffect(() => {
+    if (scannedPlate && scannedPlate !== prevScannedPlateRef.current) {
+      prevScannedPlateRef.current = scannedPlate;
+      handleFirstAction();
+    }
+  }, [scannedPlate, handleFirstAction]);
+
+  const handlePromptClose = useCallback(() => {
+    setPromptVisible(false);
   }, []);
 
   return (
@@ -95,6 +126,7 @@ const App: React.FC<AppProps> = ({ data }) => {
           onActiveChange={setIsActive}
           externalQuery={scannedPlate}
           onScanClick={handleScanClick}
+          onMatchFound={handleFirstAction}
         />
       </main>
 
@@ -104,6 +136,11 @@ const App: React.FC<AppProps> = ({ data }) => {
           onCapture={handleCapture}
         />
       )}
+
+      <PWAInstallPrompt
+        visible={promptVisible}
+        onClose={handlePromptClose}
+      />
     </div>
   );
 };
