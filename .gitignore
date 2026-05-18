@@ -53,3 +53,6 @@ test-results/
 # Local libraries
 public/libs/
 public/models/
+
+# Superpowers
+.superpowers/
