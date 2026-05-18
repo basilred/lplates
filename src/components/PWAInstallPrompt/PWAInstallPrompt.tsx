@@ -24,9 +24,8 @@ const PWAInstallPrompt: React.FC<PWAInstallPromptProps> = ({ visible, onClose })
     }
     if (!shouldBeVisible) {
       setMounted(false);
-      setHiding(false);
     }
-  }, [shouldBeVisible, mounted]);
+  }, [shouldBeVisible]);
 
   useEffect(() => {
     closedRef.current = false;
@@ -34,12 +33,12 @@ const PWAInstallPrompt: React.FC<PWAInstallPromptProps> = ({ visible, onClose })
 
   const handleClose = () => {
     setHiding(true);
-    dismiss();
   };
 
   const handleTransitionEnd = () => {
     if (hiding && !closedRef.current) {
       closedRef.current = true;
+      dismiss();
       onClose();
     }
   };
