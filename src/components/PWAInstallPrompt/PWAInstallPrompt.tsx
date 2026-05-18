@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { usePWAInstall } from '../../hooks/usePWAInstall';
 import { useTranslation } from '../../hooks/useTranslation';
 import './PWAInstallPrompt.css';
@@ -11,9 +11,26 @@ interface PWAInstallPromptProps {
 const PWAInstallPrompt: React.FC<PWAInstallPromptProps> = ({ visible, onClose }) => {
   const { platform, isInstalled, isDismissed, promptInstall, dismiss } = usePWAInstall();
   const { t } = useTranslation();
+  const [mounted, setMounted] = useState(false);
   const [hiding, setHiding] = useState(false);
+  const closedRef = useRef(false);
 
-  const shouldShow = visible && !isInstalled && !isDismissed && !hiding;
+  const shouldBeVisible = visible && !isInstalled && !isDismissed;
+
+  useEffect(() => {
+    if (shouldBeVisible && !mounted) {
+      const raf = requestAnimationFrame(() => setMounted(true));
+      return () => cancelAnimationFrame(raf);
+    }
+    if (!shouldBeVisible) {
+      setMounted(false);
+      setHiding(false);
+    }
+  }, [shouldBeVisible, mounted]);
+
+  useEffect(() => {
+    closedRef.current = false;
+  }, [visible]);
 
   const handleClose = () => {
     setHiding(true);
@@ -21,18 +38,20 @@ const PWAInstallPrompt: React.FC<PWAInstallPromptProps> = ({ visible, onClose })
   };
 
   const handleTransitionEnd = () => {
-    if (hiding) {
+    if (hiding && !closedRef.current) {
+      closedRef.current = true;
       onClose();
     }
   };
 
-  if (!shouldShow && !hiding) return null;
+  if (!shouldBeVisible && !mounted) return null;
 
-  const visibilityClass = hiding
-    ? 'PWAInstallPrompt_hiding'
-    : visible
-      ? 'PWAInstallPrompt_visible'
-      : '';
+  let visibilityClass = '';
+  if (hiding) {
+    visibilityClass = 'PWAInstallPrompt_hiding';
+  } else if (mounted) {
+    visibilityClass = 'PWAInstallPrompt_visible';
+  }
 
   return (
     <div
