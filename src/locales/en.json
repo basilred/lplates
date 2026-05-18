@@ -21,6 +21,16 @@
     "clearInput": "Clear input",
     "selectLanguage": "Select language",
     "recent": "Recent",
+    "install": {
+      "installApp": "Install App",
+      "addToHomeScreen": "Add to Home Screen",
+      "title": "Install LPlates",
+      "description": "Get quick access without a browser",
+      "installButton": "Install",
+      "dismiss": "Close",
+      "iosStep1": "Tap the Share button in Safari",
+      "iosStep2": "Choose \"Add to Home Screen\""
+    },
     "clearHistory": "Clear history",
     "theme": {
       "switchToDark": "Switch to dark theme",
