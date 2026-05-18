@@ -95,6 +95,10 @@ const PWAInstallPrompt: React.FC<PWAInstallPromptProps> = ({ visible, onClose })
                   </span>
                 </div>
               </div>
+              <div className="PWAInstallPrompt-Arrow" aria-hidden="true">
+                <div className="PWAInstallPrompt-ArrowBody" />
+                <div className="PWAInstallPrompt-ArrowHead" />
+              </div>
             </>
           ) : (
             <>

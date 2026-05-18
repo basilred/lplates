@@ -54,7 +54,24 @@ test.describe('PWA Install Prompt', () => {
     await expect(page.locator('.PWAInstallPrompt')).not.toBeVisible();
   });
 
-  test('install button in header exists when beforeinstallprompt is available', async ({ page }) => {
+  test('prompt has correct accessibility attributes', async ({ page }) => {
+    await page.goto('./');
+    const input = page.getByRole('textbox');
+    await input.fill('77');
+    await input.press('Enter');
+
+    await expect(page.locator('.Results')).toBeVisible();
+    await expect(page.locator('.PWAInstallPrompt')).toBeVisible({ timeout: 5000 });
+
+    const dialog = page.locator('[role="dialog"]');
+    await expect(dialog).toBeVisible();
+    await expect(dialog).toHaveAttribute('aria-label');
+
+    const closeButton = page.locator('.PWAInstallPrompt-Close');
+    await expect(closeButton).toHaveAttribute('aria-label');
+  });
+
+  test('install button in header has correct accessibility', async ({ page }) => {
     await page.addInitScript(() => {
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -63,12 +80,14 @@ test.describe('PWA Install Prompt', () => {
     });
 
     await page.goto('./');
-
     await page.evaluate(() => {
       window.dispatchEvent(new Event('beforeinstallprompt'));
     });
 
-    await expect(page.locator('.Header-InstallButton')).toBeVisible();
+    const installButton = page.locator('.Header-InstallButton');
+    await expect(installButton).toBeVisible();
+    await expect(installButton).toHaveAttribute('aria-label');
+    await expect(installButton).toHaveAttribute('title');
   });
 
   test('install button in header is hidden when app is already installed', async ({ page }) => {
