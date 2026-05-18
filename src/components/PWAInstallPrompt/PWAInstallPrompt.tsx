@@ -81,23 +81,25 @@ const PWAInstallPrompt: React.FC<PWAInstallPromptProps> = ({ visible, onClose })
                 <div className="PWAInstallPrompt-Step">
                   <span className="PWAInstallPrompt-StepNumber">1</span>
                   <span className="PWAInstallPrompt-StepText">
-                    <span className="PWAInstallPrompt-ShareIcon">↑</span>
-                    {' '}
+                    <svg className="PWAInstallPrompt-StepIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                      <rect x="4" y="8" width="16" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                      <line x1="12" y1="8" x2="12" y2="3" stroke="currentColor" strokeWidth="1.5" />
+                      <polyline points="8,5 12,1 16,5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                     {t('app.install.iosStep1')}
                   </span>
                 </div>
                 <div className="PWAInstallPrompt-Step">
                   <span className="PWAInstallPrompt-StepNumber">2</span>
                   <span className="PWAInstallPrompt-StepText">
-                    <span className="PWAInstallPrompt-AddIcon">➕</span>
-                    {' '}
+                    <svg className="PWAInstallPrompt-StepIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                      <rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                      <line x1="12" y1="8" x2="12" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      <line x1="8" y1="12" x2="16" y2="12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
                     {t('app.install.iosStep2')}
                   </span>
                 </div>
-              </div>
-              <div className="PWAInstallPrompt-Arrow" aria-hidden="true">
-                <div className="PWAInstallPrompt-ArrowBody" />
-                <div className="PWAInstallPrompt-ArrowHead" />
               </div>
             </>
           ) : (
