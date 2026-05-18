@@ -21,6 +21,16 @@
     "clearInput": "Очистить ввод",
     "selectLanguage": "Выбрать язык",
     "recent": "Недавние",
+    "install": {
+      "installApp": "Установить приложение",
+      "addToHomeScreen": "На экран Домой",
+      "title": "Установите LPlates",
+      "description": "Быстрый доступ без браузера",
+      "installButton": "Установить",
+      "dismiss": "Закрыть",
+      "iosStep1": "Нажмите кнопку «Поделиться» в Safari",
+      "iosStep2": "Выберите «На экран Домой»"
+    },
     "clearHistory": "Очистить историю",
     "theme": {
       "switchToDark": "Переключить на темную тему",

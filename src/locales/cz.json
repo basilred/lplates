@@ -20,6 +20,16 @@
     "clearInput": "Vymazat vstup",
     "selectLanguage": "Vybrat jazyk",
     "recent": "Nedávné",
+    "install": {
+      "installApp": "Nainstalovat aplikaci",
+      "addToHomeScreen": "Na domovskou obrazovku",
+      "title": "Nainstalujte LPlates",
+      "description": "Rychlý přístup bez prohlížeče",
+      "installButton": "Nainstalovat",
+      "dismiss": "Zavřít",
+      "iosStep1": "Klepněte na tlačítko Sdílet v Safari",
+      "iosStep2": "Vyberte «Na plochu»"
+    },
     "clearHistory": "Vymazat historii",
     "theme": {
       "switchToDark": "Přepnout na tmavý motiv",
