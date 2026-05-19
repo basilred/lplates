@@ -207,7 +207,7 @@
 @media (max-width: 720px) {
   .LookupPanel {
     scroll-snap-align: start;
-    scroll-margin-top: 80px;
+    scroll-margin-top: calc(72px + env(safe-area-inset-top, 0px));
   }
 
   .LookupPanel-Summary,
