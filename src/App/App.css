@@ -180,7 +180,7 @@
   .App-Intro {
     scroll-snap-align: start;
     scroll-margin-top: calc(72px + env(safe-area-inset-top, 0px));
-    min-height: calc(100lvh - 72px - env(safe-area-inset-top, 0px) - 24px - 1.5rem);
+    min-height: calc(100dvh - 72px - env(safe-area-inset-top, 0px) - 24px - 1.5rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
