@@ -59,6 +59,12 @@ body {
   margin: 0;
   font-family: var(--font-body);
   background: var(--color-bg);
+  background-image:
+    radial-gradient(circle at top left, var(--color-accent-soft), transparent 26%),
+    radial-gradient(circle at 85% 12%, var(--color-accent-soft), transparent 28%),
+    radial-gradient(circle at 50% 100%, var(--color-surface-soft), transparent 32%);
+  min-height: 100vh;
+  min-height: 100lvh;
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -74,6 +80,7 @@ select {
 
 #root {
   min-height: 100vh;
+  min-height: 100lvh;
 }
 
 ::selection {

@@ -81,7 +81,6 @@ const App: React.FC<AppProps> = ({ data }) => {
 
   return (
     <div className={`App ${isActive ? 'App_active' : ''}`}>
-      <div className="App-Backdrop" />
       <Header />
       <main className="App-Shell">
         <section className="App-Intro">
