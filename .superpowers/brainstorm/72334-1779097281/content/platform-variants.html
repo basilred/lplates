@@ -1,0 +1,126 @@
+<h2>PWA Install Prompt — концепт для двух платформ</h2>
+<p class="subtitle">Слева Android/Desktop (прямая установка), справа iOS (визуальная инструкция)</p>
+
+<div class="split">
+  <!-- Android / Desktop Card -->
+  <div class="mockup">
+    <div class="mockup-header">Android / Desktop — beforeinstallprompt</div>
+    <div class="mockup-body">
+      <div style="
+        background: var(--color-glass-bg-lc, rgba(255,255,255,0.8));
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--color-glass-border-lc, rgba(0,0,0,0.05));
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      ">
+        <div>
+          <div style="font-weight: 600; font-size: 15px; color: #1a1c22;">Установить приложение</div>
+          <div style="font-size: 13px; color: rgba(26,28,34,0.6); margin-top: 4px;">Быстрый доступ без браузера</div>
+        </div>
+        <button style="
+          background: #e67e22;
+          color: white;
+          border: none;
+          border-radius: 10px;
+          padding: 10px 20px;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          white-space: nowrap;
+        ">Установить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- iOS Card -->
+  <div class="mockup">
+    <div class="mockup-header">iOS Safari — кастомная подсказка</div>
+    <div class="mockup-body">
+      <div style="
+        background: var(--color-glass-bg-lc, rgba(255,255,255,0.8));
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--color-glass-border-lc, rgba(0,0,0,0.05));
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      ">
+        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+          <div style="
+            width: 32px; height: 32px;
+            background: rgba(0,122,255,0.1);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+          ">📱</div>
+          <div>
+            <div style="font-weight: 600; font-size: 15px; color: #1a1c22;">Добавить на экран «Домой»</div>
+            <div style="font-size: 13px; color: rgba(26,28,34,0.6); margin-top: 2px;">Установите LPlates как приложение</div>
+          </div>
+        </div>
+        <div style="
+          background: rgba(26,28,34,0.03);
+          border-radius: 12px;
+          padding: 14px 16px;
+        ">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <div style="
+              width: 28px; height: 28px;
+              background: rgba(0,122,255,0.12);
+              color: #007AFF;
+              border-radius: 50%;
+              display: flex; align-items: center; justify-content: center;
+              font-weight: 700; font-size: 14px;
+            ">1</div>
+            <div style="font-size: 14px; color: #1a1c22;">
+              Нажмите кнопку <span style="
+                display: inline-block; vertical-align: middle;
+                width: 20px; height: 20px;
+                border: 1.5px solid #007AFF; border-radius: 5px;
+                text-align: center; line-height: 18px; font-size: 13px; color: #007AFF;
+                margin: 0 3px;
+              ">↑</span> в Safari
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="
+              width: 28px; height: 28px;
+              background: rgba(0,122,255,0.12);
+              color: #007AFF;
+              border-radius: 50%;
+              display: flex; align-items: center; justify-content: center;
+              font-weight: 700; font-size: 14px;
+            ">2</div>
+            <div style="font-size: 14px; color: #1a1c22;">
+              Выберите «На экран Домой»
+              <span style="
+                display: inline-block; vertical-align: middle;
+                width: 18px; height: 18px;
+                background: rgba(0,122,255,0.1);
+                border-radius: 4px;
+                line-height: 18px; font-size: 12px;
+                margin-left: 4px;
+              ">➕</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Общие элементы для обеих платформ</h3>
+  <ul>
+    <li>Полупрозрачный фон с размытием (glassmorphism) — сочетается с дизайн-системой LPlates</li>
+    <li>Кнопка «Закрыть» (×) в углу</li>
+    <li>Сохраняется в localStorage при закрытии — больше не показываем</li>
+    <li>Кнопка «Установить приложение» в настройках (для тех, кто закрыл баннер)</li>
+  </ul>
+</div>

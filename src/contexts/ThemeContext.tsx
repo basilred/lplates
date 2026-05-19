@@ -19,10 +19,24 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const root = document.body;
     localStorage.setItem('theme', theme);
 
+    const updateMetaThemeColor = (resolvedTheme: 'light' | 'dark') => {
+      const color = resolvedTheme === 'dark' ? '#090b10' : '#f8f9fc';
+      const existingMeta = document.querySelector('meta[name="theme-color"]');
+      if (existingMeta) {
+        existingMeta.remove();
+      }
+      const newMeta = document.createElement('meta');
+      newMeta.name = 'theme-color';
+      newMeta.content = color;
+      document.head.appendChild(newMeta);
+    };
+
     if (theme === 'system') {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const handleChange = () => {
-        root.setAttribute('data-theme', mediaQuery.matches ? 'dark' : 'light');
+        const activeTheme = mediaQuery.matches ? 'dark' : 'light';
+        root.setAttribute('data-theme', activeTheme);
+        updateMetaThemeColor(activeTheme);
       };
       
       handleChange();
@@ -30,6 +44,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return () => mediaQuery.removeEventListener('change', handleChange);
     } else {
       root.setAttribute('data-theme', theme);
+      updateMetaThemeColor(theme);
     }
   }, [theme]);
 
