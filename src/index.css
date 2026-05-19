@@ -53,6 +53,7 @@
 
 html {
   background: var(--color-bg);
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -65,6 +66,7 @@ body {
     radial-gradient(circle at 50% 100%, var(--color-surface-soft), transparent 32%);
   min-height: 100vh;
   min-height: 100lvh;
+  overscroll-behavior-y: none;
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
