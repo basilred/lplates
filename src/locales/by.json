@@ -20,6 +20,16 @@
     "clearInput": "Ачысціць увод",
     "selectLanguage": "Выбраць мову",
     "recent": "Нядаўнія",
+    "install": {
+      "installApp": "Усталяваць дадатак",
+      "addToHomeScreen": "На галоўны экран",
+      "title": "Усталюйце LPlates",
+      "description": "Хуткі доступ без браўзера",
+      "installButton": "Усталяваць",
+      "dismiss": "Зачыніць",
+      "iosStep1": "Націсніце кнопку «Падзяліцца» у Safari",
+      "iosStep2": "Выберыце «На галоўны экран»"
+    },
     "clearHistory": "Ачысціць гісторыю",
     "theme": {
       "switchToDark": "Пераключыць на цёмную тэму",

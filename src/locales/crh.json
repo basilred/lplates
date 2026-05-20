@@ -20,6 +20,16 @@
     "clearInput": "Киришни темизле",
     "selectLanguage": "Тилни сайла",
     "recent": "Сонъгъы",
+    "install": {
+      "installApp": "Къурулым",
+      "addToHomeScreen": "Баш экрангъа",
+      "title": "LPlates-ни къурунъыз",
+      "description": "Браузерсиз тез эришим",
+      "installButton": "Къур",
+      "dismiss": "Яб",
+      "iosStep1": "Safari-де «Пае этинъиз» дюгмесине басынъыз",
+      "iosStep2": "«Баш экрангъа» сайланъыз"
+    },
     "clearHistory": "Къыдырыш кечмишини темизле",
     "theme": {
       "switchToDark": "Къаранъгъы мевзугъа дегиштир",

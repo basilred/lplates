@@ -46,12 +46,51 @@
   gap: 1rem;
 }
 
+.Header-InstallButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface-soft);
+  color: var(--color-accent);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+.Header-InstallButton:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.Header-InstallButton:active {
+  transform: translateY(0);
+}
+
+.Header-InstallButtonIcon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.Header-InstallButtonLabel {
+  font-size: 0.8125rem;
+}
+
 @media (max-width: 720px) {
   .Header-Container {
     padding: 0 1rem;
   }
   
   .Header-Name {
+    display: none;
+  }
+
+  .Header-InstallButtonLabel {
     display: none;
   }
 }
