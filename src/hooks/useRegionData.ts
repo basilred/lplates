@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { IData, IDataList, IDataRegion } from '../interfaces';
+import { IData, IDataList } from '../interfaces';
 
 /**
  * Хук для обработки и индексации данных о регионах.
@@ -17,31 +17,16 @@ export const useRegionData = (data: IData) => {
       if (data.hasOwnProperty(country)) {
         const currentCountry = data[country];
 
-        for (const region in currentCountry) {
-          if (currentCountry.hasOwnProperty(region)) {
-            const regionValue = currentCountry[region];
-            let codes: (string | number)[];
-            let mapName: string | undefined;
-
-            // Проверяем формат данных
-            if (Array.isArray(regionValue)) {
-              // Старый формат: массив кодов
-              codes = regionValue;
-              mapName = undefined;
-            } else {
-              // Новый формат: объект IDataRegion
-              const regionData = regionValue as IDataRegion;
-              codes = regionData.codes;
-              mapName = regionData.mapName;
-            }
-
-            const stringCodes = codes.map(code => code.toString());
+        for (const regionId in currentCountry) {
+          if (currentCountry.hasOwnProperty(regionId)) {
+            const regionData = currentCountry[regionId];
 
             result.push({
-              name: region,
-              codes: stringCodes,
+              id: regionId,
+              codes: regionData.codes,
               country,
-              mapName,
+              mapName: regionData.mapName,
+              localName: regionData.localName,
             });
           }
         }

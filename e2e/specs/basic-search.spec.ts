@@ -44,7 +44,7 @@ test.describe('Basic plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Москва'))).toBeTruthy();
+    expect(results.some(r => r.includes('Moscow'))).toBeTruthy();
   });
 
   test('should find Adygea region for plate Е123ОУ01', async () => {
@@ -53,7 +53,7 @@ test.describe('Basic plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Адыгея'))).toBeTruthy();
+    expect(results.some(r => r.includes('Republic of Adygea'))).toBeTruthy();
   });
 
   test('should find Moscow region for plate X001XX177', async () => {
@@ -62,7 +62,7 @@ test.describe('Basic plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Москва'))).toBeTruthy();
+    expect(results.some(r => r.includes('Moscow'))).toBeTruthy();
   });
 
   test('should handle spaces in plate number', async () => {
@@ -71,7 +71,7 @@ test.describe('Basic plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Москва'))).toBeTruthy();
+    expect(results.some(r => r.includes('Moscow'))).toBeTruthy();
   });
 
   test('should handle hyphens in plate number', async () => {
@@ -80,7 +80,7 @@ test.describe('Basic plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Москва'))).toBeTruthy();
+    expect(results.some(r => r.includes('Moscow'))).toBeTruthy();
   });
 
   test('should show no results for invalid plate', async () => {
@@ -93,7 +93,7 @@ test.describe('Basic plate search', () => {
     if (results.length > 0) {
       // Если есть результаты, проверяем что они не содержат ожидаемых регионов
       const hasValidRegion = results.some(r =>
-        r.includes('Москва') || r.includes('Адыгея') || r.includes('Киев')
+        r.includes('Moscow') || r.includes('Republic of Adygea') || r.includes('Kyiv')
       );
       expect(hasValidRegion).toBeFalsy();
     }

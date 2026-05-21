@@ -1,17 +1,19 @@
 export interface IDataRegion {
-  codes: (string | number)[];
-  mapName?: string;
+  codes: string[];
+  mapName: string;
+  localName: string;
 }
 
 export interface IData {
-  [countryIndex: string]: {
-    [regionIndex: string]: IDataRegion | (string | number)[]
-  }
+  [countryCode: string]: {
+    [regionId: string]: IDataRegion;
+  };
 }
 
 export interface IDataList {
-  name: string;
+  id: string;
   codes: string[];
   country: string;
-  mapName?: string;
+  mapName: string;
+  localName: string;
 }

@@ -1,16 +1,16 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import { geoMercator } from 'd3-geo';
 import { feature } from 'topojson-client';
-import { MAP_CONFIG, REGION_MAPPING } from '../../utils/mapUtils';
+import { MAP_CONFIG } from '../../utils/mapUtils';
 import './RegionMap.css';
 
 interface RegionMapProps {
   country: string;
-  regionName: string;
+  mapName: string;
 }
 
-const RegionMap: React.FC<RegionMapProps> = ({ country, regionName }) => {
+const RegionMap: React.FC<RegionMapProps> = ({ country, mapName }) => {
   const config = MAP_CONFIG[country];
   const [geoData, setGeoData] = useState<any>(null);
   const [projection, setProjection] = useState<any>(null);
@@ -33,10 +33,7 @@ const RegionMap: React.FC<RegionMapProps> = ({ country, regionName }) => {
     setZoom(1);
   };
 
-  // Получаем имя или ключ для подсветки
-  const highlightedRegion = useMemo(() => {
-    return REGION_MAPPING[country]?.[regionName] || regionName;
-  }, [country, regionName]);
+  const highlightedRegion = mapName;
 
   useEffect(() => {
     if (!config) return;

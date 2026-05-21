@@ -78,7 +78,7 @@ test.describe('Camera Scanner', () => {
     await appPage.waitForResults();
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Москва'))).toBeTruthy();
+    expect(results.some(r => r.includes('Moscow'))).toBeTruthy();
   });
 
   test('after scanner closes with captured plate, LookupPanel should be populated', async ({ page }) => {
