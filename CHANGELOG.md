@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.1](https://github.com/basilred/lplates/compare/v2.10.0...v2.10.1) (2026-05-23)
+
+
+### Bug Fixes
+
+* **ci:** add .npmrc with legacy-peer-deps to resolve react-simple-maps peer conflict on deploy ([#68](https://github.com/basilred/lplates/issues/68)) ([7a63d89](https://github.com/basilred/lplates/commit/7a63d89240d9c105aae66f96b27921291d690684))
+
 ## [2.10.0](https://github.com/basilred/lplates/compare/v2.9.0...v2.10.0) (2026-05-23)
 
 
