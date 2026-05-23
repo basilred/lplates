@@ -15,7 +15,7 @@ test.describe('International plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Киев'))).toBeTruthy();
+    expect(results.some(r => r.includes('Kyiv'))).toBeTruthy();
   });
 
   test('should find Kyiv region for Ukrainian plate with Cyrillic КА1234ВК', async () => {
@@ -24,7 +24,7 @@ test.describe('International plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Киев'))).toBeTruthy();
+    expect(results.some(r => r.includes('Kyiv'))).toBeTruthy();
   });
 
   test('should handle Ukrainian letter I (І) in plate', async () => {
@@ -41,7 +41,7 @@ test.describe('International plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Praha'))).toBeTruthy();
+    expect(results.some(r => r.includes('Prague'))).toBeTruthy();
   });
 
   test('should find region for Czech plate 2B31234', async () => {
@@ -60,7 +60,7 @@ test.describe('International plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Минск'))).toBeTruthy();
+    expect(results.some(r => r.includes('Minsk'))).toBeTruthy();
   });
 
   test('should find region for Belarus plate with Cyrillic 1234 АВ-7', async () => {
@@ -69,7 +69,7 @@ test.describe('International plate search', () => {
     
     const results = await appPage.getResults();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some(r => r.includes('Минск'))).toBeTruthy();
+    expect(results.some(r => r.includes('Minsk'))).toBeTruthy();
   });
 
   test('should find region for Belarus truck plate AB 1234-7', async () => {
@@ -111,7 +111,7 @@ test.describe('International plate search', () => {
     await appPage.waitForResults();
     
     const results = await appPage.getResults();
-    const russianResult = results.find(r => r.includes('Москва'));
+    const russianResult = results.find(r => r.includes('Moscow'));
     expect(russianResult).toBeTruthy();
     
     // Check that country indication is present (flag or text)
