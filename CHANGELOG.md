@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.10.0](https://github.com/basilred/lplates/compare/v2.9.0...v2.10.0) (2026-05-23)
+
+
+### Features
+
+* **ci:** merge deploy job inline into release-please workflow ([#65](https://github.com/basilred/lplates/issues/65)) ([2e18f4d](https://github.com/basilred/lplates/commit/2e18f4db40a7cc25521d3055de0aebef685cd716))
+* **localization:** implement ID-based region localization (issue [#59](https://github.com/basilred/lplates/issues/59)) ([#60](https://github.com/basilred/lplates/issues/60)) ([b644fc7](https://github.com/basilred/lplates/commit/b644fc7f9d384f4bac4fe20b80777bf33b9f9a04))
+
 ## [2.9.0](https://github.com/basilred/lplates/compare/v2.8.0...v2.9.0) (2026-05-21)
 
 
