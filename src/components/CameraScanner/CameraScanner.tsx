@@ -72,9 +72,10 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ onCapture, onClose
     }
 
     // Test hook for E2E automation
-    const handleTestCapture = (e: any) => {
-      if (e.detail?.plate) {
-        onCapture(e.detail.plate);
+    const handleTestCapture = (e: Event) => {
+      const customEvent = e as CustomEvent<{ plate?: string }>;
+      if (customEvent.detail?.plate) {
+        onCapture(customEvent.detail.plate);
       }
     };
     window.addEventListener('__test_ocr_capture__', handleTestCapture);

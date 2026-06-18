@@ -77,7 +77,7 @@ const LookupPanel: React.FC<LookupPanelProps> = React.memo(({
         const items = codeIndex.get(code);
         if (items) {
           items.forEach(item => {
-            if (country === 'any' || item.country === country) {
+            if (country === 'generic' || item.country === country) {
               matchingItems.add(item);
             }
           });

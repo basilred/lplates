@@ -2,9 +2,6 @@
  * OpenCV Utilities for License Plate Recognition
  */
 
-// We assume cv is available globally (loaded via script tag)
-declare const cv: any;
-
 export interface PlateDetectionResult {
   plateImage: ImageData;
   mainImage?: ImageData;
@@ -131,7 +128,7 @@ export const cvUtils = {
   /**
    * Warps the plate perspective and segments into characters
    */
-  extractPlate: (src: any, approx: any): PlateDetectionResult | null => {
+  extractPlate: (src: CVMat, approx: CVMat): PlateDetectionResult | null => {
     // 1. Perspective Warp with Padding
     const plateWidth = 640; // Slightly wider for padding
     const plateHeight = 160;

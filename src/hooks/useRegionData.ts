@@ -14,11 +14,11 @@ export const useRegionData = (data: IData) => {
     const result: IDataList[] = [];
 
     for (const country in data) {
-      if (data.hasOwnProperty(country)) {
+      if (Object.hasOwn(data, country)) {
         const currentCountry = data[country];
 
         for (const regionId in currentCountry) {
-          if (currentCountry.hasOwnProperty(regionId)) {
+          if (Object.hasOwn(currentCountry, regionId)) {
             const regionData = currentCountry[regionId];
 
             result.push({

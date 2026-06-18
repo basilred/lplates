@@ -31,7 +31,6 @@ const App: React.FC<AppProps> = ({ data }) => {
 
   const { originalList } = useRegionData(data);
 
-  const countryFlagGetter = useCallback((country: string) => getCountryFlag(country), []);
   const countryLabelGetter = useCallback((country: string) => getCountryLabel(country, t), [t]);
 
   const totalRegions = originalList.length;
@@ -53,11 +52,11 @@ const App: React.FC<AppProps> = ({ data }) => {
     setIsScannerOpen(false);
   }, []);
 
-  const handleFirstAction = useCallback(() => {
+  const handleFirstAction = () => {
     if (!firstActionDone) {
       setFirstActionDone(true);
     }
-  }, [firstActionDone]);
+  };
 
   // Show prompt when first action completes (small delay so user sees results first)
   useEffect(() => {
@@ -107,7 +106,7 @@ const App: React.FC<AppProps> = ({ data }) => {
                   <div className="App-StatFlags">
                     {Object.keys(data).map(country => (
                       <span key={country} title={countryLabelGetter(country)}>
-                        {countryFlagGetter(country)}
+                        {getCountryFlag(country)}
                       </span>
                     ))}
                   </div>

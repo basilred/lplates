@@ -95,10 +95,10 @@ describe('parsePlate', () => {
   });
 
   describe('Standardization', () => {
-    it('should include both normalized and standardized in any', () => {
+    it('should include both normalized and standardized in generic', () => {
       const result = parsePlate('А123ВС77'); // Cyrillic
-      expect(result.any).toContain('А123ВС77');
-      expect(result.any).toContain('A123BC77');
+      expect(result.generic).toContain('А123ВС77');
+      expect(result.generic).toContain('A123BC77');
     });
   });
 });

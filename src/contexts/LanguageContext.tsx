@@ -43,17 +43,17 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Функция перевода
   const t = (key: string, params?: Record<string, string | number>): string => {
     const keys = key.split('.');
-    let value: any = translations[locale];
+    let value: Record<string, unknown> | string = translations[locale];
 
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {
-        value = value[k];
+        value = value[k] as Record<string, unknown> | string;
       } else {
         // Если перевод не найден, попробуем английский как fallback
-        let fallbackValue: any = translations.en;
+        let fallbackValue: Record<string, unknown> | string = translations.en;
         for (const fk of keys) {
           if (fallbackValue && typeof fallbackValue === 'object' && fk in fallbackValue) {
-            fallbackValue = fallbackValue[fk];
+            fallbackValue = fallbackValue[fk] as Record<string, unknown> | string;
           } else {
             return key; // Возвращаем ключ, если перевод отсутствует
           }

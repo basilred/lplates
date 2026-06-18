@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography, ZoomableGroup, ProjectionFunction } from 'react-simple-maps';
 import { geoMercator } from 'd3-geo';
 import { feature } from 'topojson-client';
+import type { Topology } from 'topojson-specification';
+import type { Feature, FeatureCollection, GeometryObject } from 'geojson';
 import { MAP_CONFIG } from '../../utils/mapUtils';
 import './RegionMap.css';
 
@@ -12,8 +14,8 @@ interface RegionMapProps {
 
 const RegionMap: React.FC<RegionMapProps> = ({ country, mapName }) => {
   const config = MAP_CONFIG[country];
-  const [geoData, setGeoData] = useState<any>(null);
-  const [projection, setProjection] = useState<any>(null);
+  const [geoData, setGeoData] = useState<Topology | null>(null);
+  const [projection, setProjection] = useState<ProjectionFunction | null>(null);
   const [mapCenter, setMapCenter] = useState<[number, number]>([0, 0]);
   const [zoom, setZoom] = useState(1);
   const [error, setError] = useState(false);
@@ -48,36 +50,38 @@ const RegionMap: React.FC<RegionMapProps> = ({ country, mapName }) => {
       })
       .then(data => {
         setGeoData(data);
-        
+
         try {
-          const objectName = Object.keys(data.objects)[0];
-          const features = (feature(data, data.objects[objectName]) as any).features;
-          const targetFeature = features.find((f: any) => 
-            f.properties.name === highlightedRegion || 
-            f.properties['hc-key'] === highlightedRegion ||
-            f.properties['hc-a2'] === highlightedRegion ||
-            f.properties['alt-name']?.includes(highlightedRegion)
+          const objectName = Object.keys(data.objects)[0] as string;
+          const geoObject = data.objects[objectName];
+          const collection = feature(data, geoObject) as unknown as FeatureCollection<GeometryObject>;
+          const features = collection.features;
+          const targetFeature = features.find((f: Feature) =>
+            f.properties?.name === highlightedRegion ||
+            f.properties?.['hc-key'] === highlightedRegion ||
+            f.properties?.['hc-a2'] === highlightedRegion ||
+            f.properties?.['alt-name']?.includes(highlightedRegion)
           );
 
-          // Создаем проекцию, которая идеально вписывает регион с отступами
           const newProjection = geoMercator();
-          
+
           if (targetFeature) {
-            // Вписываем регион, оставляя 150px отступов для контекста страны
             newProjection.fitExtent([[100, 50], [700, 350]], targetFeature);
           } else {
-            // Если регион не найден, вписываем всю страну
-            newProjection.fitSize([800, 400], feature(data, data.objects[objectName]) as any);
+            newProjection.fitSize([800, 400], feature(data, geoObject) as unknown as FeatureCollection);
           }
-          
+
           setProjection(() => newProjection);
           if (newProjection.invert) {
-            setMapCenter(newProjection.invert([400, 200]) as [number, number]);
+            const inverted = newProjection.invert([400, 200]);
+            if (inverted) {
+              setMapCenter(inverted);
+            }
           }
         } catch (e) {
           setError(true);
         }
-        
+
         setLoading(false);
       })
       .catch(() => {
@@ -94,15 +98,15 @@ const RegionMap: React.FC<RegionMapProps> = ({ country, mapName }) => {
       {!loading && !error && geoData && projection && (
         <>
           <div className="RegionMap-Controls">
-            <button 
-              className="RegionMap-ControlButton" 
+            <button
+              className="RegionMap-ControlButton"
               onClick={handleZoomIn}
               aria-label="Zoom in"
             >
               +
             </button>
-            <button 
-              className="RegionMap-ControlButton" 
+            <button
+              className="RegionMap-ControlButton"
               onClick={handleReset}
               aria-label="Reset zoom"
               title="Reset"
@@ -112,8 +116,8 @@ const RegionMap: React.FC<RegionMapProps> = ({ country, mapName }) => {
                 <circle cx="12" cy="12" r="3" />
               </svg>
             </button>
-            <button 
-              className="RegionMap-ControlButton" 
+            <button
+              className="RegionMap-ControlButton"
               onClick={handleZoomOut}
               aria-label="Zoom out"
             >
@@ -126,7 +130,7 @@ const RegionMap: React.FC<RegionMapProps> = ({ country, mapName }) => {
             height={400}
             className="RegionMap-Canvas"
           >
-            <ZoomableGroup 
+            <ZoomableGroup
               zoom={zoom}
               center={mapCenter}
               maxZoom={5}
@@ -135,12 +139,12 @@ const RegionMap: React.FC<RegionMapProps> = ({ country, mapName }) => {
               <Geographies geography={geoData}>
                 {({ geographies }) =>
                   geographies.map((geo) => {
-                    const isHighlighted = 
-                      geo.properties.name === highlightedRegion || 
+                    const isHighlighted =
+                      geo.properties.name === highlightedRegion ||
                       geo.properties['hc-key'] === highlightedRegion ||
                       geo.properties['hc-a2'] === highlightedRegion ||
                       geo.properties['alt-name']?.includes(highlightedRegion);
-                      
+
                     return (
                       <Geography
                         key={geo.rsmKey}
