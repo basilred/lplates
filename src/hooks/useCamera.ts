@@ -44,15 +44,19 @@ export const useCamera = (): UseCameraResult => {
     setIsLoading(true);
     setError(null);
     try {
+      type ExtendedVideoTrackConstraints = MediaTrackConstraints & {
+        focusMode?: string;
+        whiteBalanceMode?: string;
+      };
+
       const constraints: MediaStreamConstraints = {
         video: {
           facingMode: 'environment',
-          width: { ideal: 1280 }, // 720p is optimal for mobile OCR speed/quality
+          width: { ideal: 1280 },
           height: { ideal: 720 },
-          // @ts-ignore - Some browsers support advanced constraints here
           focusMode: 'continuous',
           whiteBalanceMode: 'continuous'
-        },
+        } as ExtendedVideoTrackConstraints,
         audio: false,
       };
 

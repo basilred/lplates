@@ -3,7 +3,7 @@ export interface IParsedCodes {
   ua?: string[];
   cz?: string[];
   by?: string[];
-  any: string[];
+  generic: string[];
 }
 
 /**
@@ -26,7 +26,7 @@ export function parsePlate(input: string): IParsedCodes {
   }
 
   const results: IParsedCodes = {
-    any: Array.from(new Set([normalized, standardized]))
+    generic: Array.from(new Set([normalized, standardized]))
   };
 
   // RU: Russian plates
