@@ -12,7 +12,7 @@
   - 🇺🇦 Украина
   - 🇧🇾 Беларусь
   - 🇨🇿 Чехия
-- **Интернационализация (i18n)**: Интерфейс доступен на 6 языках: Русский, Украинский, Белорусский, Английский, Чешский и Крымскотатарский.
+- **Интернационализация (i18n)**: Интерфейс доступен на 7 языках: Русский, Украинский, Белорусский, Английский, Чешский, Испанский и Крымскотатарский.
 - **Сканирование номеров (OCR)**: Возможность автоматического распознавания номера автомобиля через камеру смартфона. Использует компьютерное зрение для детекции и OCR для извлечения текста. Детальное описание архитектуры доступно в [LPR_ARCHITECTURE.md](./LPR_ARCHITECTURE.md).
 - **PWA (Progressive Web App)**: Возможность установки на смартфон или компьютер, работа в оффлайн-режиме.
 - **Высокая производительность**: 
@@ -83,11 +83,13 @@ npm run deploy
 ├── public/             # Статические ресурсы и манифест PWA
 ├── src/
 │   ├── App/            # Основной компонент приложения (Layout и статика)
-│   ├── components/     # UI компоненты (Input, List, LookupPanel, CameraScanner, ThemeToggle)
+│   ├── components/     # UI компоненты (CameraScanner, Header, Input, LanguageSwitcher, List, LookupPanel, PWAInstallPrompt, RegionMap, ThemeToggle)
 │   ├── contexts/       # Контексты (LanguageContext, ThemeContext)
-│   ├── hooks/          # Кастомные React-хуки (useOCR, useCamera, useRegionData)
-│   ├── locales/        # Файлы переводов (json)
-│   ├── utils/          # Утилиты, парсер номеров, cvUtils и countryUtils
+│   ├── hooks/          # Кастомные React-хуки (useCamera, useOCR, usePWAInstall, useRegionData, useTranslation)
+│   ├── interfaces/     # TypeScript-интерфейсы
+│   ├── locales/        # Файлы переводов (json) и конфигурация языков
+│   ├── types/          # TypeScript-декларации
+│   ├── utils/          # Утилиты, парсер номеров, cvUtils, countryUtils, haptic, mapUtils
 │   ├── data.json       # База данных регионов и кодов
 │   ├── index.css       # Глобальные стили и дизайн-система
 │   ├── index.tsx       # Точка входа
