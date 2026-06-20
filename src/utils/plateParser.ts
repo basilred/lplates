@@ -43,7 +43,7 @@ export function parsePlate(input: string): IParsedCodes {
   for (const pattern of ruPatterns) {
     const match = standardized.match(pattern);
     if (match) {
-      results.ru = [match[1]];
+      results.ru = [match[1]!];
       break;
     }
   }
@@ -51,19 +51,19 @@ export function parsePlate(input: string): IParsedCodes {
   // UA: Ukrainian plates (e.g., AA1234BB, KA1234BK)
   const uaMatch = standardized.match(/^([A-Z]{2})\d{4}[A-Z]{2}$/);
   if (uaMatch) {
-    results.ua = [uaMatch[1]];
+    results.ua = [uaMatch[1]!];
   }
 
   // CZ: Czech plates (e.g., 1A23456)
   const czMatch = standardized.match(/^\d([A-Z])[\dA-Z]\d{4}$/);
   if (czMatch) {
-    results.cz = [czMatch[1]];
+    results.cz = [czMatch[1]!];
   }
   
   // BY: Belarusian plates (e.g., 1234 AB-7, AB 1234-7)
   const byMatch = standardized.match(/^(\d{4}[A-Z]{2}|[A-Z]{2}\d{4})(\d)$/);
   if (byMatch) {
-    results.by = [byMatch[2]];
+    results.by = [byMatch[2]!];
   }
 
   return results;

@@ -181,9 +181,13 @@ export const useOCR = (isActive: boolean, videoRef: React.RefObject<HTMLVideoEle
             // Find consensus
             const counts: Record<string, { count: number, sumConf: number }> = {};
             resultsBufferRef.current.forEach(r => {
-              if (!counts[r.text]) counts[r.text] = { count: 0, sumConf: 0 };
-              counts[r.text].count++;
-              counts[r.text].sumConf += r.conf;
+              let entry = counts[r.text];
+              if (!entry) {
+                entry = { count: 0, sumConf: 0 };
+                counts[r.text] = entry;
+              }
+              entry.count++;
+              entry.sumConf += r.conf;
             });
 
             const candidates = Object.keys(counts);
@@ -197,13 +201,13 @@ export const useOCR = (isActive: boolean, videoRef: React.RefObject<HTMLVideoEle
             // Priority 1: Best Full Plate that meets threshold AND confidence
             if (fullPlates.length > 0) {
               // Sort ONLY by count (8 and 9 chars are equal priority)
-              fullPlates.sort((a, b) => counts[b].count - counts[a].count);
+              fullPlates.sort((a, b) => counts[b]!.count - counts[a]!.count);
               
-              const topFull = fullPlates[0];
+              const topFull = fullPlates[0]!;
               
               // Only stable if it's frequent (matched at least twice)
               // We trust consensus more than Tesseract's confidence score for long strings
-              if (counts[topFull].count >= CONSENSUS_THRESHOLD) {
+              if (counts[topFull]!.count >= CONSENSUS_THRESHOLD) {
                 bestText = topFull;
                 isStableMatch = true;
               }
@@ -211,12 +215,11 @@ export const useOCR = (isActive: boolean, videoRef: React.RefObject<HTMLVideoEle
 
             // Priority 2: If no stable full plate, pick any most frequent plate for preview
             if (!bestText) {
-              candidates.sort((a, b) => counts[b].count - counts[a].count);
-              bestText = candidates[0];
+              candidates.sort((a, b) => counts[b]!.count - counts[a]!.count);
+              bestText = candidates[0]!;
             }
 
-            const bestInfo = counts[bestText];
-
+            const bestInfo = counts[bestText]!;
 
             // Stable only if we found a full plate with enough matches
             if (isStableMatch) {

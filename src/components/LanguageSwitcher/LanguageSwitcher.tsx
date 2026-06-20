@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
-import { Locale, LANGUAGES } from '../../locales';
+import { Locale, LANGUAGE_CONFIG, LANGUAGES } from '../../locales';
 import './LanguageSwitcher.css';
 
 const LanguageSwitcher: React.FC = () => {
@@ -8,7 +8,7 @@ const LanguageSwitcher: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const currentLanguage = LANGUAGES.find(lang => lang.code === locale) || LANGUAGES[0];
+  const currentLanguage = LANGUAGE_CONFIG[locale];
 
   const handleToggle = () => {
     setIsOpen(!isOpen);

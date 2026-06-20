@@ -16,7 +16,7 @@ All type annotations and type casts using `any` in `src/` (excluding type declar
 - **THEN** no occurrences SHALL remain
 
 ### Requirement: TypeScript strict options SHALL be maximised
-The project SHALL enable `noUncheckedIndexedAccess` in `tsconfig.json` and fix all resulting type errors. If this is deferred (optional), the proposal SHALL explicitly document the decision.
+The project SHALL enable `noUncheckedIndexedAccess` in `tsconfig.json` and fix all resulting type errors across the codebase. Indexed access on arrays and objects with index signatures SHALL handle the `| undefined` case explicitly — either via non-null assertions (`!`) where the value is provably present, or via proper guards (`if` checks, optional chaining) where real uncertainty exists.
 
 #### Scenario: noUncheckedIndexedAccess is enabled
 - **WHEN** `tsconfig.json` has `noUncheckedIndexedAccess: true`

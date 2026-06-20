@@ -103,8 +103,8 @@ export const cvUtils = {
           // SCALE COORDINATES BACK to full resolution
           let scaledApprox = new cv.Mat(approx.rows, approx.cols, approx.type());
           for (let j = 0; j < 4; j++) {
-            scaledApprox.data32S[j * 2] = Math.floor(approx.data32S[j * 2] / scale);
-            scaledApprox.data32S[j * 2 + 1] = Math.floor(approx.data32S[j * 2 + 1] / scale);
+            scaledApprox.data32S[j * 2] = Math.floor(approx.data32S[j * 2]! / scale);
+            scaledApprox.data32S[j * 2 + 1] = Math.floor(approx.data32S[j * 2 + 1]! / scale);
           }
           
           // Temporary extract to check if it works
@@ -135,7 +135,7 @@ export const cvUtils = {
     
     let points = [];
     for (let i = 0; i < 4; i++) {
-      points.push({ x: approx.data32S[i * 2], y: approx.data32S[i * 2 + 1] });
+      points.push({ x: approx.data32S[i * 2]!, y: approx.data32S[i * 2 + 1]! });
     }
     
     // Calculate center to expand points outwards (Padding for distortion)
@@ -152,7 +152,7 @@ export const cvUtils = {
     let top = points.slice(0, 2).sort((a, b) => a.x - b.x);
     let bottom = points.slice(2, 4).sort((a, b) => a.x - b.x);
     
-    let srcPts = cv.matFromArray(4, 1, cv.CV_32FC2, [top[0].x, top[0].y, top[1].x, top[1].y, bottom[1].x, bottom[1].y, bottom[0].x, bottom[0].y]);
+    let srcPts = cv.matFromArray(4, 1, cv.CV_32FC2, [top[0]!.x, top[0]!.y, top[1]!.x, top[1]!.y, bottom[1]!.x, bottom[1]!.y, bottom[0]!.x, bottom[0]!.y]);
     let dstPts = cv.matFromArray(4, 1, cv.CV_32FC2, [0, 0, plateWidth, 0, plateWidth, plateHeight, 0, plateHeight]);
     let M = cv.getPerspectiveTransform(srcPts, dstPts);
     let dst = new cv.Mat();
@@ -189,9 +189,9 @@ export const cvUtils = {
     // Merge Close Fragments (Characters that are very close horizontally)
     let mergedBoxes = [];
     if (charBoxes.length > 0) {
-      let current = charBoxes[0];
+      let current = charBoxes[0]!;
       for (let i = 1; i < charBoxes.length; i++) {
-        let next = charBoxes[i];
+        let next = charBoxes[i]!;
         let gap = next.x - (current.x + current.width);
         // If gap is small, they are parts of one char
         if (gap < 4) { // Very conservative merging

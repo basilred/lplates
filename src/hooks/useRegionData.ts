@@ -19,7 +19,7 @@ export const useRegionData = (data: IData) => {
 
         for (const regionId in currentCountry) {
           if (Object.hasOwn(currentCountry, regionId)) {
-            const regionData = currentCountry[regionId];
+            const regionData = currentCountry[regionId]!;
 
             result.push({
               id: regionId,
