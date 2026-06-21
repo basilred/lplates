@@ -58,3 +58,6 @@ public/models/
 .superpowers/
 docs/superpowers/
 .opencode/
+
+# Agent configs
+.claude/
