@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.2](https://github.com/basilred/lplates/compare/v2.10.1...v2.10.2) (2026-06-24)
+
+
+### Bug Fixes
+
+* remove @tensorflow/tfjs, strengthen TypeScript strictness (closes [#71](https://github.com/basilred/lplates/issues/71)) ([#74](https://github.com/basilred/lplates/issues/74)) ([f88919a](https://github.com/basilred/lplates/commit/f88919abad6722bdeb70aa00b868d28919af7e32))
+
 ## [2.10.1](https://github.com/basilred/lplates/compare/v2.10.0...v2.10.1) (2026-05-23)
 
 
